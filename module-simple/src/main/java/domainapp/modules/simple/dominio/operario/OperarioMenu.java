@@ -18,7 +18,7 @@ import java.util.List;
 )
 
 public class OperarioMenu {
-<<<<<<< HEAD
+
 
     @Action()
     @ActionLayout(named = "Crear Operario")
@@ -107,10 +107,9 @@ public class OperarioMenu {
 
         @javax.inject.Inject
         OperarioRepository operarioRepository;
-=======
+
     public Operario create(String nombreyApellido, String legajoSAP, String empresa, String email, String telefono, String numeroLicencia, String vencimientoLicencia, Boolean llaveRSV, String clave, String confirmacion) {
 
     }
 
->>>>>>> a515ee9ea7d00ae88d3592637103ddb686efb76b
 }

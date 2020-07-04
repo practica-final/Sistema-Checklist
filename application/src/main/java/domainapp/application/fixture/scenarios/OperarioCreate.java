@@ -118,6 +118,7 @@ public class OperarioCreate extends FixtureScript {
 
         this.operarioObject = wrap(menu).create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, confirmacion);
 
+        ec.addResult(this, operarioObject);
     }
     @javax.inject.Inject
     OperarioMenu menu;
