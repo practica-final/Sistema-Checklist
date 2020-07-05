@@ -14,7 +14,7 @@ public class VehiculoCreate extends FixtureScript {
     private String dominio;
     private String marca;
     private String modelo;
-    private String año;
+    private String anyo;
     private String kilometraje;
     private LocalDate vencimientoVtv;
     private LocalDate vencimientoPoliza;
@@ -43,12 +43,12 @@ public class VehiculoCreate extends FixtureScript {
         this.modelo = modelo;
     }
 
-    public String getAño() {
-        return año;
+    public String getAnyo() {
+        return anyo;
     }
 
-    public void setAño(String año) {
-        this.año = año;
+    public void setAnyo(String anyo) {
+        this.anyo = anyo;
     }
 
     public String getKilometraje() {
@@ -87,12 +87,12 @@ public class VehiculoCreate extends FixtureScript {
         String dominio = checkParam("dominio", ec, String.class);
         String marca = checkParam("marca", ec, String.class);
         String modelo = checkParam("modelo", ec, String.class);
-        String año = checkParam("año", ec, String.class);
+        String anyo = checkParam("anyo", ec, String.class);
         String kilometraje = checkParam("kilometraje", ec, String.class);
         LocalDate vencimientoVtv = checkParam("vencimientoVtv", ec, LocalDate.class);
         LocalDate vencimientoPoliza = checkParam("vencimientoPoliza", ec, LocalDate.class);
 
-        this.vehiculoObject = warp(menu).create(dominio, marca, modelo, año, kilometraje, vencimientoVtv, vencimientoPoliza);
+        this.vehiculoObject = warp(menu).create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza);
 
         ec.addResult(this, vehiculoObject);
     }
