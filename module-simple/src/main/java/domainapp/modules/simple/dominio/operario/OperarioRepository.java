@@ -39,25 +39,25 @@ public class OperarioRepository {
 
 
     @Programmatic
-    public Operario findByNombreyApellido(final String nombreyApellido){
+    public Operario findByLegajoSAP(final String legajoSAP){
 
         return repositoryService.uniqueMatch(
             new QueryDefault<>(
                     Operario.class,
-                    "findByNombreyApellido",
-                    "nombreyApellido", nombreyApellido
+                    "findByLegajoSAP",
+                    "legajoSAP", legajoSAP
             )
         );
     }
 
     @Programmatic
-    public List<Operario> findByNombreyApellidoContains(final String nombreyApellido) {
+    public List<Operario> findByLegajoSAPContains(final String legajoSAP) {
 
         return repositoryService.allMatches(
                 new QueryDefault<>(
                         Operario.class,
-                        "findByNombreyApellidoContains",
-                        "nombreyApellido", nombreyApellido));
+                        "findByLegajoSAPContains",
+                        "legajoSAP", legajoSAP));
     }
 
 
@@ -71,10 +71,9 @@ public class OperarioRepository {
             final String numeroLicencia,
             final String vencimientoLicencia,
             final Boolean llaveRSV,
-            final String clave,
-            final String confirmacion) {
+            final String clave) {
         final Operario operario = new Operario(nombreyApellido, legajoSAP, empresa, email, telefono,
-                numeroLicencia, vencimientoLicencia, llaveRSV, clave, confirmacion);
+                numeroLicencia, vencimientoLicencia, llaveRSV, clave);
         repositoryService.persist(operario);
         return operario;
     }
@@ -89,11 +88,10 @@ public class OperarioRepository {
             final String numeroLicencia,
             final String vencimientoLicencia,
             final Boolean llaveRSV,
-            final String clave,
-            final String confirmacion) {
-        Operario operario = findByNombreyApellido(nombreyApellido);
+            final String clave) {
+        Operario operario = findByLegajoSAP(legajoSAP);
         if (operario == null) {
-            operario = create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, confirmacion);
+            operario = create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave);
         }
         return operario;
     }
@@ -103,4 +101,3 @@ public class OperarioRepository {
     RepositoryService repositoryService;
 
 }
-

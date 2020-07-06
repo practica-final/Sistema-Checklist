@@ -16,7 +16,6 @@ public class OperarioCreate extends FixtureScript {
     private String vencimientoLicencia;
     private boolean llaveRSV;
     private String clave;
-    private String confirmacion;
 
     public String getNombreyApellido() {
         return nombreyApellido;
@@ -90,14 +89,6 @@ public class OperarioCreate extends FixtureScript {
         this.clave = clave;
     }
 
-    public String getConfirmacion() {
-        return confirmacion;
-    }
-
-    public void setConfirmacion(String confirmacion) {
-        this.confirmacion = confirmacion;
-    }
-
     private Operario operarioObject;
 
     public Operario getOperarioObject() {
@@ -114,9 +105,8 @@ public class OperarioCreate extends FixtureScript {
         String vencimientoLicencia = checkParam("vencimientoLicencia", ec, String.class);
         Boolean llaveRSV = checkParam("llaveRSV", ec, Boolean.class);
         String clave = checkParam("clave", ec, String.class);
-        String confirmacion = checkParam("confirmacion", ec, String.class);
 
-        this.operarioObject = wrap(menu).create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, confirmacion);
+        this.operarioObject = wrap(menu).create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave);
 
         ec.addResult(this, operarioObject);
     }

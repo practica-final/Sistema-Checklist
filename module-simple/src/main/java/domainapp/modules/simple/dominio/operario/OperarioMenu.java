@@ -59,15 +59,11 @@ public class OperarioMenu {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Clave: ")
-            final String clave,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Confirmación: ")
-            final String confirmacion )
+            final String clave)
 
         {
             return operarioRepository.create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia,
-                    llaveRSV, clave, confirmacion);
+                    llaveRSV, clave);
         }
 
 
@@ -108,8 +104,5 @@ public class OperarioMenu {
         @javax.inject.Inject
         OperarioRepository operarioRepository;
 
-    public Operario create(String nombreyApellido, String legajoSAP, String empresa, String email, String telefono, String numeroLicencia, String vencimientoLicencia, Boolean llaveRSV, String clave, String confirmacion) {
-
-    }
 
 }

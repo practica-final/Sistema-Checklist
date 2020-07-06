@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dominio.operario;
 
+import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
@@ -30,24 +31,24 @@ import javax.jdo.annotations.*;
         @Query(
                 name = "find", language = "JDOQL",
                 value = "SELECT "
-                    + "FROM domainapp.modelus.simple.dominio.operario.Operario"
+                    + "FROM domainapp.modules.simple.dominio.operario.Operario"
                     + "ORDER BY nombreyApellido ASC"
         ),
         @Query(
                 name = "findByNombreyApellidoContains", language = "JDOQL",
                 value = "SELECT"
-                        + "FROM domainapp.modelus.simple.dominio.operario.Operario"
+                        + "FROM domainapp.modules.simple.dominio.operario.Operario"
                         + "WHERE nombreyApellido.indexOf(:nombreyApellido) >= 0"
         ),
         @Query(
                 name = "findByEstado", language = "JDOQL",
                 value = "SELECT"
-                        + "FROM domain.app.modelus.simple.dominio.operario.Operario"
+                        + "FROM domain.app.modules.simple.dominio.operario.Operario"
                         + "WHERE estado == :estado"
                         + "ORDER BY nombreyApellido ASC"
         )
 })
-@Unique(name = "Operario_nombreyApellido_UNQ", members = { "nombreyApellido"})
+@Unique(name = "Operario_legajoSAP_UNQ", members = { "legajoSAP"})
 @DomainObject(
         editing = Editing.DISABLED
 )
@@ -96,16 +97,13 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         @Column(allowsNull = "false", length = 40)
         @Property()
-        private String confirmacion;
-
-        @Column(allowsNull = "false", length = 40)
-        @Property()
         private OperarioEstado estado;
 
-        @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
+        /*@Persistent(mappedBy = "operario", defaultFetchGroup = "true")
         @Column(allowsNull = "true")
         @Property()
         private List<Empresa> empresas;
+         */
 
         @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
         @Column(allowsNull = "true")
@@ -126,13 +124,12 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String RepoNombreyApellido(){ return this.nombreyApellido;}
         public String RepoLegajoSAP(){ return this.legajoSAP;}
         public String RepoEmpresa(){ return this.empresa;}
-        public String RepoEmail(){ return this.email;}
-        public String RepoTelefono(){ return this.telefono;}
+        //public String RepoEmail(){ return this.email;}
+        //public String RepoTelefono(){ return this.telefono;}
         public String RepoNumeroLicencia(){ return this.numeroLicencia;}
         public String RepoVencimientoLicencia(){ return this.vencimientoLicencia;}
         public boolean RepoLlaveRSV(){ return this.llaveRSV;}
-        public String RepoClave(){ return this.clave;}
-        public String RepoConfirmacion(){ return this.confirmacion;}
+        //public String RepoClave(){ return this.clave;}
         public String RepoEstado(){ return this.estado.toString();}
 
         public Operario(){}
@@ -146,8 +143,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String numeroLicencia,
                 String vencimientoLicencia,
                 boolean llaveRSV,
-                String clave,
-                String confirmacion
+                String clave
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -158,7 +154,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
             this.clave = clave;
-            this.confirmacion = confirmacion;
             this.estado = OperarioEstado.Activo;
         }
 
@@ -172,9 +167,8 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String vencimientoLicencia,
                 boolean llaveRSV,
                 String clave,
-                String confirmacion,
                 OperarioEstado estado,
-                List<Empresa> empresas,
+                //List<Empresa> empresas,
                 List<Vehiculo> vehiculos
         ){
             this.nombreyApellido = nombreyApellido;
@@ -186,9 +180,8 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
             this.clave = clave;
-            this.confirmacion = confirmacion;
             this.estado = estado;
-            this.empresas = empresas;
+            //this.empresas = empresas;
             this.vehiculos = vehiculos;
         }
 
@@ -243,11 +236,8 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
                 @Parameter(maxLength = 40)
                 @ParameterLayout(named = "Clave: ")
-                final String clave,
+                final String clave
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Confirmacion: ")
-                final String confirmacion
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -258,7 +248,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
             this.clave = clave;
-            this.confirmacion = confirmacion;
             return this;
         }
 
@@ -271,7 +260,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String default6Update() { return getVencimientoLicencia();}
         public boolean default7Update() { return isLlaveRSV();}
         public String default8Update() { return getClave();}
-        public String default9Update() { return getConfirmacion();}
 
         @Programmatic
         public void CambioEstado(OperarioEstado estado){
@@ -304,9 +292,10 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @Override
         public void Notificar(){
 
-            for ( Empresa empresa : empresas){
+            /*for ( Empresa empresa : empresas){
                 empresa.Actualizar();
             }
+             */
             for (Vehiculo vehiculo : vehiculos){
                 vehiculo.Actualizar();
             }
@@ -324,10 +313,11 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String toString() { return org.apache.isis.applib.util.ObjectContracts.toString(this, "nombreyApellido");
         }
 
-        @javax.inject.Inject
+        /* @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
         @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
         EmpresaRepository empresaRepository;
+         */
 
         @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
