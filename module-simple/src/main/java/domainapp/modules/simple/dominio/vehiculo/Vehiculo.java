@@ -316,7 +316,7 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
     }
     @Override
     public String toString() {
-        return org.apache.isis.applib.util.ObjectContracts.toString(this, "cuil");
+        return org.apache.isis.applib.util.ObjectContracts.toString(this, "dominio");
     }
     //endregion
 
