@@ -54,7 +54,7 @@ public class VehiculoMenu {
 
             ) {
 
-        return vehiculoRepository.create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza);
+        return vehiculoRepository.create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
     }
 
     public String validate0Create (final String dominio) {
