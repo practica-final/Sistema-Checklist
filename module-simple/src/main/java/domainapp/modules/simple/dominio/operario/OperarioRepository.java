@@ -70,7 +70,7 @@ public class OperarioRepository {
             final String telefono,
             final String numeroLicencia,
             final String vencimientoLicencia,
-            final Boolean llaveRSV,
+            final String llaveRSV,
             final String clave) {
         final Operario operario = new Operario(nombreyApellido, legajoSAP, empresa, email, telefono,
                 numeroLicencia, vencimientoLicencia, llaveRSV, clave);
@@ -87,7 +87,7 @@ public class OperarioRepository {
             final String telefono,
             final String numeroLicencia,
             final String vencimientoLicencia,
-            final Boolean llaveRSV,
+            final String llaveRSV,
             final String clave) {
         Operario operario = findByLegajoSAP(legajoSAP);
         if (operario == null) {

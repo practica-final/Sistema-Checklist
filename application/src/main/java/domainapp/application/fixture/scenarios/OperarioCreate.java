@@ -14,7 +14,7 @@ public class OperarioCreate extends FixtureScript {
     private String telefono;
     private String numeroLicencia;
     private String vencimientoLicencia;
-    private boolean llaveRSV;
+    private String llaveRSV;
     private String clave;
 
     public String getNombreyApellido() {
@@ -73,11 +73,11 @@ public class OperarioCreate extends FixtureScript {
         this.vencimientoLicencia = vencimientolicencia;
     }
 
-    public boolean isllaveRSV() {
+    public String isllaveRSV() {
         return llaveRSV;
     }
 
-    public void setllaveRSV(boolean llaveRSV) {
+    public void setllaveRSV(String llaveRSV) {
         this.llaveRSV = llaveRSV;
     }
 
@@ -103,7 +103,7 @@ public class OperarioCreate extends FixtureScript {
         String telefono = checkParam("telefono", ec, String.class);
         String numeroLicencia = checkParam("numeroLicencia", ec, String.class);
         String vencimientoLicencia = checkParam("vencimientoLicencia", ec, String.class);
-        Boolean llaveRSV = checkParam("llaveRSV", ec, Boolean.class);
+        String llaveRSV = checkParam("llaveRSV", ec, String.class);
         String clave = checkParam("clave", ec, String.class);
 
         this.operarioObject = wrap(menu).create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave);

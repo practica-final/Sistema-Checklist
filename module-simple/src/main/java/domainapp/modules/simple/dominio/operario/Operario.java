@@ -1,6 +1,9 @@
 package domainapp.modules.simple.dominio.operario;
 
-import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+/*import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;*/
+import com.google.common.collect.ComparisonChain;
+import jdk.internal.dynalink.linker.ConversionComparator;
 import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.Getter;
@@ -8,54 +11,29 @@ import lombok.Getter;
 import java.util.Collection;
 import java.util.List;
 import org.apache.isis.applib.annotation.*;
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
 import javax.jdo.annotations.*;
 
-@PersistenceCapable(
-        identityType = IdentityType.DATASTORE,
-        schema = "dominio",
-        table = "Operario"
+@javax.jdo.annotations.PersistenceCapable(
+        identityType = IdentityType.DATASTORE, schema = "dominio", table = "Operario"
 )
-@DatastoreIdentity(
-        strategy = IdGeneratorStrategy.IDENTITY,
-        column = "id"
+@javax.jdo.annotations.DatastoreIdentity(
+        strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "id"
 )
-@Version(
-        strategy = VersionStrategy.VERSION_NUMBER,
-        column = "version"
+@javax.jdo.annotations.Version(
+        strategy = VersionStrategy.VERSION_NUMBER, column = "version"
 )
-@Queries({
-        @Query(
-                name = "find", language = "JDOQL",
-                value = "SELECT "
-                    + "FROM domainapp.modules.simple.dominio.operario.Operario"
-                    + "ORDER BY nombreyApellido ASC"
-        ),
-        @Query(
-                name = "findByNombreyApellidoContains", language = "JDOQL",
-                value = "SELECT"
-                        + "FROM domainapp.modules.simple.dominio.operario.Operario"
-                        + "WHERE nombreyApellido.indexOf(:nombreyApellido) >= 0"
-        ),
-        @Query(
-                name = "findByEstado", language = "JDOQL",
-                value = "SELECT"
-                        + "FROM domain.app.modules.simple.dominio.operario.Operario"
-                        + "WHERE estado == :estado"
-                        + "ORDER BY nombreyApellido ASC"
-        )
-})
-@Unique(name = "Operario_legajoSAP_UNQ", members = { "legajoSAP"})
+@javax.jdo.annotations.Unique(name = "Operario_legajoSAP_UNQ", members = {"legajoSAP"})
 @DomainObject(
-        editing = Editing.DISABLED
+        auditing = Auditing.ENABLED
 )
 @DomainObjectLayout(
         bookmarking = BookmarkPolicy.AS_ROOT
 )
-@Getter @Setter
+@lombok.Getter @lombok.Setter
+
 public class Operario implements Comparable<Operario>//, SujetoGeneral
     {
         @Column(allowsNull = "false", length = 40)
@@ -89,7 +67,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         @Column(allowsNull = "false", length = 40)
         @Property()
-        private boolean llaveRSV;
+        private String llaveRSV;
 
         @Column(allowsNull = "false", length = 40)
         @Property()
@@ -103,12 +81,12 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @Column(allowsNull = "true")
         @Property()
         private List<Empresa> empresas;
-         */
+
 
         @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
         @Column(allowsNull = "true")
         @Property
-        private List<Vehiculo> vehiculos;
+        private List<Vehiculo> vehiculos;*/
 
 
         public String iconName(){
@@ -128,7 +106,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         //public String RepoTelefono(){ return this.telefono;}
         public String RepoNumeroLicencia(){ return this.numeroLicencia;}
         public String RepoVencimientoLicencia(){ return this.vencimientoLicencia;}
-        public boolean RepoLlaveRSV(){ return this.llaveRSV;}
+        public String RepoLlaveRSV(){ return this.llaveRSV;}
         //public String RepoClave(){ return this.clave;}
         public String RepoEstado(){ return this.estado.toString();}
 
@@ -142,7 +120,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String telefono,
                 String numeroLicencia,
                 String vencimientoLicencia,
-                boolean llaveRSV,
+                String llaveRSV,
                 String clave
         ){
             this.nombreyApellido = nombreyApellido;
@@ -165,11 +143,11 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String telefono,
                 String numeroLicencia,
                 String vencimientoLicencia,
-                boolean llaveRSV,
+                String llaveRSV,
                 String clave,
-                OperarioEstado estado,
+                OperarioEstado estado
                 //List<Empresa> empresas,
-                List<Vehiculo> vehiculos
+                //List<Vehiculo> vehiculos
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -182,7 +160,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.clave = clave;
             this.estado = estado;
             //this.empresas = empresas;
-            this.vehiculos = vehiculos;
+            //this.vehiculos = vehiculos;
         }
 
         @NotPersistent
@@ -203,43 +181,27 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @ActionLayout(named = "Editar")
         public Operario update(
                 @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Nombre y Apellido: ")
-                final String nombreyApellido,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Legajo SAP: ")
-                final String legajoSAP,
+                @ParameterLayout(named = "Nombre y Apellido: ") final String nombreyApellido,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Empresa: ")
-                final String empresa,
+                @ParameterLayout(named = "Legajo SAP: ") final String legajoSAP,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Email: ")
-                final String email,
+                @ParameterLayout(named = "Empresa: ") final String empresa,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Telefono: ")
-                final String telefono,
+                @ParameterLayout(named = "Email: ") final String email,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Numero de Licencia: ")
-                final String numeroLicencia,
+                @ParameterLayout(named = "Telefono: ") final String telefono,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Vencimiento de Licencia: ")
-                final String vencimientoLicencia,
+                @ParameterLayout(named = "Numero de Licencia: ") final String numeroLicencia,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Llave RSV: ")
-                final boolean llaveRSV,
+                @ParameterLayout(named = "Vencimiento de Licencia: ") final String vencimientoLicencia,
 
-                @Parameter(maxLength = 40)
-                @ParameterLayout(named = "Clave: ")
-                final String clave
+                @ParameterLayout(named = "Llave RSV: ") final String llaveRSV,
+
+                @ParameterLayout(named = "Clave: ") final String clave
 
         ){
-            this.nombreyApellido = nombreyApellido;
+            /**this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
             this.empresa = empresa;
             this.email = email;
@@ -247,7 +209,16 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.numeroLicencia = numeroLicencia;
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
-            this.clave = clave;
+            this.clave = clave;*/
+            setNombreyApellido(nombreyApellido);
+            setLegajoSAP(legajoSAP);
+            setEmpresa(empresa);
+            setEmail(email);
+            setTelefono(telefono);
+            setNumeroLicencia(numeroLicencia);
+            setVencimientoLicencia(vencimientoLicencia);
+            setLlaveRSV(llaveRSV);
+            setClave(clave);
             return this;
         }
 
@@ -258,7 +229,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String default4Update() { return getTelefono();}
         public String default5Update() { return getNumeroLicencia();}
         public String default6Update() { return getVencimientoLicencia();}
-        public boolean default7Update() { return isLlaveRSV();}
+        public String default7Update() { return getLlaveRSV();}
         public String default8Update() { return getClave();}
 
         @Programmatic
@@ -285,20 +256,20 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             return this;
         }
 
-        public boolean hideActivar() { return this.estado == OperarioEstado.Activo;}
+        /**public boolean hideActivar() { return this.estado == OperarioEstado.Activo;}
         public boolean hideDesactivar() { return this.estado == OperarioEstado.Inactivo;}
-        public boolean hideEliminar() { return this.estado == OperarioEstado.Eliminado;}
+        public boolean hideEliminar() { return this.estado == OperarioEstado.Eliminado;}**/
 
-        @Override
+        //@Override
         public void Notificar(){
 
-            /*for ( Empresa empresa : empresas){
+           /** for ( Empresa empresa : empresas){
                 empresa.Actualizar();
             }
-             */
+
             for (Vehiculo vehiculo : vehiculos){
                 vehiculo.Actualizar();
-            }
+            }*/
         }
 
         @Programmatic
@@ -306,23 +277,27 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         @Override
         public int compareTo(final Operario other){
-            return org.apache.isis.applib.util.ObjectContracts.compare(this, other, "nombreyApellido");
+         //   return org.apache.isis.applib.util.ObjectContracts.compare(this, other, "nombreyApellido");
+            return ComparisonChain.start()
+                    .compare(this.getLegajoSAP(), other.getLegajoSAP())
+                    .result();
         }
 
         @Override
-        public String toString() { return org.apache.isis.applib.util.ObjectContracts.toString(this, "nombreyApellido");
+        public String toString() { return org.apache.isis.applib.util.ObjectContracts
+                .toString(this, "legajoSAP");
         }
 
         /* @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
         @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
         EmpresaRepository empresaRepository;
-         */
+
 
         @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
         @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
-        VehiculoRepository vehiculoRepository;
+        VehiculoRepository vehiculoRepository;*/
 
         @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent

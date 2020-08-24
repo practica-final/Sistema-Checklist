@@ -1,4 +1,4 @@
-package domainapp.application.fixture.scenarios;
+/*package domainapp.application.fixture.scenarios;
 
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoMenu;
@@ -103,3 +103,4 @@ public class VehiculoCreate extends FixtureScript {
 
 
 }
+*/

@@ -55,7 +55,7 @@ public class OperarioMenu {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Llave RSV: ")
-            final boolean llaveRSV,
+            final String llaveRSV,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Clave: ")
