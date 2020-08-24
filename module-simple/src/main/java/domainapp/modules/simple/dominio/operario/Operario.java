@@ -183,21 +183,13 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 @Parameter(maxLength = 40)
 
                 @ParameterLayout(named = "Nombre y Apellido: ") final String nombreyApellido,
-
                 @ParameterLayout(named = "Legajo SAP: ") final String legajoSAP,
-
                 @ParameterLayout(named = "Empresa: ") final String empresa,
-
                 @ParameterLayout(named = "Email: ") final String email,
-
                 @ParameterLayout(named = "Telefono: ") final String telefono,
-
                 @ParameterLayout(named = "Numero de Licencia: ") final String numeroLicencia,
-
                 @ParameterLayout(named = "Vencimiento de Licencia: ") final String vencimientoLicencia,
-
                 @ParameterLayout(named = "Llave RSV: ") final String llaveRSV,
-
                 @ParameterLayout(named = "Clave: ") final String clave
 
         ){
