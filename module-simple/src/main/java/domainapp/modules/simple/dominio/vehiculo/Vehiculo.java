@@ -173,14 +173,14 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
             @ParameterLayout(named = "Vencimiento del seguro: ") final LocalDate vencimientoPoliza)
 
     {
-            setDominio(dominio);
-            setMarca(marca);
-            setModelo(modelo);
-            setAnyo(anyo);
-            setKilometraje(kilometraje);
-            setVencimientoVtv(vencimientoVtv);
-            setVencimientoPoliza(vencimientoPoliza);
-            return this;
+        setDominio(dominio);
+        setMarca(marca);
+        setModelo(modelo);
+        setAnyo(anyo);
+        setKilometraje(kilometraje);
+        setVencimientoVtv(vencimientoVtv);
+        setVencimientoPoliza(vencimientoPoliza);
+        return this;
     }
 
     public String default0Update() {return getDominio();}
