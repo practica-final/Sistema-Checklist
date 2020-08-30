@@ -1,10 +1,12 @@
-/*package domainapp.application.fixture.scenarios;
+package domainapp.application.fixture.scenarios;
 
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoMenu;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
-import java.time.LocalDate;
+import domainapp.modules.simple.dominio.operario.Operario;
+
+import org.joda.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import net.sf.cglib.core.Local;
@@ -91,8 +93,10 @@ public class VehiculoCreate extends FixtureScript {
         String kilometraje = checkParam("kilometraje", ec, String.class);
         LocalDate vencimientoVtv = checkParam("vencimientoVtv", ec, LocalDate.class);
         LocalDate vencimientoPoliza = checkParam("vencimientoPoliza", ec, LocalDate.class);
+        Operario operario = checkParam("operario", ec, Operario.class);
 
-        this.vehiculoObject = warp(menu).create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza);
+
+        this.vehiculoObject = wrap(menu).create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
 
         ec.addResult(this, vehiculoObject);
     }
@@ -100,7 +104,4 @@ public class VehiculoCreate extends FixtureScript {
 
     @javax.inject.Inject
     VehiculoMenu menu;
-
-
 }
-*/
