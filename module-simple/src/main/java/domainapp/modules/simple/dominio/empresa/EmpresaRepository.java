@@ -83,7 +83,7 @@ public class EmpresaRepository {
 
     @Programmatic
     public Empresa create(
-            final String razonSocial, final String direccion, final String cuit, final String telefono)
+            final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
     {
         final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono);
         repositoryService.persist(empresa);
@@ -92,11 +92,11 @@ public class EmpresaRepository {
 
     @Programmatic
     public Empresa findOrCreate(
-            final String razonSocial, final String direccion, final String cuit, final String telefono)
+            final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
     {
         Empresa empresa = findByCuit(cuit);
         if (empresa == null) {
-            empresa = create(razonSocial, direccion, cuit, telefono);
+            empresa = create(razonSocial, direccion, cuit, telefono, operario);
         }
         return empresa;
     }

@@ -3,9 +3,8 @@ package domainapp.modules.simple.dominio.empresa;
 import com.google.common.collect.ComparisonChain;
 import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.ObservadorGeneral;
-import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.operario.OperarioEstado;
-import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +23,7 @@ import java.util.List;
 @javax.jdo.annotations.Version(
         strategy = VersionStrategy.VERSION_NUMBER, column = "version")
 
-@javax.jdo.annotations.Unique(name = "Empresa_dominio_UNQ", members = { "cuit" })
+@javax.jdo.annotations.Unique(name = "Empresa_cuit_UNQ", members = { "cuit" })
 @DomainObject(
         auditing = Auditing.ENABLED
 )
@@ -33,7 +32,7 @@ import java.util.List;
 )
 @Getter
 @Setter
-public class Empresa implements Comparable<Empresa> {
+public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
 
     @Column(allowsNull = "false", length = 20)
     @Property()

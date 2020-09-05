@@ -1,9 +1,10 @@
-package domainapp.modules.simple.dominio.vehiculo;
+package domainapp.modules.simple.dominio.empresa;
 
 import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.operario.QOperario;
 import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
+import domainapp.modules.simple.dominio.empresa.Empresa;
+import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
 
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.value.Blob;
@@ -16,53 +17,43 @@ import net.sf.jasperreports.engine.JRException;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
-        objectType ="Vehiculo",
-        repositoryFor = Vehiculo.class
+        objectType ="Empresa",
+        repositoryFor = Empresa.class
 )
 @DomainServiceLayout(
-        named = "Vehiculo",
+        named = "Empresa",
         menuOrder =""
 )
 
-public class VehiculoMenu {
+public class EmpresaMenu {
 
     @Action()
-    @ActionLayout(named = "Crear Vehiculo")
+    @ActionLayout(named = "Crear Empresa")
     @MemberOrder(sequence = "1")
-    public Vehiculo create(
+    public Empresa create(
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Dominio: ")
-            final String dominio,
+            @ParameterLayout(named = "Razon Social: ")
+            final String razonSocial,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Marca: ")
-            final String marca,
+            @ParameterLayout(named = "Direccion: ")
+            final String direccion,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Modelo: ")
-            final String modelo,
+            @ParameterLayout(named = "Cuit: ")
+            final String cuit,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Año:  ")
-            final String anyo,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Kilometraje: ")
-            final String kilometraje,
-
-            @ParameterLayout(named = "Vencimiento VTV: ")
-            final LocalDate vencimientoVtv,
-
-            @ParameterLayout(named = "Vencimiento Poliza: ")
-            final LocalDate vencimientoPoliza,
+            @ParameterLayout(named = "Telefono:  ")
+            final String telefono,
 
             @ParameterLayout(named = "Operario: ")
             final Operario operario
 
-            ) {
+    ) {
 
-        return vehiculoRepository.create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
+        return empresaRepository.create(razonSocial, direccion, cuit, telefono, operario);
     }
 
     public String validate0Create (final String dominio) {
@@ -87,42 +78,35 @@ public class VehiculoMenu {
                 Character.isDigit(dominio.charAt(12))){
             return null;
         }   else {
-                return "Formato no valido";
+            return "Formato no valido";
         }
 
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Vehiculo")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Empresa")
     @MemberOrder(sequence = "2")
 
-    public Vehiculo findByDominio(
+    public Empresa findByCuit(
             @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Por nombre: ")
-            final Vehiculo vehiculo)
+            @ParameterLayout(named = "Por cuit: ")
+            final Empresa empresa)
     {
-        return vehiculo;
+        return empresa;
     }
 
-    public List<Vehiculo> choices0FindByDominio() { return vehiculoRepository.Listar();}
+    public List<Empresa> choices0FindByCuit() { return empresaRepository.Listar();}
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Vehiculos")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de empresas")
     @MemberOrder(sequence = "2")
-    public java.util.List<Vehiculo> listAll(){
-        return vehiculoRepository.Listar();
+    public java.util.List<Empresa> listAll(){
+        return empresaRepository.Listar();
     }
 
-    /*
-    @Action()
-    @ActionLayout(named = "Listado exportado")
-    public Blob ExportarListado() throws JRException, IOException {
-        EjecutarReportes ejecutarReportes = new EjecutarReportes();
-        return ejecutarReportes.ListadoVehiculosPDF(vehiculoRepository.Listar());
-    }
-    */
+
 
     @javax.inject.Inject
-    VehiculoRepository vehiculoRepository;
+    EmpresaRepository empresaRepository;
 }
