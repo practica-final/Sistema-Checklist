@@ -81,6 +81,10 @@ public class Empresa implements Comparable<Empresa> {
     public String RepoTelefono() {
         return this.telefono;
     }
+    public String RepoEstado() {
+
+        return this.estado.toString();
+    }
 
 
     public Empresa() { }
@@ -95,6 +99,7 @@ public class Empresa implements Comparable<Empresa> {
         this.direccion = direccion;
         this.cuit = cuit;
         this.telefono = telefono;
+        this.estado = EstadoGeneral.Habilitado;
     }
 
     @NotPersistent
