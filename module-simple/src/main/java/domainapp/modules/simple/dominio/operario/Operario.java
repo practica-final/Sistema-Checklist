@@ -3,6 +3,10 @@ package domainapp.modules.simple.dominio.operario;
 /*import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;*/
 import com.google.common.collect.ComparisonChain;
+import domainapp.modules.simple.dominio.empresa.Empresa;
+import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
+import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
 import jdk.internal.dynalink.linker.ConversionComparator;
 import lombok.AccessLevel;
 import lombok.Setter;
@@ -102,12 +106,9 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String RepoNombreyApellido(){ return this.nombreyApellido;}
         public String RepoLegajoSAP(){ return this.legajoSAP;}
         public String RepoEmpresa(){ return this.empresa;}
-        //public String RepoEmail(){ return this.email;}
-        //public String RepoTelefono(){ return this.telefono;}
         public String RepoNumeroLicencia(){ return this.numeroLicencia;}
         public String RepoVencimientoLicencia(){ return this.vencimientoLicencia;}
         public String RepoLlaveRSV(){ return this.llaveRSV;}
-        //public String RepoClave(){ return this.clave;}
         public String RepoEstado(){ return this.estado.toString();}
 
         public Operario(){}
@@ -280,7 +281,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 .toString(this, "legajoSAP");
         }
 
-        /* @javax.inject.Inject
+        @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
         @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
         EmpresaRepository empresaRepository;
@@ -289,7 +290,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent
         @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
-        VehiculoRepository vehiculoRepository;*/
+        VehiculoRepository vehiculoRepository;
 
         @javax.inject.Inject
         @javax.jdo.annotations.NotPersistent

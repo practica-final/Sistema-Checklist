@@ -98,6 +98,7 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
         this.direccion = direccion;
         this.cuit = cuit;
         this.telefono = telefono;
+        //this.estado = estado;
         this.estado = EstadoGeneral.Habilitado;
     }
 
