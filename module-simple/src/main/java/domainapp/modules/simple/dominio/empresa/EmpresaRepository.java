@@ -52,7 +52,7 @@ public class EmpresaRepository {
 
 
     @Programmatic
-    public List<Empresa> Listar (EstadoGeneral estado){
+    public List<Empresa> Listar(EstadoGeneral estado){
         return repositoryService.allMatches(
                 new QueryDefault<>(
                         Empresa.class,
@@ -85,7 +85,7 @@ public class EmpresaRepository {
     public Empresa create(
             final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
     {
-        final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono);
+        final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono, operario);
         repositoryService.persist(empresa);
         return empresa;
     }

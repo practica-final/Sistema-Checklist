@@ -2,11 +2,14 @@ package domainapp.modules.simple.dominio.operario;
 
 /*import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;*/
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.google.common.collect.ComparisonChain;
+import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
+import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import jdk.internal.dynalink.linker.ConversionComparator;
 import lombok.AccessLevel;
 import lombok.Setter;
@@ -51,10 +54,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         @Column(allowsNull = "false", length = 40)
         @Property()
-        private String empresa;
-
-        @Column(allowsNull = "false", length = 40)
-        @Property()
         private String email;
 
         @Column(allowsNull = "false", length = 40)
@@ -81,17 +80,9 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @Property()
         private OperarioEstado estado;
 
-        /*@Persistent(mappedBy = "operario", defaultFetchGroup = "true")
-        @Column(allowsNull = "true")
+        @Column(allowsNull = "false")
         @Property()
-        private List<Empresa> empresas;
-
-
-        @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
-        @Column(allowsNull = "true")
-        @Property
-        private List<Vehiculo> vehiculos;*/
-
+        private Empresa empresa;
 
         public String iconName(){
             if (this.estado == OperarioEstado.Activo){
@@ -105,28 +96,27 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         public String RepoNombreyApellido(){ return this.nombreyApellido;}
         public String RepoLegajoSAP(){ return this.legajoSAP;}
-        public String RepoEmpresa(){ return this.empresa;}
         public String RepoNumeroLicencia(){ return this.numeroLicencia;}
         public String RepoVencimientoLicencia(){ return this.vencimientoLicencia;}
         public String RepoLlaveRSV(){ return this.llaveRSV;}
+        public String RepoEmpresa(){ return this.empresa.getRazonSocial();}
         public String RepoEstado(){ return this.estado.toString();}
 
         public Operario(){}
 
         public Operario(
-                String nombreyApellido,
-                String legajoSAP,
-                String empresa,
-                String email,
-                String telefono,
-                String numeroLicencia,
-                String vencimientoLicencia,
-                String llaveRSV,
-                String clave
-        ){
+                final String nombreyApellido,
+                final String legajoSAP,
+                final String email,
+                final String telefono,
+                final String numeroLicencia,
+                final String vencimientoLicencia,
+                final String llaveRSV,
+                final String clave,
+                final Empresa empresa
+                ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
-            this.empresa = empresa;
             this.email = email;
             this.telefono = telefono;
             this.numeroLicencia = numeroLicencia;
@@ -134,6 +124,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.llaveRSV = llaveRSV;
             this.clave = clave;
             this.estado = OperarioEstado.Activo;
+            this.empresa = empresa;
         }
 
         public Operario(
@@ -147,12 +138,9 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String llaveRSV,
                 String clave,
                 OperarioEstado estado
-                //List<Empresa> empresas,
-                //List<Vehiculo> vehiculos
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
-            this.empresa = empresa;
             this.email = email;
             this.telefono = telefono;
             this.numeroLicencia = numeroLicencia;
@@ -160,8 +148,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.llaveRSV = llaveRSV;
             this.clave = clave;
             this.estado = estado;
-            //this.empresas = empresas;
-            //this.vehiculos = vehiculos;
         }
 
         @NotPersistent
@@ -183,47 +169,68 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public Operario update(
                 @Parameter(maxLength = 40)
 
-                @ParameterLayout(named = "Nombre y Apellido: ") final String nombreyApellido,
-                @ParameterLayout(named = "Legajo SAP: ") final String legajoSAP,
-                @ParameterLayout(named = "Empresa: ") final String empresa,
-                @ParameterLayout(named = "Email: ") final String email,
-                @ParameterLayout(named = "Telefono: ") final String telefono,
-                @ParameterLayout(named = "Numero de Licencia: ") final String numeroLicencia,
-                @ParameterLayout(named = "Vencimiento de Licencia: ") final String vencimientoLicencia,
-                @ParameterLayout(named = "Llave RSV: ") final String llaveRSV,
-                @ParameterLayout(named = "Clave: ") final String clave
+                @ParameterLayout(named = "Nombre y Apellido: ")
+                final String nombreyApellido,
 
-        ){
-            /**this.nombreyApellido = nombreyApellido;
+                @ParameterLayout(named = "Legajo SAP: ")
+                final String legajoSAP,
+
+                @ParameterLayout(named = "Email: ")
+                final String email,
+
+                @ParameterLayout(named = "Telefono: ")
+                final String telefono,
+
+                @ParameterLayout(named = "Numero de Licencia: ")
+                final String numeroLicencia,
+
+                @ParameterLayout(named = "Vencimiento de Licencia: ")
+                final String vencimientoLicencia,
+
+                @ParameterLayout(named = "Llave RSV: ")
+                final String llaveRSV,
+
+                @ParameterLayout(named = "Clave: ")
+                final String clave,
+
+                @Parameter(optionality = Optionality.MANDATORY)
+                @ParameterLayout(named = "Empresa: ")
+                final Empresa empresa)
+
+        {
+            /*this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
-            this.empresa = empresa;
             this.email = email;
             this.telefono = telefono;
             this.numeroLicencia = numeroLicencia;
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
-            this.clave = clave;*/
+            this.clave = clave;
+            this.empresa = empresa;*/
             setNombreyApellido(nombreyApellido);
             setLegajoSAP(legajoSAP);
-            setEmpresa(empresa);
             setEmail(email);
             setTelefono(telefono);
             setNumeroLicencia(numeroLicencia);
             setVencimientoLicencia(vencimientoLicencia);
             setLlaveRSV(llaveRSV);
             setClave(clave);
+            setEmpresa(empresa);
             return this;
         }
 
         public String default0Update() { return getNombreyApellido();}
         public String default1Update() { return getLegajoSAP();}
-        public String default2Update() { return getEmpresa();}
-        public String default3Update() { return getEmail();}
-        public String default4Update() { return getTelefono();}
-        public String default5Update() { return getNumeroLicencia();}
-        public String default6Update() { return getVencimientoLicencia();}
-        public String default7Update() { return getLlaveRSV();}
-        public String default8Update() { return getClave();}
+        public String default2Update() { return getEmail();}
+        public String default3Update() { return getTelefono();}
+        public String default4Update() { return getNumeroLicencia();}
+        public String default5Update() { return getVencimientoLicencia();}
+        public String default6Update() { return getLlaveRSV();}
+        public String default7Update() { return getClave();}
+        public Empresa default8Update() {return getEmpresa();}
+            public List<Empresa> choices8Update() {
+                return empresaRepository.Listar(EstadoGeneral.Habilitado);
+            }
 
         @Programmatic
         public void CambioEstado(OperarioEstado estado){
@@ -249,9 +256,18 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             return this;
         }
 
-        /**public boolean hideActivar() { return this.estado == OperarioEstado.Activo;}
+        public boolean hideActivar() { return this.estado == OperarioEstado.Activo;}
         public boolean hideDesactivar() { return this.estado == OperarioEstado.Inactivo;}
-        public boolean hideEliminar() { return this.estado == OperarioEstado.Eliminado;}**/
+        public boolean hideEliminar() { return this.estado == OperarioEstado.Eliminado;}
+
+        /*@Override
+        public void Actualizar() {
+            if (empresa.ObtenerEstado() == EstadoGeneral.Habilitado){
+                this.bajaEmpresa = false;
+            } else {
+                this.bajaEmpresa = true;
+            }
+        }*/
 
         //@Override
         public void Notificar(){
@@ -265,8 +281,14 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             }*/
         }
 
-        @Programmatic
-        public OperarioEstado ObtenerEstado() { return this.estado;}
+        /*@Programmatic
+        public OperarioEstado ObtenerEstado() { return this.estado;}*/
+
+        /*@Programmatic
+        public boolean BajaEmpresa(){
+            Actualizar();
+            return this.bajaEmpresa;
+        }*/
 
         @Override
         public int compareTo(final Operario other){

@@ -5,6 +5,7 @@ import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.ObservadorGeneral;
 
 
+import domainapp.modules.simple.dominio.operario.Operario;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +56,15 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     @Property()
     private EstadoGeneral estado;
 
+    /*@Column(allowsNull = "false")
+    @Property()
+    private Operario operario;*/
+
+    @Persistent(mappedBy = "empresa", defaultFetchGroup = "true")
+        @Column(allowsNull = "true")
+        @Property()
+        private List<Operario> operarios;
+
     public String iconName() {
         if (this.estado == EstadoGeneral.Espera) {
             return "Espera";
@@ -68,22 +78,11 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     }
 
 
-    public String RepoRazonSocial() {
-        return this.razonSocial;
-    }
-    public String RepoDireccion() {
-        return this.direccion;
-    }
-    public String RepoCuit() {
-        return this.cuit;
-    }
-    public String RepoTelefono() {
-        return this.telefono;
-    }
-    public String RepoEstado() {
-
-        return this.estado.toString();
-    }
+    public String RepoRazonSocial() { return this.razonSocial; }
+    public String RepoDireccion() { return this.direccion; }
+    public String RepoCuit() { return this.cuit; }
+    public String RepoTelefono() { return this.telefono; }
+    public String RepoEstado() { return this.estado.toString(); }
 
 
     public Empresa() { }
@@ -92,12 +91,14 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
             final String razonSocial,
             final String direccion,
             final String cuit,
-            final String telefono) {
+            final String telefono,
+            final Operario operario) {
 
         this.razonSocial = razonSocial;
         this.direccion = direccion;
         this.cuit = cuit;
         this.telefono = telefono;
+        //this.operario = operario;
         //this.estado = estado;
         this.estado = EstadoGeneral.Habilitado;
     }
@@ -157,6 +158,7 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     public String default1Update() {return getRazonSocial();}
     public String default2Update() {return getDireccion();}
     public String default3Update() {return getTelefono();}
+
 
 
     @Programmatic
@@ -219,6 +221,10 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     }
 
 
+    @Programmatic
+    public EstadoGeneral ObtenerEstado(){
+        return this.estado;
+    }
 
     //region > compareTo, toString
     @Override

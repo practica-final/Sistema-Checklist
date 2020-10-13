@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dominio.operario;
 
+import domainapp.modules.simple.dominio.empresa.Empresa;
 import org.apache.isis.applib.annotation.*;
 
 import java.io.IOException;
@@ -34,10 +35,6 @@ public class OperarioMenu {
             final String legajoSAP,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Empresa: ")
-            final String empresa,
-
-            @Parameter(maxLength = 40)
             @ParameterLayout(named = "Correo: ")
             final String email,
 
@@ -59,11 +56,15 @@ public class OperarioMenu {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Clave: ")
-            final String clave)
+            final String clave,
+
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Empresa: ")
+            final Empresa empresa)
 
         {
-            return operarioRepository.create(nombreyApellido, legajoSAP, empresa, email, telefono, numeroLicencia, vencimientoLicencia,
-                    llaveRSV, clave);
+            return operarioRepository.create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia,
+                    llaveRSV, clave, empresa);
         }
 
 
