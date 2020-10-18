@@ -84,6 +84,11 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @Property()
         private Empresa empresa;
 
+        @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
+        @Column(allowsNull = "true")
+        @Property()
+        private List<Vehiculo> vehiculos;
+
         public String iconName(){
             if (this.estado == OperarioEstado.Activo){
                 return "Activo";
@@ -130,14 +135,15 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public Operario(
                 String nombreyApellido,
                 String legajoSAP,
-                String empresa,
                 String email,
                 String telefono,
                 String numeroLicencia,
                 String vencimientoLicencia,
                 String llaveRSV,
                 String clave,
-                OperarioEstado estado
+                Empresa empresa,
+                OperarioEstado estado,
+                List<Vehiculo> vehiculos
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -147,7 +153,9 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
             this.clave = clave;
+            this.empresa = empresa;
             this.estado = estado;
+            this.vehiculos = vehiculos;
         }
 
         @NotPersistent
@@ -198,15 +206,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 final Empresa empresa)
 
         {
-            /*this.nombreyApellido = nombreyApellido;
-            this.legajoSAP = legajoSAP;
-            this.email = email;
-            this.telefono = telefono;
-            this.numeroLicencia = numeroLicencia;
-            this.vencimientoLicencia = vencimientoLicencia;
-            this.llaveRSV = llaveRSV;
-            this.clave = clave;
-            this.empresa = empresa;*/
             setNombreyApellido(nombreyApellido);
             setLegajoSAP(legajoSAP);
             setEmail(email);
@@ -272,13 +271,13 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         //@Override
         public void Notificar(){
 
-           /** for ( Empresa empresa : empresas){
+           /*for ( Empresa empresa : empresa){
                 empresa.Actualizar();
-            }
+            }*/
 
             for (Vehiculo vehiculo : vehiculos){
                 vehiculo.Actualizar();
-            }*/
+            }
         }
 
         /*@Programmatic
@@ -292,7 +291,6 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
         @Override
         public int compareTo(final Operario other){
-         //   return org.apache.isis.applib.util.ObjectContracts.compare(this, other, "nombreyApellido");
             return ComparisonChain.start()
                     .compare(this.getLegajoSAP(), other.getLegajoSAP())
                     .result();

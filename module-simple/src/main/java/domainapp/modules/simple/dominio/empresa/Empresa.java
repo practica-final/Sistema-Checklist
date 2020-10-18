@@ -103,6 +103,20 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
         this.estado = EstadoGeneral.Habilitado;
     }
 
+    public Empresa(
+            final String razonSocial,
+            final String direccion,
+            final String cuit,
+            final String telefono,
+            List<Operario> operarios){
+
+            this.razonSocial = razonSocial;
+            this.direccion = direccion;
+            this.cuit = cuit;
+            this.telefono = telefono;
+            this.operarios = operarios;
+    }
+
     @NotPersistent
     @CollectionLayout(named = "Empresa en Espera")
     public List<Empresa> getEspera() {

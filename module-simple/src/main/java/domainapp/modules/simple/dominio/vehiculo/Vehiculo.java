@@ -3,6 +3,7 @@ package domainapp.modules.simple.dominio.vehiculo;
 import com.google.common.collect.ComparisonChain;
 import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.ObservadorGeneral;
+import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.operario.Operario;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -70,6 +71,10 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
     @Property(hidden = Where.ALL_TABLES)
     private boolean bajaVehiculo;
 
+    @Column(allowsNull = "false")
+    @Property()
+    private Operario operario;
+
 
     public String iconName() {
         if (this.estado == EstadoGeneral.Espera) {
@@ -115,7 +120,8 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
             final String anyo,
             final String kilometraje,
             final LocalDate vencimientoVtv,
-            final LocalDate vencimientoPoliza) {
+            final LocalDate vencimientoPoliza,
+            final Operario operario) {
 
         this.dominio = dominio;
         this.marca = marca;
@@ -126,6 +132,7 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
         this.vencimientoPoliza = vencimientoPoliza;
         this.estado = EstadoGeneral.Habilitado;
         this.bajaVehiculo = BajaVehiculo();
+        this.operario = operario;
     }
 
     @NotPersistent

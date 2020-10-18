@@ -85,7 +85,7 @@ public class VehiculoRepository {
             final String dominio, final String marca, final String modelo, final String anyo, final String kilometraje,
             final LocalDate vencimientoVtv, final LocalDate vencimientoPoliza, final Operario operario)
     {
-        final Vehiculo vehiculo = new Vehiculo(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza);
+        final Vehiculo vehiculo = new Vehiculo(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
         repositoryService.persist(vehiculo);
         return vehiculo;
     }
