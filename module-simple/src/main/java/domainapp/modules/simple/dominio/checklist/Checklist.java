@@ -4,6 +4,8 @@ import com.google.common.collect.ComparisonChain;
 import domainapp.modules.simple.dominio.ObservadorGeneral;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
+import lombok.AccessLevel;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.Title;
@@ -18,7 +20,7 @@ public class Checklist implements Comparable<Checklist> {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     @Property(hidden = Where.EVERYWHERE)
     @Title()
-    private int idChecklist;
+    private String idChecklist;
 
     @Column(allowsNull = "false", length = 20)
     @Property()
@@ -58,19 +60,15 @@ public class Checklist implements Comparable<Checklist> {
     @Column(allowsNull = "false", length = 20)
     @Property()
     @Title()
-    private Operario operario;
-
-    @Column(allowsNull = "false", length = 20)
-    @Property()
-    @Title()
     private Vehiculo vehiculo;
 
 
     public Checklist(
-            int idChecklist,
+            String idChecklist,
             boolean documentacion, boolean tablero, boolean laterales, boolean seccionTrasera,
             boolean frente,
-            String comentarios, String fotos
+            String comentarios, String fotos,
+            Vehiculo vehiculo
     ){
         this.idChecklist = idChecklist;
         this.documentacion = documentacion;
@@ -80,9 +78,10 @@ public class Checklist implements Comparable<Checklist> {
         this.frente = frente;
         this.comentarios = comentarios;
         this.fotos = fotos;
+        this.vehiculo = vehiculo;
     }
 
-    public int getIdChecklist() { return this.idChecklist; }
+    public String getIdChecklist() { return this.idChecklist; }
     public boolean getDocumentacion() { return this.documentacion; }
     public boolean getTablero() { return this.tablero; }
     public boolean getLaterales() { return this.laterales; }
@@ -97,6 +96,21 @@ public class Checklist implements Comparable<Checklist> {
                 .compare(this.getIdChecklist(), other.getIdChecklist())
                 .result();
     }
+
+    @Override
+    public String toString() { return org.apache.isis.applib.util.ObjectContracts
+            .toString(this, "idChecklist");
+    }
+
+    @javax.inject.Inject
+    @javax.jdo.annotations.NotPersistent
+    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
+    VehiculoRepository vehiculoRepository;
+
+    @javax.inject.Inject
+    @javax.jdo.annotations.NotPersistent
+    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
+    ChecklistRepository checklistRepository;
 
 
 }

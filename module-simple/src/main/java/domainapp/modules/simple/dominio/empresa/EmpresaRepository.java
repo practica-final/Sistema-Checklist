@@ -2,8 +2,6 @@ package domainapp.modules.simple.dominio.empresa;
 
 import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.operario.OperarioEstado;
-import domainapp.modules.simple.dominio.empresa.Empresa;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;
