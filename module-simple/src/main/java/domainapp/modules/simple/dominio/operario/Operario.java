@@ -41,7 +41,7 @@ import javax.jdo.annotations.*;
 )
 @lombok.Getter @lombok.Setter
 
-public class Operario implements Comparable<Operario>//, SujetoGeneral
+public class Operario implements Comparable<Operario>
     {
         @Column(allowsNull = "false", length = 40)
         @Property()
@@ -80,9 +80,10 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @Property()
         private OperarioEstado estado;
 
-        @Column(allowsNull = "false")
+        @Column(allowsNull = "true", name = "asig-empr")
         @Property()
-        private Empresa empresa;
+        @PropertyLayout(named = "Empresa")
+        private Empresa asigEmpresa;
 
         @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
         @Column(allowsNull = "true")
@@ -104,7 +105,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String RepoNumeroLicencia(){ return this.numeroLicencia;}
         public String RepoVencimientoLicencia(){ return this.vencimientoLicencia;}
         public String RepoLlaveRSV(){ return this.llaveRSV;}
-        public String RepoEmpresa(){ return this.empresa.getRazonSocial();}
+        public String RepoEmpresa(){ return this.asigEmpresa.getRazonSocial();}
         public String RepoEstado(){ return this.estado.toString();}
 
         public Operario(){}
@@ -117,8 +118,8 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 final String numeroLicencia,
                 final String vencimientoLicencia,
                 final String llaveRSV,
-                final String clave,
-                final Empresa empresa
+                final String clave
+               // final Empresa asigEmpresa
                 ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -129,7 +130,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.llaveRSV = llaveRSV;
             this.clave = clave;
             this.estado = OperarioEstado.Activo;
-            this.empresa = empresa;
+            //this.asigEmpresa = asigEmpresa;
         }
 
         public Operario(
@@ -142,8 +143,8 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
                 String llaveRSV,
                 String clave,
                 Empresa empresa,
-                OperarioEstado estado,
-                List<Vehiculo> vehiculos
+                OperarioEstado estado
+               // List<Vehiculo> vehiculos
         ){
             this.nombreyApellido = nombreyApellido;
             this.legajoSAP = legajoSAP;
@@ -153,9 +154,9 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             this.vencimientoLicencia = vencimientoLicencia;
             this.llaveRSV = llaveRSV;
             this.clave = clave;
-            this.empresa = empresa;
+            this.asigEmpresa = empresa;
             this.estado = estado;
-            this.vehiculos = vehiculos;
+           // this.vehiculos = vehiculos;
         }
 
         @NotPersistent
@@ -170,7 +171,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         @CollectionLayout(named = "Operarios Eliminados")
         public List<Operario> getEliminado(){ return operarioRepository.Listar(OperarioEstado.Eliminado);}
 
-        public String getNombreyApellido() { return this.nombreyApellido;}
+       // public String getNombreyApellido() { return this.nombreyApellido;}
 
         @Action()
         @ActionLayout(named = "Editar")
@@ -203,7 +204,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
 
                 @Parameter(optionality = Optionality.MANDATORY)
                 @ParameterLayout(named = "Empresa: ")
-                final Empresa empresa)
+                final Empresa asigEmpresa)
 
         {
             setNombreyApellido(nombreyApellido);
@@ -214,7 +215,7 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
             setVencimientoLicencia(vencimientoLicencia);
             setLlaveRSV(llaveRSV);
             setClave(clave);
-            setEmpresa(empresa);
+            setAsigEmpresa(asigEmpresa);
             return this;
         }
 
@@ -226,10 +227,10 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public String default5Update() { return getVencimientoLicencia();}
         public String default6Update() { return getLlaveRSV();}
         public String default7Update() { return getClave();}
-        public Empresa default8Update() {return getEmpresa();}
+        /*public Empresa default8Update() {return getAsignarEmpresa();}
             public List<Empresa> choices8Update() {
                 return empresaRepository.Listar(EstadoGeneral.Habilitado);
-            }
+            }*/
 
         @Programmatic
         public void CambioEstado(OperarioEstado estado){
@@ -259,35 +260,30 @@ public class Operario implements Comparable<Operario>//, SujetoGeneral
         public boolean hideDesactivar() { return this.estado == OperarioEstado.Inactivo;}
         public boolean hideEliminar() { return this.estado == OperarioEstado.Eliminado;}
 
-        /*@Override
-        public void Actualizar() {
-            if (empresa.ObtenerEstado() == EstadoGeneral.Habilitado){
-                this.bajaEmpresa = false;
-            } else {
-                this.bajaEmpresa = true;
-            }
-        }*/
-
         //@Override
         public void Notificar(){
 
            /*for ( Empresa empresa : empresa){
                 empresa.Actualizar();
-            }*/
+            }
 
             for (Vehiculo vehiculo : vehiculos){
                 vehiculo.Actualizar();
-            }
+            }*/
         }
 
-        /*@Programmatic
-        public OperarioEstado ObtenerEstado() { return this.estado;}*/
+        @Action()
+        @ActionLayout(named = "Asignar Empresa")
+        public Operario AgregarEmpresa(
+                @Parameter(optionality = Optionality.MANDATORY)
+                @ParameterLayout(named = "Empresa")
+                final Empresa empresa) {
 
-        /*@Programmatic
-        public boolean BajaEmpresa(){
-            Actualizar();
-            return this.bajaEmpresa;
-        }*/
+            this.asigEmpresa = empresa;
+            return this;
+        }
+
+        public List<Empresa> choices0AgregarEmpresa() { return empresaRepository.Listar(); }
 
         @Override
         public int compareTo(final Operario other){

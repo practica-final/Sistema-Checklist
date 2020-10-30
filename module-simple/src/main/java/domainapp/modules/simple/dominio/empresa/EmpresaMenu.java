@@ -5,15 +5,14 @@ import domainapp.modules.simple.dominio.operario.QOperario;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
-
 import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.query.QueryDefault;
+import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.value.Blob;
+import org.datanucleus.query.typesafe.TypesafeQuery;
 
 import java.io.IOException;
 import java.util.List;
-import org.joda.time.LocalDate;
-
-import net.sf.jasperreports.engine.JRException;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
@@ -56,7 +55,7 @@ public class EmpresaMenu {
         return empresaRepository.create(razonSocial, direccion, cuit, telefono, operario);
     }
 
-    public String validate0Create (final String dominio) {
+    /*public String validate0Create (final String dominio) {
         return ValidarDominio(dominio);
     }
 
@@ -81,9 +80,25 @@ public class EmpresaMenu {
             return "Formato no valido";
         }
 
-    }
+    }*/
 
     @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Empresa")
+    @MemberOrder(sequence = "2")
+    public Empresa findByCuit(
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Por cuit: ")
+            final String cuit) {
+        TypesafeQuery<Empresa> q = isisJdoSupport.newTypesafeQuery(Empresa.class);
+        final QEmpresa cand = QEmpresa.candidate();
+        q = q.filter(
+                cand.cuit.eq(q.stringParameter("cuit"))
+        );
+        return q.setParameter("cuit", cuit)
+                .executeUnique();
+    }
+
+    /*@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Empresa")
     @MemberOrder(sequence = "2")
 
@@ -95,17 +110,20 @@ public class EmpresaMenu {
         return empresa;
     }
 
-    public List<Empresa> choices0FindByCuit() { return empresaRepository.Listar();}
+    public List<Empresa> choices0FindByCuit() { return empresaRepository.Listar();}*/
 
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de empresas")
-    @MemberOrder(sequence = "2")
-    public java.util.List<Empresa> listAll(){
+    @MemberOrder(sequence = "3")
+    public List<Empresa> listAll(){
+        List <Empresa> empresas =  empresaRepository.Listar();
         return empresaRepository.Listar();
     }
 
 
+    @javax.inject.Inject
+    IsisJdoSupport isisJdoSupport;
 
     @javax.inject.Inject
     EmpresaRepository empresaRepository;

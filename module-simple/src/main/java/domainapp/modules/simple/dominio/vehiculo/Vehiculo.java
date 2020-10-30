@@ -32,7 +32,7 @@ import java.util.List;
 )
 @Getter
 @Setter
-public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
+public class Vehiculo implements Comparable<Vehiculo> {
 
     @Column(allowsNull = "false", length = 20)
     @Property()
@@ -131,8 +131,8 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
         this.vencimientoVtv = vencimientoVtv;
         this.vencimientoPoliza = vencimientoPoliza;
         this.estado = EstadoGeneral.Habilitado;
-        this.bajaVehiculo = BajaVehiculo();
-        this.operario = operario;
+       // this.bajaVehiculo = BajaVehiculo();
+        //this.operario = operario;
     }
 
     @NotPersistent
@@ -250,17 +250,12 @@ public class Vehiculo implements Comparable<Vehiculo>, ObservadorGeneral {
     public boolean hideInhabilitar() {return this.estado == EstadoGeneral.Inhabilitado;}
     public boolean hideBorrar() {return this.estado == EstadoGeneral.Borrado;}
 
-    @Override
-    public void Actualizar (){
-
-    }
-
-    @Programmatic
+    /*@Programmatic
     public boolean BajaVehiculo(){
         Actualizar();
         return this.bajaVehiculo;
     }
-
+*/
     //region > compareTo, toString
     @Override
     public int compareTo(final Vehiculo other) {

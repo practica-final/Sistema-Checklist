@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @javax.jdo.annotations.PersistenceCapable(
-        identityType = IdentityType.DATASTORE, schema = "cuit", table = "Empresa"
+        identityType = IdentityType.DATASTORE, schema = "dominio", table = "Empresa"
 )
 @javax.jdo.annotations.DatastoreIdentity(
         strategy = IdGeneratorStrategy.IDENTITY, column = "id")
@@ -33,11 +33,11 @@ import java.util.List;
 )
 @Getter
 @Setter
-public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
+public class Empresa implements Comparable<Empresa> {
 
-    @Column(allowsNull = "false", length = 20)
+    @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
+    @lombok.NonNull
     @Property()
-    @Title()
     private String razonSocial;
 
     @Column(allowsNull = "false")
@@ -56,16 +56,12 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     @Property()
     private EstadoGeneral estado;
 
-    /*@Column(allowsNull = "false")
+    @Persistent(mappedBy = "asigEmpresa", defaultFetchGroup = "true")
+    @Column(allowsNull = "true")
     @Property()
-    private Operario operario;*/
+    private List<Operario> operarios;
 
-    @Persistent(mappedBy = "empresa", defaultFetchGroup = "true")
-        @Column(allowsNull = "true")
-        @Property()
-        private List<Operario> operarios;
-
-    public String iconName() {
+    /*public String iconName() {
         if (this.estado == EstadoGeneral.Espera) {
             return "Espera";
         } else if (this.estado == EstadoGeneral.Habilitado) {
@@ -83,27 +79,25 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     public String RepoCuit() { return this.cuit; }
     public String RepoTelefono() { return this.telefono; }
     public String RepoEstado() { return this.estado.toString(); }
+    */
 
+
+    public String title(){
+        return getRazonSocial();
+    }
 
     public Empresa() { }
 
-    public Empresa(
-            final String razonSocial,
-            final String direccion,
-            final String cuit,
-            final String telefono,
-            final Operario operario) {
+    public Empresa(String razonSocial, String direccion, String cuit, String telefono, Operario operario) {
 
         this.razonSocial = razonSocial;
         this.direccion = direccion;
         this.cuit = cuit;
         this.telefono = telefono;
-        //this.operario = operario;
-        //this.estado = estado;
-        this.estado = EstadoGeneral.Habilitado;
+        this.operarios = (List<Operario>) operario;
     }
 
-    public Empresa(
+    /*public Empresa(
             final String razonSocial,
             final String direccion,
             final String cuit,
@@ -138,7 +132,7 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     @CollectionLayout(named = "Empresa Borrada")
     public List<Empresa> getBorrado() {
         return empresaRepository.Listar(EstadoGeneral.Borrado);
-    }
+    }*/
 
 
     @Action()
@@ -167,15 +161,15 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     }
 
     public String default0Update() {return getCuit();}
-    public String validate0Update(final String cuit) {
-        return ValidarCuit(cuit);    }
+        /*public String validate0Update(final String cuit) {
+        return ValidarCuit(cuit);    }*/
     public String default1Update() {return getRazonSocial();}
     public String default2Update() {return getDireccion();}
     public String default3Update() {return getTelefono();}
 
 
 
-    @Programmatic
+    /*@Programmatic
     private String ValidarCuit(final String cuit) {
         if (Character.isDigit(cuit.charAt(0)) &&
                 Character.isDigit(cuit.charAt(1)) &&
@@ -195,6 +189,7 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
             return "Formato no valido XX-XXXXXXXX-X";
         }
     }
+    */
 
     @Programmatic
     public void CambiarEstado(EstadoGeneral estado){
@@ -219,7 +214,7 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
         return this;
     }
 
-    @Action(semantics = SemanticsOf.IDEMPOTENT_ARE_YOU_SURE)
+    /*@Action(semantics = SemanticsOf.IDEMPOTENT_ARE_YOU_SURE)
     public Empresa Borrar(){
         CambiarEstado(EstadoGeneral.Borrado);
         return this;
@@ -229,16 +224,13 @@ public class Empresa implements Comparable<Empresa>, ObservadorGeneral {
     public boolean hideInhabilitar() {return this.estado == EstadoGeneral.Inhabilitado;}
     public boolean hideBorrar() {return this.estado == EstadoGeneral.Borrado;}
 
-    @Override
-    public void Actualizar (){
-
-    }
-
-
     @Programmatic
     public EstadoGeneral ObtenerEstado(){
         return this.estado;
     }
+
+     */
+
 
     //region > compareTo, toString
     @Override

@@ -66,16 +66,15 @@ public class OperarioRepository {
     public Operario create(
             final String nombreyApellido,
             final String legajoSAP,
-            //final String empresa,
             final String email,
             final String telefono,
             final String numeroLicencia,
             final String vencimientoLicencia,
             final String llaveRSV,
             final String clave,
-            final Empresa empresa) {
+            final Empresa asigEmpresa) {
         final Operario operario = new Operario(nombreyApellido, legajoSAP, email, telefono,
-                numeroLicencia, vencimientoLicencia, llaveRSV, clave, empresa);
+                numeroLicencia, vencimientoLicencia, llaveRSV, clave);
         repositoryService.persist(operario);
         return operario;
     }
@@ -84,17 +83,16 @@ public class OperarioRepository {
     public Operario findOrCreate(
             final String nombreyApellido,
             final String legajoSAP,
-            //final String empresa,
             final String email,
             final String telefono,
             final String numeroLicencia,
             final String vencimientoLicencia,
             final String llaveRSV,
             final String clave,
-            final Empresa empresa) {
+            final Empresa asigEmpresa) {
         Operario operario = findByLegajoSAP(legajoSAP);
         if (operario == null) {
-            operario = create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, empresa);
+            operario = create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, asigEmpresa);
         }
         return operario;
     }

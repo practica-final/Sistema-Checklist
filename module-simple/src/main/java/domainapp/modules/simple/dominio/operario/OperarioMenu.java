@@ -5,6 +5,9 @@ import org.apache.isis.applib.annotation.*;
 
 import java.io.IOException;
 import org.apache.isis.applib.value.Blob;
+import org.datanucleus.query.typesafe.TypesafeQuery;
+import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+
 import java.util.List;
 
 
@@ -14,7 +17,7 @@ import java.util.List;
         repositoryFor = Operario.class
 )
 @DomainServiceLayout(
-        named = "",
+        named = "Operario",
         menuOrder = ""
 )
 
@@ -60,11 +63,11 @@ public class OperarioMenu {
 
             @Parameter(optionality = Optionality.MANDATORY)
             @ParameterLayout(named = "Empresa: ")
-            final Empresa empresa)
+            final Empresa asigEmpresa)
 
         {
             return operarioRepository.create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia,
-                    llaveRSV, clave, empresa);
+                    llaveRSV, clave, asigEmpresa);
         }
 
 
@@ -72,15 +75,24 @@ public class OperarioMenu {
         @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Operario")
         @MemberOrder(sequence = "2")
 
-        public Operario findByNombreyApellido(
+        public Operario findByLegajoSAP(
                 @Parameter(optionality = Optionality.MANDATORY)
-                @ParameterLayout(named = "Buscar por Nombre: ")
-                final Operario operario){
+                @ParameterLayout(named = "Buscar por legajoSAP: ")
+                final String legajoSAP){
 
-            return operario;
+            //return operario;
+
+            TypesafeQuery<Operario> q = isisJdoSupport.newTypesafeQuery(Operario.class);
+            final QOperario cand = QOperario.candidate();
+            q = q.filter(
+                    cand.legajoSAP.eq(q.stringParameter("legajoSAP"))
+            );
+            return q.setParameter("legajoSAP", legajoSAP)
+                    .executeUnique();
+
         }
 
-        public List<Operario> choices0FindByNombreyApellido(){
+        public List<Operario> choices0FindByLegajoSAP(){
             return operarioRepository.Listar();
         }
 
@@ -105,5 +117,6 @@ public class OperarioMenu {
         @javax.inject.Inject
         OperarioRepository operarioRepository;
 
-
+        @javax.inject.Inject
+        IsisJdoSupport isisJdoSupport;
 }

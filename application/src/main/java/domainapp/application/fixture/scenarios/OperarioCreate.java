@@ -83,7 +83,7 @@ public class OperarioCreate extends FixtureScript {
     }
     @Override
     protected void execute(final ExecutionContext ec){
-        String nombreyApellido = checkParam("nombreyAPellido", ec, String.class);
+        String nombreyApellido = checkParam("nombreyApellido", ec, String.class);
         String legajoSAP = checkParam("legajoSAP", ec, String.class);
         String email = checkParam("email", ec, String.class);
         String telefono = checkParam("telefono", ec, String.class);
@@ -91,7 +91,7 @@ public class OperarioCreate extends FixtureScript {
         String vencimientoLicencia = checkParam("vencimientoLicencia", ec, String.class);
         String llaveRSV = checkParam("llaveRSV", ec, String.class);
         String clave = checkParam("clave", ec, String.class);
-        Empresa empresa = checkParam("empresa", ec, Empresa.class);
+        Empresa asigEmpresa = checkParam("asigEmpresa", ec, Empresa.class);
 
         this.operarioObject = wrap(menu).create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, clave, empresa);
 

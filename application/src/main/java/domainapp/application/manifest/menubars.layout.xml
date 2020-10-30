@@ -17,25 +17,67 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<mb3:menuBars xsi:schemaLocation="http://isis.apache.org/applib/layout/menubars/bootstrap3 http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<mb3:menuBars
+        xsi:schemaLocation="http://isis.apache.org/applib/layout/menubars/bootstrap3 http://isis.apache.org/applib/layout/menubars/bootstrap3/menubars.xsd http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd"
+        xmlns:cpt="http://isis.apache.org/applib/layout/component"
+        xmlns:lnk="http://isis.apache.org/applib/layout/links"
+        xmlns:mb3="http://isis.apache.org/applib/layout/menubars/bootstrap3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:mbr="http://isis.apache.org/applib/layout/menubars/bootstrap3">
     <mb3:primary>
+
         <mb3:menu>
-            <mb3:named>Simple Objects</mb3:named>
+            <mb3:named>Operarios</mb3:named>
             <mb3:section>
-                <mb3:serviceAction objectType="simple.SimpleObjectMenu" id="create">
-                    <cpt:named>Create</cpt:named>
+                <mb3:serviceAction objectType="Operario" id="create">
+                    <cpt:named>Crear Operario</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction objectType="simple.SimpleObjectMenu" id="findByName">
-                    <cpt:named>Find By Name</cpt:named>
+                <mb3:serviceAction objectType="Operario" id="findByLegajoSAP">
+                    <cpt:named>Buscar por Legajo Operario</cpt:named>
                 </mb3:serviceAction>
-                <mb3:serviceAction objectType="simple.SimpleObjectMenu" id="listAll">
-                    <cpt:named>List All</cpt:named>
+                <mb3:serviceAction objectType="Operario" id="listAll">
+                    <cpt:named>Listar Operarios</cpt:named>
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
+
+        <mb3:menu>
+            <mb3:named>Empresas</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction objectType="Empresa" id="create">
+                    <cpt:named>Crear Empresas</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction objectType="Empresa" id="findByCuit">
+                    <cpt:named>Buscar por CUIT de empresa</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction objectType="Empresa" id="listAll">
+                    <cpt:named>Listar Empresas</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+        </mb3:menu>
+
+        <mb3:menu>
+            <mb3:named>Vehiculos</mb3:named>
+            <mb3:section>
+                <mb3:serviceAction objectType="Vehiculo" id="create">
+                    <cpt:named>Crear Vehiculos</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction objectType="Vehiculo" id="findByDominio">
+                    <cpt:named>Buscar por Dominio</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction objectType="Vehiculo" id="listAll">
+                    <cpt:named>Listar Vehiculos</cpt:named>
+                </mb3:serviceAction>
+            </mb3:section>
+        </mb3:menu>
+
+
+
         <mb3:menu unreferencedActions="true">
             <mb3:named>Other</mb3:named>
         </mb3:menu>
+
+
     </mb3:primary>
     <mb3:secondary>
         <mb3:menu>

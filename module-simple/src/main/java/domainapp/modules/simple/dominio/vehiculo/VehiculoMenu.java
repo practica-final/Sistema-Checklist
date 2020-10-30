@@ -109,7 +109,7 @@ public class VehiculoMenu {
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Vehiculos")
-    @MemberOrder(sequence = "2")
+    @MemberOrder(sequence = "3")
     public java.util.List<Vehiculo> listAll(){
         return vehiculoRepository.Listar();
     }

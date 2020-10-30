@@ -28,7 +28,7 @@ public class EmpresaRepository {
                         "find"));
     }
 
-    @Programmatic
+   /* @Programmatic
     public List <Empresa> Listar(Operario operario) {
 
         return repositoryService.allMatches(
@@ -59,6 +59,16 @@ public class EmpresaRepository {
     }
 
     @Programmatic
+    public List<Empresa> findByCuitContains(final String cuit) {
+
+        return repositoryService.allMatches(
+                new QueryDefault<>(
+                        Empresa.class,
+                        "findByCuitContains",
+                        "cuit", cuit));
+    }*/
+
+    @Programmatic
     public Empresa findByCuit(final String cuit){
 
         return repositoryService.uniqueMatch(
@@ -69,26 +79,17 @@ public class EmpresaRepository {
     }
 
     @Programmatic
-    public List<Empresa> findByCuitContains(final String cuit) {
-
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Empresa.class,
-                        "findByCuitContains",
-                        "cuit", cuit));
-    }
-
-
-    @Programmatic
     public Empresa create(
-            final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
+            final String razonSocial, final String direccion,
+            final String cuit, final String telefono,
+            final Operario operario)
     {
         final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono, operario);
         repositoryService.persist(empresa);
         return empresa;
     }
 
-    @Programmatic
+/*    @Programmatic
     public Empresa findOrCreate(
             final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
     {
@@ -98,6 +99,8 @@ public class EmpresaRepository {
         }
         return empresa;
     }
+
+ */
 
 
     @javax.inject.Inject
