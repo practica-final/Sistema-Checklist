@@ -28,46 +28,6 @@ public class EmpresaRepository {
                         "find"));
     }
 
-   /* @Programmatic
-    public List <Empresa> Listar(Operario operario) {
-
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Empresa.class,
-                        "findByOperario",
-                        "operario", operario));
-    }
-
-    @Programmatic
-    public List <Empresa> Listar (Operario operario, EstadoGeneral estado){
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Empresa.class,
-                        "findByOperarioAndEstado",
-                        "empresa", operario,
-                        "estado", estado));
-    }
-
-
-    @Programmatic
-    public List<Empresa> Listar(EstadoGeneral estado){
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Empresa.class,
-                        "findByEstado",
-                        "estado", estado ));
-    }
-
-    @Programmatic
-    public List<Empresa> findByCuitContains(final String cuit) {
-
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Empresa.class,
-                        "findByCuitContains",
-                        "cuit", cuit));
-    }*/
-
     @Programmatic
     public Empresa findByCuit(final String cuit){
 
@@ -81,26 +41,13 @@ public class EmpresaRepository {
     @Programmatic
     public Empresa create(
             final String razonSocial, final String direccion,
-            final String cuit, final String telefono,
-            final Operario operario)
+            final String cuit, final String telefono, final EstadoGeneral estado/*,
+            final Operario operario*/)
     {
-        final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono, operario);
+        final Empresa empresa = new Empresa(razonSocial, direccion, cuit, telefono, estado);
         repositoryService.persist(empresa);
         return empresa;
     }
-
-/*    @Programmatic
-    public Empresa findOrCreate(
-            final String razonSocial, final String direccion, final String cuit, final String telefono, final Operario operario)
-    {
-        Empresa empresa = findByCuit(cuit);
-        if (empresa == null) {
-            empresa = create(razonSocial, direccion, cuit, telefono, operario);
-        }
-        return empresa;
-    }
-
- */
 
 
     @javax.inject.Inject

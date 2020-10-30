@@ -12,6 +12,7 @@ import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 
 import java.io.IOException;
+import java.lang.annotation.ElementType;
 import java.util.List;
 
 @DomainService(
@@ -47,12 +48,16 @@ public class EmpresaMenu {
             @ParameterLayout(named = "Telefono:  ")
             final String telefono,
 
-            @ParameterLayout(named = "Operario: ")
-            final Operario operario
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Estado: ")
+            final EstadoGeneral estado
+
+            /*@ParameterLayout(named = "Operario: ")
+            final Operario operario*/
 
     ) {
 
-        return empresaRepository.create(razonSocial, direccion, cuit, telefono, operario);
+        return empresaRepository.create(razonSocial, direccion, cuit, telefono, estado);
     }
 
     /*public String validate0Create (final String dominio) {

@@ -1,5 +1,6 @@
 package domainapp.application.fixture.scenarios;
 
+import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.empresa.EmpresaMenu;
 import domainapp.modules.simple.dominio.operario.Operario;
@@ -11,6 +12,7 @@ public class EmpresaCreate extends FixtureScript {
     private String direccion;
     private String cuit;
     private String telefono;
+    private EstadoGeneral estado;
 
     public String getRazonSocial() {
         return razonSocial;
@@ -24,6 +26,9 @@ public class EmpresaCreate extends FixtureScript {
     public String getTelefono() {
         return telefono;
     }
+    public EstadoGeneral getEstado() {
+        return estado;
+    }
 
     public void setRazonSocial (String razonSocial) {
         this.razonSocial = razonSocial;
@@ -31,6 +36,7 @@ public class EmpresaCreate extends FixtureScript {
     public void setDireccion (String direccion) { this.direccion = direccion; }
     public void setCuit (String cuit) { this.cuit = cuit;}
     public void setTelefono (String telefono) { this.telefono = telefono;}
+    public void setEstado (EstadoGeneral estado) { this.estado = estado;}
 
     private Empresa empresaObject;
 
@@ -44,9 +50,10 @@ public class EmpresaCreate extends FixtureScript {
         String direccion = checkParam("direccion", ec, String.class);
         String cuit = checkParam("cuit", ec, String.class);
         String telefono = checkParam("telefono", ec, String.class);
+        EstadoGeneral estado = checkParam("estado", ec, EstadoGeneral.class);
         Operario operario = checkParam("operario", ec, Operario.class);
 
-        this.empresaObject = wrap(menu).create(razonSocial, direccion, cuit, telefono, operario);
+        this.empresaObject = wrap(menu).create(razonSocial, direccion, cuit, telefono, estado);
 
         ec.addResult(this, empresaObject);
     }
