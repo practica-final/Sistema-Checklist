@@ -5,9 +5,11 @@ import domainapp.modules.simple.dominio.operario.QOperario;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
+import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 
@@ -103,29 +105,15 @@ public class EmpresaMenu {
                 .executeUnique();
     }
 
-    /*@Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Empresa")
-    @MemberOrder(sequence = "2")
-
-    public Empresa findByCuit(
-            @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Por cuit: ")
-            final Empresa empresa)
-    {
-        return empresa;
-    }
-
-    public List<Empresa> choices0FindByCuit() { return empresaRepository.Listar();}*/
-
-
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de empresas")
     @MemberOrder(sequence = "3")
     public List<Empresa> listAll(){
-        List <Empresa> empresas =  empresaRepository.Listar();
-        return empresaRepository.Listar();
+        return repositoryService.allInstances(Empresa.class);
     }
 
+    @javax.inject.Inject
+    RepositoryService repositoryService;
 
     @javax.inject.Inject
     IsisJdoSupport isisJdoSupport;

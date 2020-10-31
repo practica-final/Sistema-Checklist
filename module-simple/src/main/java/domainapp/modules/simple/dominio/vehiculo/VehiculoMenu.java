@@ -6,6 +6,7 @@ import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.value.Blob;
 
 import java.io.IOException;
@@ -87,29 +88,17 @@ public class VehiculoMenu {
                 .executeUnique();
     }
 
-
-    /*@Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Vehiculos")
-    @MemberOrder(sequence = "3")
-    public List<Vehiculo> listAll(){
-        List <Vehiculo> vehiculos =  vehiculoRepository.Listar();
-        return vehiculos;
-    }*/
-
-
-    public List<Vehiculo> choices0FindByDominio() {return vehiculoRepository.Listar();}
-
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named ="Buscar por Vehiculo")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named ="Listado de Vehiculos")
     @MemberOrder(sequence = "3")
     public List<Vehiculo> listAll() {
-        List <Vehiculo> vehiculos =  vehiculoRepository.Listar();
-        return vehiculos;
+        return repositoryService.allInstances(Vehiculo.class);
 
     }
 
     @javax.inject.Inject
-    OperarioRepository operarioRepository;
+    RepositoryService repositoryService;
+
 
     @javax.inject.Inject
     IsisJdoSupport isisJdoSupport;

@@ -68,10 +68,6 @@ public class Vehiculo implements Comparable<Vehiculo> {
     @Property()
     private EstadoVehiculo estado;
 
-    @Column(allowsNull = "false")
-    @Property(hidden = Where.ALL_TABLES)
-    private boolean bajaVehiculo;
-
     @Column(allowsNull = "true", name = "asig-operario")
     @Property()
     private Operario asignarOperario;
@@ -147,7 +143,7 @@ public class Vehiculo implements Comparable<Vehiculo> {
         this.estado = estado;
     }
 
-    @Programmatic
+    @Action()
     public Vehiculo Activo(){
         CambiarEstado(EstadoVehiculo.Activo);
         return this;
