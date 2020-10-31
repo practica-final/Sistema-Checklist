@@ -85,10 +85,10 @@ public class Operario implements Comparable<Operario>
         @PropertyLayout(named = "Empresa")
         private Empresa asigEmpresa;
 
-        @Persistent(mappedBy = "operario", defaultFetchGroup = "true")
+        /*@Persistent(mappedBy = "asignarOperario", defaultFetchGroup = "true")*/
         @Column(allowsNull = "true")
         @Property()
-        private List<Vehiculo> vehiculos;
+        private Vehiculo vehiculos;
 
         public String iconName(){
             if (this.estado == OperarioEstado.Activo){

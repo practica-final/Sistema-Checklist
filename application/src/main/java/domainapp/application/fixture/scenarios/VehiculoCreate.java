@@ -1,5 +1,6 @@
 package domainapp.application.fixture.scenarios;
 
+import domainapp.modules.simple.dominio.vehiculo.EstadoVehiculo;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoMenu;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
@@ -20,62 +21,54 @@ public class VehiculoCreate extends FixtureScript {
     private String kilometraje;
     private LocalDate vencimientoVtv;
     private LocalDate vencimientoPoliza;
+    private EstadoVehiculo estado;
 
     public String getDominio() {
         return dominio;
     }
+    public String getMarca() {
+        return marca;
+    }
+    public String getModelo() {
+        return modelo;
+    }
+    public String getAnyo() {
+        return anyo;
+    }
+    public String getKilometraje() {
+        return kilometraje;
+    }
+    public LocalDate getVencimientoVtv() {
+        return vencimientoVtv;
+    }
+    public LocalDate getVencimientoPoliza() {
+        return vencimientoPoliza;
+    }
+    public EstadoVehiculo getEstado(){ return  estado; }
+
 
     public void setDominio(String dominio) {
         this.dominio = dominio;
     }
-
-    public String getMarca() {
-        return marca;
-    }
-
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
-    public String getModelo() {
-        return modelo;
-    }
-
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
-
-    public String getAnyo() {
-        return anyo;
-    }
-
     public void setAnyo(String anyo) {
         this.anyo = anyo;
     }
-
-    public String getKilometraje() {
-        return kilometraje;
-    }
-
     public void setKilometraje(String kilometraje) {
         this.kilometraje = kilometraje;
     }
-
-    public LocalDate getVencimientoVtv() {
-        return vencimientoVtv;
-    }
-
     public void setVencimientoVtv(LocalDate vencimientoVtv) {
         this.vencimientoVtv = vencimientoVtv;
     }
-
-    public LocalDate getVencimientoPoliza() {
-        return vencimientoPoliza;
-    }
-
     public void setVencimientoPoliza(LocalDate vencimientoPoliza) {
         this.vencimientoPoliza = vencimientoPoliza;
     }
+    public void setEstado(EstadoVehiculo estado) { this.estado = estado; }
 
     private Vehiculo vehiculoObject;
 
@@ -93,10 +86,12 @@ public class VehiculoCreate extends FixtureScript {
         String kilometraje = checkParam("kilometraje", ec, String.class);
         LocalDate vencimientoVtv = checkParam("vencimientoVtv", ec, LocalDate.class);
         LocalDate vencimientoPoliza = checkParam("vencimientoPoliza", ec, LocalDate.class);
+        EstadoVehiculo estado = checkParam("estado", ec, EstadoVehiculo.class);
         Operario operario = checkParam("operario", ec, Operario.class);
 
 
-        this.vehiculoObject = wrap(menu).create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
+        this.vehiculoObject = wrap(menu).create(dominio, marca, modelo, anyo, kilometraje,
+                vencimientoVtv, vencimientoPoliza, estado);
 
         ec.addResult(this, vehiculoObject);
     }

@@ -5,6 +5,7 @@ import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.ObservadorGeneral;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.operario.Operario;
+import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,63 +66,26 @@ public class Vehiculo implements Comparable<Vehiculo> {
 
     @Column(allowsNull = "false")
     @Property()
-    private EstadoGeneral estado;
+    private EstadoVehiculo estado;
 
     @Column(allowsNull = "false")
     @Property(hidden = Where.ALL_TABLES)
     private boolean bajaVehiculo;
 
-    @Column(allowsNull = "false")
+    @Column(allowsNull = "true", name = "asig-operario")
     @Property()
-    private Operario operario;
+    private Operario asignarOperario;
 
-
-    public String iconName() {
-        if (this.estado == EstadoGeneral.Espera) {
-            return "Espera";
-        } else if (this.estado == EstadoGeneral.Habilitado) {
-            return "Habilitado";
-        } else if (this.estado == EstadoGeneral.Inhabilitado) {
-            return "Inhabilitado";
-        } else {
-            return "Borrado";
-        }
-    }
-
-    public String RepoDominio() {
-        return this.dominio;
-    }
-    public String RepoMarca() {
-        return this.marca;
-    }
-    public String RepoModelo() {
-        return this.modelo;
-    }
-    public String RepoAnyo() {
-        return this.anyo;
-    }
-    public String RepoKilometraje() {
-        return this.kilometraje;
-    }
-    public String RepoVencimientoVtv() { return this.vencimientoVtv.toString("dd-MM-yyyy"); }
-    public String RepoVencimientoPoliza() {
-        return this.vencimientoPoliza.toString("dd-MM-yyyy");
-    }
-    public String RepoEstado() {
-        return this.estado.toString();
+    public String title(){
+        return getMarca() + " " + getModelo();
     }
 
     public Vehiculo() { }
 
     public Vehiculo(
-            final String dominio,
-            final String marca,
-            final String modelo,
-            final String anyo,
-            final String kilometraje,
-            final LocalDate vencimientoVtv,
-            final LocalDate vencimientoPoliza,
-            final Operario operario) {
+            String dominio, String marca, String modelo, String anyo,
+            String kilometraje, LocalDate vencimientoVtv, LocalDate vencimientoPoliza,
+            EstadoVehiculo estado) {
 
         this.dominio = dominio;
         this.marca = marca;
@@ -130,33 +94,7 @@ public class Vehiculo implements Comparable<Vehiculo> {
         this.kilometraje = kilometraje;
         this.vencimientoVtv = vencimientoVtv;
         this.vencimientoPoliza = vencimientoPoliza;
-        this.estado = EstadoGeneral.Habilitado;
-       // this.bajaVehiculo = BajaVehiculo();
-        //this.operario = operario;
-    }
-
-    @NotPersistent
-    @CollectionLayout(named = "Vehiculos en Espera")
-    public List<Vehiculo> getEspera() {
-        return vehiculoRepository.Listar(EstadoGeneral.Espera);
-    }
-
-    @NotPersistent
-    @CollectionLayout(named = "Vehiculos Habilitados")
-    public List<Vehiculo> getHabilitado() {
-        return vehiculoRepository.Listar(EstadoGeneral.Habilitado);
-    }
-
-    @NotPersistent
-    @CollectionLayout(named = "Vehiculos Inhabilitados")
-    public List<Vehiculo> getInhabilitado() {
-        return vehiculoRepository.Listar(EstadoGeneral.Inhabilitado);
-    }
-
-    @NotPersistent
-    @CollectionLayout(named = "Vehiculos Borrados")
-    public List<Vehiculo> getBorrado() {
-        return vehiculoRepository.Listar(EstadoGeneral.Borrado);
+        this.estado = estado;
     }
 
     @Action()
@@ -177,7 +115,10 @@ public class Vehiculo implements Comparable<Vehiculo> {
             @Parameter(maxLength = 80)
             @ParameterLayout(named = "Kilometraje: ") final String kilometraje,
             @ParameterLayout(named = "Vencimiento de la VTV: ") final LocalDate vencimientoVtv,
-            @ParameterLayout(named = "Vencimiento del seguro: ") final LocalDate vencimientoPoliza)
+            @ParameterLayout(named = "Vencimiento del seguro: ") final LocalDate vencimientoPoliza,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Estado del vehículo: ") final EstadoVehiculo estado)
 
     {
         setDominio(dominio);
@@ -187,75 +128,58 @@ public class Vehiculo implements Comparable<Vehiculo> {
         setKilometraje(kilometraje);
         setVencimientoVtv(vencimientoVtv);
         setVencimientoPoliza(vencimientoPoliza);
+        setEstado(estado);
         return this;
     }
 
     public String default0Update() {return getDominio();}
-    public String validate0Update(final String dominio) {
-        return ValidarDominio(dominio);    }
     public String default1Update() {return getMarca();}
     public String default2Update() {return getModelo();}
     public String default3Update() {return getAnyo();}
     public String default4Update() {return getKilometraje();}
     public LocalDate default5Update() {return getVencimientoVtv();}
     public LocalDate default6Update() {return getVencimientoPoliza();}
+    public EstadoVehiculo default7Update(){return getEstado();}
+
 
     @Programmatic
-    private String ValidarDominio(final String dominio) {
-        if (Character.isDigit(dominio.charAt(0)) &&
-                Character.isDigit(dominio.charAt(1)) &&
-                (Character.compare(dominio.charAt(2), '-') == 0) &&
-                Character.isDigit(dominio.charAt(3)) &&
-                Character.isDigit(dominio.charAt(4)) &&
-                Character.isDigit(dominio.charAt(5)) &&
-                (Character.compare(dominio.charAt(6), '-') == 0) &&
-                Character.isDigit(dominio.charAt(7)) &&
-                Character.isDigit(dominio.charAt(8))) {
-            return null;
-        } else {
-            return "Formato no valido XX-XXX-XX";
-        }
-    }
-
-    @Programmatic
-    public void CambiarEstado(EstadoGeneral estado){
+    public void CambiarEstado(EstadoVehiculo estado){
         this.estado = estado;
     }
 
     @Programmatic
-    public Vehiculo Espera(){
-        CambiarEstado(EstadoGeneral.Espera);
+    public Vehiculo Activo(){
+        CambiarEstado(EstadoVehiculo.Activo);
         return this;
     }
 
     @Action()
-    public Vehiculo Habilitar(){
-        CambiarEstado(EstadoGeneral.Habilitado);
+    public Vehiculo NoActivo(){
+        CambiarEstado(EstadoVehiculo.NoActivo);
         return this;
     }
 
     @Action(semantics = SemanticsOf.IDEMPOTENT_ARE_YOU_SURE)
-    public Vehiculo Inhabilitar(){
-        CambiarEstado(EstadoGeneral.Inhabilitado);
+    public Vehiculo Baja(){
+        CambiarEstado(EstadoVehiculo.Baja);
         return this;
     }
 
-    @Action(semantics = SemanticsOf.IDEMPOTENT_ARE_YOU_SURE)
-    public Vehiculo Borrar(){
-        CambiarEstado(EstadoGeneral.Borrado);
+    @Action()
+    @ActionLayout(named = "Asignar Operario")
+    public Vehiculo AsignarOperario(
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Operario")
+            final Operario operario) {
+
+        this.asignarOperario = operario;
         return this;
     }
 
-    public boolean hideHabilitar() {return this.estado == EstadoGeneral.Habilitado;}
-    public boolean hideInhabilitar() {return this.estado == EstadoGeneral.Inhabilitado;}
-    public boolean hideBorrar() {return this.estado == EstadoGeneral.Borrado;}
+    public List<Operario> choices0AsignarOperario() { return operarioRepository.Listar(); }
 
-    /*@Programmatic
-    public boolean BajaVehiculo(){
-        Actualizar();
-        return this.bajaVehiculo;
-    }
-*/
+
+
     //region > compareTo, toString
     @Override
     public int compareTo(final Vehiculo other) {
@@ -276,6 +200,11 @@ public class Vehiculo implements Comparable<Vehiculo> {
     @javax.jdo.annotations.NotPersistent
     @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
     VehiculoRepository vehiculoRepository;
+
+    @javax.inject.Inject
+    @javax.jdo.annotations.NotPersistent
+    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
+    OperarioRepository operarioRepository;
 
 
 }

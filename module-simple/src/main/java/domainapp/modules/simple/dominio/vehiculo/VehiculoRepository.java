@@ -30,36 +30,6 @@ public class VehiculoRepository {
     }
 
     @Programmatic
-    public List <Vehiculo> Listar(Operario operario) {
-
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Vehiculo.class,
-                        "findByOperario",
-                        "operario", operario));
-    }
-
-    @Programmatic
-    public List <Vehiculo> Listar (Operario operario, EstadoGeneral estado){
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Vehiculo.class,
-                        "findByOperarioAndEstado",
-                        "empresa", operario,
-                        "estado", estado));
-    }
-
-
-    @Programmatic
-    public List<Vehiculo> Listar (EstadoGeneral estado){
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Vehiculo.class,
-                        "findByEstado",
-                        "estado", estado ));
-    }
-
-    @Programmatic
     public Vehiculo findByDominio(final String dominio){
 
         return repositoryService.uniqueMatch(
@@ -70,35 +40,14 @@ public class VehiculoRepository {
     }
 
     @Programmatic
-    public List<Vehiculo> findByDominioContains(final String dominio) {
-
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Vehiculo.class,
-                        "findByDominioContains",
-                        "dominio", dominio));
-    }
-
-
-    @Programmatic
     public Vehiculo create(
-            final String dominio, final String marca, final String modelo, final String anyo, final String kilometraje,
-            final LocalDate vencimientoVtv, final LocalDate vencimientoPoliza, final Operario operario)
+            final String dominio, final String marca, final String modelo, final String anyo,
+            final String kilometraje, final LocalDate vencimientoVtv, final LocalDate vencimientoPoliza,
+            final EstadoVehiculo estado)
     {
-        final Vehiculo vehiculo = new Vehiculo(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
+        final Vehiculo vehiculo = new Vehiculo(dominio, marca, modelo, anyo, kilometraje,
+                vencimientoVtv, vencimientoPoliza, estado);
         repositoryService.persist(vehiculo);
-        return vehiculo;
-    }
-
-    @Programmatic
-    public Vehiculo findOrCreate(
-            final String dominio, final String marca, final String modelo, final String anyo, final String kilometraje,
-            final LocalDate vencimientoVtv, final LocalDate vencimientoPoliza, final Operario operario)
-    {
-        Vehiculo vehiculo = findByDominio(dominio);
-        if (vehiculo == null) {
-            vehiculo = create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
-        }
         return vehiculo;
     }
 

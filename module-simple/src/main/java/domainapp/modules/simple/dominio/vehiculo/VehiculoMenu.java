@@ -1,18 +1,18 @@
 package domainapp.modules.simple.dominio.vehiculo;
 
-import domainapp.modules.simple.dominio.EstadoGeneral;
-import domainapp.modules.simple.dominio.operario.QOperario;
+import domainapp.modules.simple.dominio.empresa.Empresa;
+import domainapp.modules.simple.dominio.empresa.QEmpresa;
 import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
-
+import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.value.Blob;
 
 import java.io.IOException;
 import java.util.List;
-import org.joda.time.LocalDate;
 
-import net.sf.jasperreports.engine.JRException;
+import org.datanucleus.query.typesafe.TypesafeQuery;
+import org.joda.time.LocalDate;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
@@ -32,7 +32,7 @@ public class VehiculoMenu {
     public Vehiculo create(
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Dominio: ")
+            @ParameterLayout(named = "Dominio (patente): ")
             final String dominio,
 
             @Parameter(maxLength = 40)
@@ -57,71 +57,62 @@ public class VehiculoMenu {
             @ParameterLayout(named = "Vencimiento Poliza: ")
             final LocalDate vencimientoPoliza,
 
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Estado Vehiculo: ")
+            final EstadoVehiculo estado/*,
+
             @ParameterLayout(named = "Operario: ")
-            final Operario operario
+            final Operario operario*/
 
             ) {
 
-        return vehiculoRepository.create(dominio, marca, modelo, anyo, kilometraje, vencimientoVtv, vencimientoPoliza, operario);
+        return vehiculoRepository.create(dominio, marca, modelo,
+                anyo, kilometraje, vencimientoVtv, vencimientoPoliza, estado);
     }
 
-    public String validate0Create (final String dominio) {
-        return ValidarDominio(dominio);
-    }
-
-
-    @Programmatic
-    private String ValidarDominio(final String dominio){
-        if (Character.isDigit(dominio.charAt(0)) &&
-                Character.isDigit(dominio.charAt(1)) &&
-                (Character.compare(dominio.charAt(2),'-') == 0) &&
-                Character.isDigit(dominio.charAt(3)) &&
-                Character.isDigit(dominio.charAt(4)) &&
-                Character.isDigit(dominio.charAt(5)) &&
-                Character.isDigit(dominio.charAt(6)) &&
-                Character.isDigit(dominio.charAt(7)) &&
-                Character.isDigit(dominio.charAt(8)) &&
-                Character.isDigit(dominio.charAt(9)) &&
-                Character.isDigit(dominio.charAt(10)) &&
-                (Character.compare(dominio.charAt(11),'-') == 0) &&
-                Character.isDigit(dominio.charAt(12))){
-            return null;
-        }   else {
-                return "Formato no valido";
-        }
-
-    }
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Vehiculo")
     @MemberOrder(sequence = "2")
-
     public Vehiculo findByDominio(
             @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Por nombre: ")
-            final Vehiculo vehiculo)
-    {
-        return vehiculo;
+            @ParameterLayout(named = "Por Dominio: ")
+            final String dominio) {
+        TypesafeQuery<Vehiculo> q = isisJdoSupport.newTypesafeQuery(Vehiculo.class);
+        final QVehiculo cand = QVehiculo.candidate();
+        q = q.filter(
+                cand.dominio.eq(q.stringParameter("dominio"))
+        );
+        return q.setParameter("dominio", dominio)
+                .executeUnique();
     }
 
-    public List<Vehiculo> choices0FindByDominio() { return vehiculoRepository.Listar();}
 
-
-    @Action(semantics = SemanticsOf.SAFE)
+    /*@Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Vehiculos")
     @MemberOrder(sequence = "3")
-    public java.util.List<Vehiculo> listAll(){
-        return vehiculoRepository.Listar();
+    public List<Vehiculo> listAll(){
+        List <Vehiculo> vehiculos =  vehiculoRepository.Listar();
+        return vehiculos;
+    }*/
+
+
+    public List<Vehiculo> choices0FindByDominio() {return vehiculoRepository.Listar();}
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named ="Buscar por Vehiculo")
+    @MemberOrder(sequence = "3")
+    public List<Vehiculo> listAll() {
+        List <Vehiculo> vehiculos =  vehiculoRepository.Listar();
+        return vehiculos;
+
     }
 
-    /*
-    @Action()
-    @ActionLayout(named = "Listado exportado")
-    public Blob ExportarListado() throws JRException, IOException {
-        EjecutarReportes ejecutarReportes = new EjecutarReportes();
-        return ejecutarReportes.ListadoVehiculosPDF(vehiculoRepository.Listar());
-    }
-    */
+    @javax.inject.Inject
+    OperarioRepository operarioRepository;
+
+    @javax.inject.Inject
+    IsisJdoSupport isisJdoSupport;
 
     @javax.inject.Inject
     VehiculoRepository vehiculoRepository;
