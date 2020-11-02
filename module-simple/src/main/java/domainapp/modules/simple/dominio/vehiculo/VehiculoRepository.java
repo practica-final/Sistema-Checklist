@@ -1,8 +1,6 @@
 package domainapp.modules.simple.dominio.vehiculo;
 
-import domainapp.modules.simple.dominio.EstadoGeneral;
-import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.operario.OperarioEstado;
+
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;

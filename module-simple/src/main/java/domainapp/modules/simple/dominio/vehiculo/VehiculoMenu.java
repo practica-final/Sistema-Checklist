@@ -1,15 +1,12 @@
 package domainapp.modules.simple.dominio.vehiculo;
 
-import domainapp.modules.simple.dominio.empresa.Empresa;
-import domainapp.modules.simple.dominio.empresa.QEmpresa;
-import domainapp.modules.simple.dominio.operario.Operario;
-import domainapp.modules.simple.dominio.operario.OperarioRepository;
+
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.services.repository.RepositoryService;
-import org.apache.isis.applib.value.Blob;
 
-import java.io.IOException;
+
+
 import java.util.List;
 
 import org.datanucleus.query.typesafe.TypesafeQuery;

@@ -1,9 +1,7 @@
 package domainapp.modules.simple.dominio.vehiculo;
 
 import com.google.common.collect.ComparisonChain;
-import domainapp.modules.simple.dominio.EstadoGeneral;
-import domainapp.modules.simple.dominio.ObservadorGeneral;
-import domainapp.modules.simple.dominio.empresa.Empresa;
+
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import lombok.AccessLevel;

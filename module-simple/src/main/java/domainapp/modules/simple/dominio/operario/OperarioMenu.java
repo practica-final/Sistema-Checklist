@@ -1,15 +1,18 @@
 package domainapp.modules.simple.dominio.operario;
 
-import domainapp.modules.simple.dominio.empresa.Empresa;
+
+
 import org.apache.isis.applib.annotation.*;
 
-import java.io.IOException;
-import org.apache.isis.applib.value.Blob;
+
 import org.datanucleus.query.typesafe.TypesafeQuery;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+import org.apache.isis.applib.services.repository.RepositoryService;
 
+import org.joda.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.List;
-
+import org.apache.isis.schema.utils.jaxbadapters.JodaDateTimeStringAdapter;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
@@ -51,23 +54,18 @@ public class OperarioMenu {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Vencimiento de Licencia: ")
-            final String vencimientoLicencia,
+            final LocalDate vencimientoLicencia,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Llave RSV: ")
-            final String llaveRSV,
+            final OperarioEstado llaveRSV,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Clave: ")
-            final String clave,
-
-            @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Empresa: ")
-            final Empresa asigEmpresa)
+            final OperarioEstado estado)
 
         {
-            return operarioRepository.create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia,
-                    llaveRSV, clave, asigEmpresa);
+            return operarioRepository.create(nombreyApellido, legajoSAP, email, telefono, numeroLicencia, vencimientoLicencia, llaveRSV, estado);
         }
 
 
@@ -79,9 +77,6 @@ public class OperarioMenu {
                 @Parameter(optionality = Optionality.MANDATORY)
                 @ParameterLayout(named = "Buscar por legajoSAP: ")
                 final String legajoSAP){
-
-            //return operario;
-
             TypesafeQuery<Operario> q = isisJdoSupport.newTypesafeQuery(Operario.class);
             final QOperario cand = QOperario.candidate();
             q = q.filter(
@@ -92,27 +87,15 @@ public class OperarioMenu {
 
         }
 
-        public List<Operario> choices0FindByLegajoSAP(){
-            return operarioRepository.Listar();
-        }
-
-
         @Action(semantics = SemanticsOf.SAFE)
         @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Operarios")
         @MemberOrder(sequence = "3")
-        public List<Operario> listAll(){
-            List<Operario> operarios = operarioRepository.Listar();
-            return operarios;
+        public List<Operario> listAll() {
+            return repositoryService.allInstances(Operario.class);
         }
 
-
-        //@Action()
-        //@ActionLayout(named = "Listado exportado de Operarios")
-        //public Blob ExportarListado() throws JRException, IOException{
-        //    EjectuarReportes ejectuarReportes = new EjecutarReportes();
-        //    return ejectuarReportes.ListadoOperariosPDF(operarioRepository.Listar());
-        //}
-
+        @javax.inject.Inject
+        RepositoryService repositoryService;
 
         @javax.inject.Inject
         OperarioRepository operarioRepository;
