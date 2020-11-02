@@ -2,6 +2,7 @@ package domainapp.modules.simple.dominio.vehiculo;
 
 import com.google.common.collect.ComparisonChain;
 
+import domainapp.modules.simple.dominio.checklist.Checklist;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import lombok.AccessLevel;
@@ -69,6 +70,10 @@ public class Vehiculo implements Comparable<Vehiculo> {
     @Column(allowsNull = "true", name = "asig-operario")
     @Property()
     private Operario asignarOperario;
+
+    /*@Column(allowsNull = "true")
+    @Property()
+    private Checklist checklist;*/
 
     public String title(){
         return getMarca() + " " + getModelo();

@@ -61,7 +61,7 @@ public class OperarioMenu {
             final OperarioEstado llaveRSV,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Clave: ")
+            @ParameterLayout(named = "Estado: ")
             final OperarioEstado estado)
 
         {

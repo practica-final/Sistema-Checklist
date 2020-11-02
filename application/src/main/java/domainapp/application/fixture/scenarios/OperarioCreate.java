@@ -55,7 +55,7 @@ public class OperarioCreate extends FixtureScript {
     public void setNumeroLicencia(String numeroLicencia) { this.numeroLicencia = numeroLicencia; }
     public void setVencimientoLicencia(LocalDate vencimientoLicencia) { this.vencimientoLicencia = vencimientoLicencia; }
     public void setllaveRSV(OperarioEstado llaveRSV) { this.llaveRSV = llaveRSV; }
-    public void setClave(OperarioEstado estado) { this.estado = estado; }
+    public void setEstado(OperarioEstado estado) { this.estado = estado; }
 
     private Operario operarioObject;
 

@@ -143,7 +143,7 @@ public class Operario implements Comparable<Operario>
                 @ParameterLayout(named = "Llave RSV: ")
                 final OperarioEstado llaveRSV,
 
-                @ParameterLayout(named = "Clave: ")
+                @ParameterLayout(named = "Estado: ")
                 final OperarioEstado estado)
 
 
