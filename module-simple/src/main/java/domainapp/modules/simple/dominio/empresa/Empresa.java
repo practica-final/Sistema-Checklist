@@ -16,6 +16,12 @@ import javax.jdo.annotations.*;
 import java.util.List;
 
 
+@Queries({
+        @Query(
+                name = "find", language = "JDOQL",
+                value = "SELECT "),
+})
+
 @javax.jdo.annotations.PersistenceCapable(
         identityType = IdentityType.DATASTORE, schema = "dominio", table = "Empresa"
 )

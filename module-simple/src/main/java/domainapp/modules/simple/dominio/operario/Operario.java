@@ -24,6 +24,13 @@ import org.apache.isis.applib.annotation.*;
 import javax.jdo.annotations.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+
+@Queries({
+        @Query(
+                name = "find", language = "JDOQL",
+                value = "SELECT "),
+})
+
 @javax.jdo.annotations.PersistenceCapable(
         identityType = IdentityType.DATASTORE, schema = "dominio", table = "Operario"
 )
