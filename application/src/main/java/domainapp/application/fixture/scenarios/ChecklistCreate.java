@@ -8,7 +8,7 @@ import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 public class ChecklistCreate extends FixtureScript{
 
-    private String idChecklist;
+    private Vehiculo vehiculo;
     private EstadoChecklist documentacion;
     private EstadoChecklist tablero;
     private EstadoChecklist laterales;
@@ -17,8 +17,8 @@ public class ChecklistCreate extends FixtureScript{
     private String comentarios;
     private String fotos;
 
-    public String getIdChecklist() {
-        return idChecklist;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
     }
     public EstadoChecklist getDocumentacion() {
         return documentacion;
@@ -42,7 +42,7 @@ public class ChecklistCreate extends FixtureScript{
         return fotos;
     }
 
-    public void setIdChecklist (String idChecklist) {this.idChecklist = idChecklist;    }
+    public void setVehiculo (Vehiculo vehiculo) {this.vehiculo = vehiculo;    }
     public void setDocumentacion(EstadoChecklist documentacion) { this.documentacion = documentacion; }
     public void setTablero (EstadoChecklist tablero) { this.tablero = tablero;}
     public void setLaterales (EstadoChecklist laterales) { this.laterales = laterales;}
@@ -59,7 +59,7 @@ public class ChecklistCreate extends FixtureScript{
 
     @Override
     protected void execute(final ExecutionContext ec){
-        String idChecklist = checkParam("idChecklist", ec, String.class);
+        Vehiculo vehiculo = checkParam("vehiculo", ec, Vehiculo.class);
         EstadoChecklist documentacion = checkParam("documentacion", ec, EstadoChecklist.class);
         EstadoChecklist tablero = checkParam("tablero", ec, EstadoChecklist.class);
         EstadoChecklist laterales = checkParam("laterales", ec, EstadoChecklist.class);
@@ -67,9 +67,8 @@ public class ChecklistCreate extends FixtureScript{
         EstadoChecklist frente = checkParam("frente", ec, EstadoChecklist.class);
         String comentarios = checkParam("comentarios", ec, String.class);
         String fotos = checkParam("fotos", ec, String.class);
-        Vehiculo vehiculo = checkParam("vehiculo", ec, Vehiculo.class);
 
-        this.checklistObject = wrap(menu).create(idChecklist, documentacion, tablero, laterales, seccionTrasera,
+        this.checklistObject = wrap(menu).create(vehiculo, documentacion, tablero, laterales, seccionTrasera,
                 frente, comentarios,fotos);
 
         ec.addResult(this, checklistObject);

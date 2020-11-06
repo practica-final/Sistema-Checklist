@@ -38,11 +38,11 @@ public class ChecklistRepository {
 
     @Programmatic
     public Checklist create(
-            final String idChecklist, final EstadoChecklist documentacion, final EstadoChecklist tablero,
+            final Vehiculo vehiculo, final EstadoChecklist documentacion, final EstadoChecklist tablero,
             final EstadoChecklist laterales, final EstadoChecklist seccionTrasera,
             final EstadoChecklist frente, final String comentarios, final String fotos)
     {
-        final Checklist checklist = new Checklist(idChecklist, documentacion, tablero, laterales, seccionTrasera,
+        final Checklist checklist = new Checklist(vehiculo, documentacion, tablero, laterales, seccionTrasera,
                 frente, comentarios, fotos);
         repositoryService.persist(checklist);
         return checklist;

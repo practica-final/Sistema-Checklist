@@ -76,9 +76,9 @@ public class Vehiculo implements Comparable<Vehiculo> {
     @Property()
     private Operario asignarOperario;
 
-    /*@Column(allowsNull = "true")
+    @Column(allowsNull = "true")
     @Property()
-    private Checklist checklist;*/
+    private Checklist checklist;
 
     public String title(){
         return getMarca() + " " + getModelo();

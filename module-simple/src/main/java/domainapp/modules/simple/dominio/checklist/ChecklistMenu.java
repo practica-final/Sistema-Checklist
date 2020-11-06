@@ -28,8 +28,12 @@ public class ChecklistMenu {
     @MemberOrder(sequence = "1")
     public Checklist create(
 
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Id Checklist") final String idChecklist,
+            /*@Parameter(maxLength = 40)
+            @ParameterLayout(named = "Id Checklist") final String idChecklist,*/
+
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Vehiculo: ") final Vehiculo vehiculo,
+
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Documentación: ") final EstadoChecklist documentacion,
@@ -50,38 +54,47 @@ public class ChecklistMenu {
             @ParameterLayout(named = "Comentarios:  ") final String comentarios,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Fotos:  ") final String fotos) {
+            @ParameterLayout(named = "Fotos:  ") final String fotos)
+    {
 
-        return checklistRepository.create(idChecklist, documentacion, tablero, laterales, seccionTrasera,
+        return checklistRepository.create(vehiculo, documentacion, tablero, laterales, seccionTrasera,
                 frente, comentarios, fotos);
     }
 
+    public List<Vehiculo> choice0Create() {return vehiculoRepository.Listar();}
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar por Checklist")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar por Vehiculo")
     @MemberOrder(sequence = "2")
 
-    public Checklist findByIdChecklist(
+    public Checklist findByVehiculo(
             @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Por Id Checklist: ")
-            final String idChecklist) {
+            @ParameterLayout(named = "Por Vehiculo: ")
+            final Vehiculo vehiculo) {
 
         TypesafeQuery<Checklist> q = isisJdoSupport.newTypesafeQuery(Checklist.class);
         final QChecklist cand = QChecklist.candidate();
         q = q.filter(
-                cand.idChecklist.eq(q.stringParameter("idChecklist"))
+                cand.vehiculo.eq(q.stringParameter("vehiculo"))
         );
-        return q.setParameter("idChecklist", idChecklist)
+        return q.setParameter("vehiculo", vehiculo)
                 .executeUnique();
     }
 
 
+    public List<Vehiculo> choices0FindByVehiculo() {return vehiculoRepository.Listar();}
+
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Checklist")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "3")
     public List<Checklist> listAll() {
-        return repositoryService.allInstances(Checklist.class);
+        List <Checklist> checklists =  checklistRepository.Listar();
+        return checklists;
+
     }
+
+    @javax.inject.Inject
+    VehiculoRepository vehiculoRepository;
 
     @javax.inject.Inject
     RepositoryService repositoryService;
