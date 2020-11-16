@@ -81,7 +81,7 @@ public class Vehiculo implements Comparable<Vehiculo> {
     private Checklist checklist;
 
     public String title(){
-        return getMarca() + " " + getModelo();
+        return getDominio();
     }
 
     public Vehiculo() { }

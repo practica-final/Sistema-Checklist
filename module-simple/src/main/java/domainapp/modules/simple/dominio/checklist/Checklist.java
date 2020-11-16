@@ -1,7 +1,6 @@
 package domainapp.modules.simple.dominio.checklist;
 
 import com.google.common.collect.ComparisonChain;
-import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
 import lombok.AccessLevel;
@@ -11,45 +10,49 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
 
+
 import javax.jdo.annotations.*;
 
+@Getter
+@Setter
+@lombok.RequiredArgsConstructor
 
 @Queries({
         @Query(
                 name = "find", language = "JDOQL",
                 value = "SELECT "),
 })
-
-@javax.jdo.annotations.PersistenceCapable(
-        identityType = IdentityType.DATASTORE, schema = "dominio", table = "Checklist"
+@PersistenceCapable(
+        identityType = IdentityType.DATASTORE,
+        schema = "dominio",
+        table = "Checklist"
 )
-@javax.jdo.annotations.DatastoreIdentity(
-        strategy = IdGeneratorStrategy.IDENTITY, column = "id")
-@javax.jdo.annotations.Version(
-        strategy = VersionStrategy.VERSION_NUMBER, column = "version")
-
-@javax.jdo.annotations.Unique(name = "Checklist_documentacion_UNQ", members = { "documentacion" })
+@DatastoreIdentity(
+        strategy = IdGeneratorStrategy.IDENTITY,
+        column = "id")
+@Version(
+        strategy = VersionStrategy.VERSION_NUMBER,
+        column = "version")
+@Unique(name = "Checklist_identificacion_UNQ", members = { "identificacion" })
 @DomainObject(
-        auditing = Auditing.ENABLED
+        editing = Editing.DISABLED
 )
 @DomainObjectLayout(
         bookmarking = BookmarkPolicy.AS_ROOT
 )
-@Getter
-@Setter
-@lombok.RequiredArgsConstructor
 
-public class Checklist implements Comparable<Checklist> {
 
-    /*@Column(allowsNull = "false", length = 40)
-    @Property()
-    private String idChecklist;*/
+public class Checklist {
 
     @lombok.NonNull
-    @Column(allowsNull = "false")
     @Property()
+    @Column(allowsNull = "false")
     private Vehiculo vehiculo;
 
+    @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
+    @lombok.NonNull
+    @Property()
+    private String identificacion;
 
     @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
     @lombok.NonNull
@@ -86,22 +89,47 @@ public class Checklist implements Comparable<Checklist> {
     @Property()
     private String fotos;
 
-//    public Checklist(Vehiculo vehiculo, EstadoChecklist documentacion, EstadoChecklist tablero, EstadoChecklist laterales, EstadoChecklist seccionTrasera, EstadoChecklist frente, String comentarios, String fotos) {
-  //  }
+
+    public String title(){ return vehiculo.getDominio() + " " + vehiculo.getMarca(); }
 
 
-    public Vehiculo title(){
-        return getVehiculo();
-    }
 
-    //public Checklist(){ }
+    @Action()
+    @ActionLayout(named = "Editar")
+    public Checklist update(
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Identificacion")
+            final String identificacion,
 
-    /*public Checklist(
-            /*String idChecklist, EstadoChecklist documentacion, EstadoChecklist tablero,
-            EstadoChecklist laterales, EstadoChecklist seccionTrasera, EstadoChecklist frente,
-            String comentarios, String fotos)
-    {
-       // this.idChecklist = idChecklist;
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Documentacion")
+            final EstadoChecklist documentacion,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Tablero")
+            final EstadoChecklist tablero,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Laterales")
+            final EstadoChecklist laterales,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Seccion Trasera")
+            final EstadoChecklist seccionTrasera,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Frente")
+            final EstadoChecklist frente,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Comentarios")
+            final String comentarios,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Fotos")
+            final String fotos){
+
+        this.identificacion = identificacion;
         this.documentacion = documentacion;
         this.tablero = tablero;
         this.laterales = laterales;
@@ -109,99 +137,58 @@ public class Checklist implements Comparable<Checklist> {
         this.frente = frente;
         this.comentarios = comentarios;
         this.fotos = fotos;
-    }*/
 
-    @Action()
-    @ActionLayout(named = "Editar")
-    public Checklist update(
-            /*@Parameter(maxLength = 13)
-            @ParameterLayout(named = "idChecklist: ") final String idChecklist,*/
 
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Documentacion: ") final EstadoChecklist documentacion,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Tablero: ") final EstadoChecklist tablero,
-
-            @Parameter(maxLength = 13)
-            @ParameterLayout(named = "Laterales: ") final EstadoChecklist laterales,
-
-            @Parameter(maxLength = 80)
-            @ParameterLayout(named = "Seccion Trasera: ") final EstadoChecklist seccionTrasera,
-
-            @Parameter(maxLength = 80)
-            @ParameterLayout(named = "Frente: ") final EstadoChecklist frente,
-
-            @Parameter(maxLength = 80)
-            @ParameterLayout(named = "Comentarios ") final String comentarios,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Fotos: ") final String fotos)
-
-    {
-       // setIdChecklist(idChecklist);
-        setDocumentacion(documentacion);
-        setTablero(tablero);
-        setLaterales(laterales);
-        setSeccionTrasera(seccionTrasera);
-        setFrente(frente);
-        setComentarios(comentarios);
-        setFotos(fotos);
         return this;
+
     }
 
-    //public String default0Update() {return getIdChecklist();}
-    public EstadoChecklist default0Update() {return getDocumentacion();}
-    public EstadoChecklist default1Update() {return getTablero();}
-    public EstadoChecklist default2Update() {return getLaterales();}
-    public EstadoChecklist default3Update() {return getSeccionTrasera();}
-    public EstadoChecklist default4Update() {return getFrente();}
-    public String default5Update() {return getComentarios();}
-    public String default6Update(){return getFotos();}
-
-
-    /*@Action()
-    @ActionLayout(named = "Asignar Vehiculo")
-    public Checklist AsignarVehiculo(
-            @Parameter(optionality = Optionality.MANDATORY)
-            @ParameterLayout(named = "Vehiculo")
-            final Vehiculo vehiculo) {
-
-        this.asignarVehiculo = vehiculo;
-        return this;
+    public String default0Update() {
+        return getIdentificacion();
+    }
+    public EstadoChecklist default1Update() {
+        return getDocumentacion();
+    }
+    public EstadoChecklist default2Update() {
+        return getTablero();
+    }
+    public EstadoChecklist default3Update() {
+        return getLaterales();
+    }
+    public EstadoChecklist default4Update() {
+        return getSeccionTrasera();
+    }
+    public EstadoChecklist default5Update() {
+        return getFrente();
+    }
+    public String default6Update() {
+        return getComentarios();
+    }
+    public String default7Update() {
+        return getFotos();
     }
 
-    public List<Vehiculo> choices0AsignarVehiculo() { return vehiculoRepository.Listar(); }
-*/
 
     @Override
     public String toString() {
-        return getComentarios();
+        return getIdentificacion();
     }
 
     public int compareTo(final Checklist other) {
         return ComparisonChain.start()
-                .compare(this.getComentarios(), other.getComentarios())
+                .compare(this.getIdentificacion(), other.getIdentificacion())
                 .result();
     }
 
-//    @Override
-//    public String toString() {
-//        return org.apache.isis.applib.util.ObjectContracts
-//                .toString(this, "idChecklist");
-//    }
-    //endregion
-
+    @javax.inject.Inject
+    @javax.jdo.annotations.NotPersistent
+    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
+    ChecklistRepository checklistRepository;
 
     @javax.inject.Inject
     @javax.jdo.annotations.NotPersistent
     @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
     VehiculoRepository vehiculoRepository;
-
-    @javax.inject.Inject
-    @javax.jdo.annotations.NotPersistent
-    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
-    OperarioRepository operarioRepository;
 
     @javax.inject.Inject
     @javax.jdo.annotations.NotPersistent
@@ -212,5 +199,4 @@ public class Checklist implements Comparable<Checklist> {
     @javax.jdo.annotations.NotPersistent
     @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
     MessageService messageService;
-
 }
