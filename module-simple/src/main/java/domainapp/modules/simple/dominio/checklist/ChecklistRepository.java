@@ -6,6 +6,7 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.value.Blob;
 
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class ChecklistRepository {
             final EstadoChecklist seccionTrasera,
             final EstadoChecklist frente,
             final String comentarios,
-            final String fotos
+            final Blob fotos
 
     ) {
         final Checklist checklist = new Checklist(vehiculo, identificacion, documentacion, tablero,

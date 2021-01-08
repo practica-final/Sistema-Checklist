@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
+import org.apache.isis.applib.value.Blob;
 
 
 import javax.jdo.annotations.*;
@@ -84,10 +85,20 @@ public class Checklist {
     @Property()
     private String comentarios;
 
-    @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
+    /*@javax.jdo.annotations.Column(allowsNull = "false", length = 40)
     @lombok.NonNull
     @Property()
-    private String fotos;
+    private String fotos;*/
+
+    @javax.jdo.annotations.Persistent(defaultFetchGroup="false", columns = {
+            @javax.jdo.annotations.Column(name = "fotos_name"),
+            @javax.jdo.annotations.Column(name = "fotos_mimetype"),
+            @javax.jdo.annotations.Column(name = "fotos_bytes", jdbcType = "BLOB", sqlType = "VARBINARY")
+    })
+    @Property(optionality = Optionality.OPTIONAL)
+    @lombok.NonNull
+    @Getter @Setter
+    private Blob fotos;
 
 
     public String title(){ return vehiculo.getDominio() + " " + vehiculo.getMarca(); }
@@ -127,7 +138,7 @@ public class Checklist {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Fotos")
-            final String fotos){
+            final Blob fotos){
 
         this.identificacion = identificacion;
         this.documentacion = documentacion;
@@ -164,7 +175,7 @@ public class Checklist {
     public String default6Update() {
         return getComentarios();
     }
-    public String default7Update() {
+    public Blob default7Update() {
         return getFotos();
     }
 

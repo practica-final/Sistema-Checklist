@@ -7,6 +7,7 @@ import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
+import org.apache.isis.applib.value.Blob;
 
 
 public class ChecklistCreate extends FixtureScript {
@@ -52,7 +53,7 @@ public class ChecklistCreate extends FixtureScript {
         EstadoChecklist seccionTrasera = checkParam("seccionTrasera", ec, EstadoChecklist.class);
         EstadoChecklist frente = checkParam("frente", ec, EstadoChecklist.class);
         String comentarios = checkParam("comentarios", ec, String.class);
-        String fotos = checkParam("fotos", ec, String.class);
+        Blob fotos = checkParam("fotos", ec, Blob.class);
 
         this.checklistObject = wrap(menu).create(vehiculo, identificacion, documentacion, tablero, laterales,
                 seccionTrasera, frente, comentarios, fotos);

@@ -4,6 +4,7 @@ import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class ChecklistMenu {
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Fotos")
-            final String fotos)
+            final Blob fotos)
     {
         return checklistRepository.create(vehiculo, identificacion, documentacion, tablero, laterales, seccionTrasera, frente, comentarios, fotos);
     }
