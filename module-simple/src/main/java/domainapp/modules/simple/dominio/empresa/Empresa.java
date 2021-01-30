@@ -72,6 +72,12 @@ public class Empresa implements Comparable<Empresa> {
         return getRazonSocial();
     }
 
+    public String ReporteCuit() {return this.cuit; }
+    public String ReporteRazonSocial() {return this.razonSocial; }
+    public String ReporteDireccion() {return this.direccion; }
+    public String ReporteTelefono() {return this.telefono; }
+    public String ReporteEstado() {return this.estado.toString(); }
+
     public Empresa() { }
 
     public Empresa(String razonSocial, String direccion, String cuit, String telefono, EstadoGeneral estado) {

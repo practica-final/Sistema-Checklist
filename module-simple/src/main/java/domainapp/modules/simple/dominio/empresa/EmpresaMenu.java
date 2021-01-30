@@ -5,7 +5,9 @@ import domainapp.modules.simple.dominio.operario.QOperario;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.empresa.EmpresaRepository;
+import domainapp.modules.simple.dominio.reportes.Ejecutar;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
@@ -111,6 +113,16 @@ public class EmpresaMenu {
     public List<Empresa> listAll(){
         return repositoryService.allInstances(Empresa.class);
     }
+
+
+    @Action()
+    @ActionLayout(named = "Listado Exportado")
+    public Blob ExportarListado() throws JRException, IOException {
+        Ejecutar ejecutar = new Ejecutar();
+        return ejecutar.ListadoEmpresasPDF(empresaRepository.Listar());
+    }
+
+
 
     @javax.inject.Inject
     RepositoryService repositoryService;

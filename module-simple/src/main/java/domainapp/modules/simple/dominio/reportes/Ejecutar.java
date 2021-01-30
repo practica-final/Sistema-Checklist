@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dominio.reportes;
 
+import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -22,6 +23,8 @@ import java.util.Map;
 
 public class Ejecutar {
 
+    //REPORTE DE VEHICULOS
+
     public Blob ListadoVehiculosPDF(List<Vehiculo> vehiculos) throws JRException, IOException{
 
         List<ReporteVehiculo> reporteVehiculos = new ArrayList<>();
@@ -36,8 +39,28 @@ public class Ejecutar {
         }
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(reporteVehiculos);
-        return GenerarArchivoPDF("ListVehiculoDesing.jrxml","Listado de Vehiculos.pdf", ds);
+        return GenerarArchivoPDF("ListVehiculoDesing.jrxml","Reporte de Vehiculos.pdf", ds);
     }
+
+
+    //REPORTE DE EMPRESAS
+
+    public Blob ListadoEmpresasPDF(List<Empresa> empresas) throws JRException, IOException{
+
+        List<ReporteEmpresa> reporteEmpresas = new ArrayList<>();
+        reporteEmpresas.add(new ReporteEmpresa());
+
+        for (Empresa empresa : empresas) {
+            ReporteEmpresa reporteEmpresa = new ReporteEmpresa(empresa.ReporteCuit(), empresa.ReporteRazonSocial(), empresa.ReporteDireccion(),
+                    empresa.ReporteTelefono(), empresa.ReporteEstado());
+            reporteEmpresas.add(reporteEmpresa);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(reporteEmpresas);
+        return GenerarArchivoPDF("ListEmpresaDesing.jrxml","Reporte de Empresas.pdf", ds);
+    }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private Blob GenerarArchivoPDF(String archivoDesing, String nombreSalida, JRBeanCollectionDataSource ds) throws JRException, IOException{
