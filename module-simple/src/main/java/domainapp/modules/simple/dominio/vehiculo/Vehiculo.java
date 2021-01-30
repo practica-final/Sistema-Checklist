@@ -84,6 +84,16 @@ public class Vehiculo implements Comparable<Vehiculo> {
         return getDominio();
     }
 
+
+    public String ReporteDominio(){ return this.dominio; }
+    public String ReporteMarca(){ return this.marca; }
+    public String ReporteModelo(){ return this.modelo; }
+    public String ReporteAnyo(){ return this.anyo; }
+    public String ReporteKilometraje() {return this.kilometraje; }
+    public LocalDate ReporteVencimientoVtv() {return this.vencimientoVtv; }
+    public LocalDate ReporteVencimientoPoliza() {return this.vencimientoPoliza; }
+    public String ReporteEstado() {return this.estado.toString(); }
+
     public Vehiculo() { }
 
     public Vehiculo(

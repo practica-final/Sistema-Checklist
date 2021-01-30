@@ -68,6 +68,9 @@
                 <mb3:serviceAction objectType="Vehiculo" id="listAll">
                     <cpt:named>Listar Vehiculos</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction objectType="Vehiculo" id="ExportarListado">
+                    <cpt:named>Exportar Listado a PDF</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
 
@@ -85,7 +88,6 @@
                 </mb3:serviceAction>
             </mb3:section>
     </mb3:menu>
-
 
         <mb3:menu unreferencedActions="true">
             <mb3:named>Other</mb3:named>
@@ -155,7 +157,9 @@
             </mb3:section>
         </mb3:menu>
     </mb3:secondary>
-    <mb3:tertiary>
+
+
+<!--    <mb3:tertiary>
         <mb3:menu>
             <mb3:named>Configuration Service Menu</mb3:named>
             <mb3:section>
@@ -164,5 +168,5 @@
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
-    </mb3:tertiary>
+    </mb3:tertiary>-->
 </mb3:menuBars>

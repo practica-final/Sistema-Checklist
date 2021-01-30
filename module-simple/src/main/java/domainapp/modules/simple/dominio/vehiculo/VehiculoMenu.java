@@ -1,14 +1,17 @@
 package domainapp.modules.simple.dominio.vehiculo;
 
 
+import domainapp.modules.simple.dominio.reportes.Ejecutar;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.services.repository.RepositoryService;
 
 
-
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 import org.joda.time.LocalDate;
 
@@ -91,6 +94,13 @@ public class VehiculoMenu {
     public List<Vehiculo> listAll() {
         return repositoryService.allInstances(Vehiculo.class);
 
+    }
+
+    @Action()
+    @ActionLayout(named = "Listado Exportado")
+    public Blob ExportarListado() throws JRException, IOException {
+        Ejecutar ejecutar = new Ejecutar();
+        return ejecutar.ListadoVehiculosPDF(vehiculoRepository.Listar());
     }
 
     @javax.inject.Inject
