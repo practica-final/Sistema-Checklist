@@ -103,6 +103,13 @@ public class Operario implements Comparable<Operario>
         }
 
 
+        public String ReporteLegajoSAP() {return this.legajoSAP; }
+        public String ReporteNombreyApellido() {return this.nombreyApellido; }
+        public String ReporteEmail() {return this.email; }
+        public String ReporteNumeroLicencia() {return this.numeroLicencia; }
+        public LocalDate ReporteVencimientoLicencia() {return this.vencimientoLicencia; }
+
+
         public Operario(){}
 
         public Operario(

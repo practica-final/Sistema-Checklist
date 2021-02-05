@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dominio.reportes;
 
 import domainapp.modules.simple.dominio.empresa.Empresa;
+import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -60,6 +61,22 @@ public class Ejecutar {
         return GenerarArchivoPDF("ListEmpresaDesing.jrxml","Reporte de Empresas.pdf", ds);
     }
 
+    //REPORTE DE OPERARIO
+
+    public Blob ListadoOperariosPDF(List<Operario> operarios) throws JRException, IOException{
+
+        List<ReporteOperario> reporteOperarios = new ArrayList<>();
+        reporteOperarios.add(new ReporteOperario());
+
+        for (Operario operario : operarios) {
+            ReporteOperario reporteOperario = new ReporteOperario(operario.ReporteLegajoSAP(), operario.ReporteNombreyApellido(), operario.ReporteEmail(),
+                    operario.ReporteNumeroLicencia(), operario.ReporteVencimientoLicencia().toString("dd-MM-yyyy"));
+            reporteOperarios.add(reporteOperario);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(reporteOperarios);
+        return GenerarArchivoPDF("ListOperarioDesing.jrxml","Reporte de Operarios.pdf", ds);
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

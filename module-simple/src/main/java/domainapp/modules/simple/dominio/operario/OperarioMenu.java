@@ -2,15 +2,19 @@ package domainapp.modules.simple.dominio.operario;
 
 
 
+import domainapp.modules.simple.dominio.reportes.Ejecutar;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 
 
+import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.services.repository.RepositoryService;
 
 import org.joda.time.LocalDate;
 //import java.time.LocalDate;
+import java.io.IOException;
 import java.util.List;
 import org.apache.isis.schema.utils.jaxbadapters.JodaDateTimeStringAdapter;
 
@@ -92,6 +96,14 @@ public class OperarioMenu {
         @MemberOrder(sequence = "3")
         public List<Operario> listAll() {
             return repositoryService.allInstances(Operario.class);
+        }
+
+
+        @Action()
+        @ActionLayout(named = "Listado Exportado")
+        public Blob ExportarListado() throws JRException, IOException {
+            Ejecutar ejecutar = new Ejecutar();
+            return ejecutar.ListadoOperariosPDF(operarioRepository.Listar());
         }
 
         @javax.inject.Inject

@@ -38,6 +38,9 @@
                 <mb3:serviceAction objectType="Operario" id="listAll">
                     <cpt:named>Listar Operarios</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction objectType="Operario" id="ExportarListado">
+                    <cpt:named>Exportar Listado a PDF</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
 
