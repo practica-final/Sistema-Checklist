@@ -1,12 +1,15 @@
 package domainapp.modules.simple.dominio.checklist;
 
+import domainapp.modules.simple.dominio.reportes.Ejecutar;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
 
+import java.io.IOException;
 import java.util.List;
 
 @DomainService(
@@ -91,7 +94,13 @@ public class ChecklistMenu {
     public List<Checklist> listAll() {
         List <Checklist> checklists =  checklistRepository.Listar();
         return checklists;
+    }
 
+    @Action()
+    @ActionLayout(named = "Listado Exportado")
+    public Blob ExportarListado() throws JRException, IOException {
+        Ejecutar ejecutar = new Ejecutar();
+        return ejecutar.ListadoChecklistPDF(checklistRepository.Listar());
     }
 
     @javax.inject.Inject

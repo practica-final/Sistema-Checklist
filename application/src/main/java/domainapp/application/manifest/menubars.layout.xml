@@ -92,6 +92,9 @@
                 <mb3:serviceAction objectType="Checklist" id="listAll">
                     <cpt:named>Listar Checklist</cpt:named>
                 </mb3:serviceAction>
+                <mb3:serviceAction objectType="Checklist" id="ExportarListado">
+                    <cpt:named>Exportar Listado a PDF</cpt:named>
+                </mb3:serviceAction>
             </mb3:section>
     </mb3:menu>
 

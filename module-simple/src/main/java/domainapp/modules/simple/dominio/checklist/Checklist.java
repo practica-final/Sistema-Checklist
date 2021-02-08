@@ -85,11 +85,6 @@ public class Checklist {
     @Property()
     private String comentarios;
 
-    /*@javax.jdo.annotations.Column(allowsNull = "false", length = 40)
-    @lombok.NonNull
-    @Property()
-    private String fotos;*/
-
     @javax.jdo.annotations.Persistent(defaultFetchGroup="false", columns = {
             @javax.jdo.annotations.Column(name = "fotos_name"),
             @javax.jdo.annotations.Column(name = "fotos_mimetype"),
@@ -103,6 +98,13 @@ public class Checklist {
 
     public String title(){ return vehiculo.getDominio() + " " + vehiculo.getMarca(); }
 
+    public String ReporteIdentificacion(){ return this.identificacion; }
+    public String ReporteDocumentacion(){ return this.documentacion.toString(); }
+    public String ReporteTablero(){ return this.tablero.toString(); }
+    public String ReporteLaterales(){ return this.laterales.toString(); }
+    public String ReporteSeccionTrasera(){ return this.seccionTrasera.toString(); }
+    public String ReporteFrente(){ return this.frente.toString(); }
+    public String ReporteComentarios(){ return this.comentarios; }
 
 
     @Action()

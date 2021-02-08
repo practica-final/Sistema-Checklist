@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dominio.reportes;
 
+import domainapp.modules.simple.dominio.checklist.Checklist;
 import domainapp.modules.simple.dominio.empresa.Empresa;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
@@ -76,6 +77,24 @@ public class Ejecutar {
 
         JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(reporteOperarios);
         return GenerarArchivoPDF("ListOperarioDesing.jrxml","Reporte de Operarios.pdf", ds);
+    }
+
+    //REPORTE DE CHECKLIST
+
+    public Blob ListadoChecklistPDF(List<Checklist> checklists) throws JRException, IOException{
+
+        List<ReporteChecklist> reporteChecklists = new ArrayList<>();
+        reporteChecklists.add(new ReporteChecklist());
+
+        for (Checklist checklist : checklists) {
+            ReporteChecklist reporteChecklist = new ReporteChecklist(checklist.ReporteIdentificacion(), checklist.ReporteDocumentacion(),
+                    checklist.ReporteTablero(), checklist.ReporteLaterales(), checklist.ReporteSeccionTrasera(),
+                    checklist.ReporteFrente(), checklist.ReporteComentarios());
+            reporteChecklists.add(reporteChecklist);
+        }
+
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(reporteChecklists);
+        return GenerarArchivoPDF("ListChecklistDesing.jrxml","Reporte de Checklist.pdf", ds);
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
