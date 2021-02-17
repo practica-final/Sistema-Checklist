@@ -42,7 +42,9 @@ public class OperarioMenu {
             @ParameterLayout(named = "Nombre y Apellido: ")
             final String nombreyApellido,
 
-            @Parameter(maxLength = 40)
+            @Parameter(maxLength = 40,
+                    regexPattern = "^[0-9]{9}$",
+                    regexPatternReplacement = "Unicamente carga de números (9 como maximo)")
             @ParameterLayout(named = "Legajo SAP: ")
             final String legajoSAP,
 
