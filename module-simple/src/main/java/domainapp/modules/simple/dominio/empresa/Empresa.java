@@ -51,7 +51,9 @@ public class Empresa implements Comparable<Empresa> {
     private String direccion;
 
     @Column(allowsNull = "false")
-    @Property()
+    @Property(maxLength = 40,
+            regexPattern = "^[0-9]{11}$",
+            regexPatternReplacement = "Solo numeros, sin espacios ni barras (11 como maximo)")
     private String cuit;
 
     @Column(allowsNull = "false")

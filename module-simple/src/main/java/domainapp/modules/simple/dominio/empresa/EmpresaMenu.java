@@ -44,7 +44,9 @@ public class EmpresaMenu {
             @ParameterLayout(named = "Direccion: ")
             final String direccion,
 
-            @Parameter(maxLength = 40)
+            @Parameter(maxLength = 40,
+                    regexPattern = "^[0-9]{11}$",
+                    regexPatternReplacement = "Solo numeros, sin espacios ni barras (11 como maximo)")
             @ParameterLayout(named = "Cuit: ")
             final String cuit,
 
