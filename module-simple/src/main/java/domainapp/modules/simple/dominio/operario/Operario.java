@@ -19,6 +19,8 @@ import org.joda.time.LocalDate;
 import org.apache.isis.schema.utils.jaxbadapters.JodaDateTimeStringAdapter;
 
 import java.util.List;
+import java.util.regex.Pattern;
+
 import org.apache.isis.applib.annotation.*;
 
 import javax.jdo.annotations.*;
@@ -62,7 +64,10 @@ public class Operario implements Comparable<Operario>
         private String legajoSAP;
 
         @Column(allowsNull = "false", length = 40)
-        @Property()
+        @Property(maxLength = 40,
+                regexPattern = "(\\w+\\.)*\\w+@(\\w+\\.)+[A-Za-z]+",
+                regexPatternFlags= Pattern.CASE_INSENSITIVE,
+                regexPatternReplacement = "Ingrese un correo valido (debe contener '@')")
         private String email;
 
         @Column(allowsNull = "false", length = 40)

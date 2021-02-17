@@ -16,6 +16,8 @@ import org.joda.time.LocalDate;
 //import java.time.LocalDate;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
+
 import org.apache.isis.schema.utils.jaxbadapters.JodaDateTimeStringAdapter;
 
 @DomainService(
@@ -44,7 +46,10 @@ public class OperarioMenu {
             @ParameterLayout(named = "Legajo SAP: ")
             final String legajoSAP,
 
-            @Parameter(maxLength = 40)
+            @Parameter(maxLength = 40,
+                    regexPattern = "(\\w+\\.)*\\w+@(\\w+\\.)+[A-Za-z]+",
+                    regexPatternFlags= Pattern.CASE_INSENSITIVE,
+                    regexPatternReplacement = "Ingrese un correo valido (debe contener '@')")
             @ParameterLayout(named = "Correo: ")
             final String email,
 
