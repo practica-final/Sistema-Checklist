@@ -13,7 +13,7 @@
 </ion-header>
 
   <ion-content>
-    <ion-item *ngFor="let resultado of resultadosV">
+    <ion-item *ngFor="let resultado of resultadosV" (click)="goDetVeh()">
       
       <ion-avatar slot="start">
         <ion-img src="https://image.flaticon.com/icons/png/512/26/26596.png"></ion-img>
@@ -22,6 +22,7 @@
       <ion-label>
         <h1>{{resultado.$$title}}</h1>
         <p> Solicitado por <strong>operador</strong></p>
+
       </ion-label>
   
     </ion-item>

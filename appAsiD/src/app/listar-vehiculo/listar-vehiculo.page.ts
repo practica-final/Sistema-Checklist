@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-vehiculo',
@@ -10,7 +11,7 @@ export class ListarVehiculoPage implements OnInit {
 
   public resultadosV : any = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
 
@@ -26,10 +27,18 @@ export class ListarVehiculoPage implements OnInit {
     }
     const URL = 'http://localhost:8080/restful/services/Vehiculo/actions/listAll/invoke';
     this.http.get(URL, httpOptions)
-    .subscribe(resultados => (this.resultadosV = resultados)
-    );
+    .subscribe((resultados : Array<any>) => {
+      var array = resultados;
+      array.pop();
+      this.resultadosV = array;
+    });
 
   }
+
+  goDetVeh() { 
+    this.router.navigate(['/vehiculo'])
+  }
+
 
 filterItemsOfType(){
  return this.resultadosV.filter(resultado => resultado.titulo != null);

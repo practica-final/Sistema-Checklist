@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'listar-vehiculo',
     loadChildren: () => import('./listar-vehiculo/listar-vehiculo.module').then( m => m.ListarVehiculoPageModule)
   },
+  {
+    path: 'vehiculo',
+    loadChildren: () => import('./listar-vehiculo/vehiculo-detail/vehiculo-detail.module').then( m => m.VehiculoDetailPageModule)
+  },
 ];
 
 @NgModule({
