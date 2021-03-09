@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listar-checklist"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de Checklist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-label *ngIf="checkData != null">
+    
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center"><strong>{{checkData.$$title}}</strong></ion-card-title>
+      </ion-card-header>
+  
+      <ion-item>
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Documentacion:</strong> 
+          {{checkData.documentacion}}</ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Tablero: </strong>
+          {{checkData.tablero}}</ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Laterales: </strong>
+          {{checkData.laterales}}</ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Sección Trasera: </strong>
+          {{checkData.seccionTrasera}}</ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Frente: </strong>
+          {{checkData.frente}}</ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon  name="reader" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Comentarios: </strong>
+          {{checkData.comentarios}}</ion-label>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-icon  name="locate" slot="start"></ion-icon>
+        <ion-label>
+          <strong>Foto: </strong>
+          {{checkData.fotos}}</ion-label>
+      </ion-item> -->
+  
+  
+    </ion-card> 
+  
+    </ion-label>
+
+</ion-content>

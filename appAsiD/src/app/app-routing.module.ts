@@ -19,6 +19,15 @@ const routes: Routes = [
     path: 'vehiculo',
     loadChildren: () => import('./listar-vehiculo/vehiculo-detail/vehiculo-detail.module').then( m => m.VehiculoDetailPageModule)
   },
+  {
+    path: 'listar-checklist',
+    loadChildren: () => import('./listar-checklist/listar-checklist.module').then( m => m.ListarChecklistPageModule)
+  },
+  {
+    path: 'checklist',
+    loadChildren: () => import('./listar-checklist/checklist-detail/checklist-detail.module').then( m => m.ChecklistDetailPageModule)
+  },
+
 ];
 
 @NgModule({

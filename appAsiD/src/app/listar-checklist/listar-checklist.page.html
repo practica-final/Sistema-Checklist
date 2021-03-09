@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Listado de Checklist
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let resultado of resultadosC" (click)="goDetCheck(resultado.$$instanceId)">
+      
+    <ion-avatar slot="start">
+      <ion-img src="https://image.flaticon.com/icons/png/512/16/16424.png"></ion-img>
+    </ion-avatar>
+
+    <ion-label>
+      <h1>{{resultado.$$title}}</h1>
+      <p> Solicitado por <strong>operador</strong></p>
+
+    </ion-label>
+
+  </ion-item>
+
+</ion-content>

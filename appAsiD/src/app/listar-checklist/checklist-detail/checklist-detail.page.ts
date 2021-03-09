@@ -1,40 +1,39 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-vehiculo-detail',
-  templateUrl: './vehiculo-detail.page.html',
-  styleUrls: ['./vehiculo-detail.page.scss'],
+  selector: 'app-checklist-detail',
+  templateUrl: './checklist-detail.page.html',
+  styleUrls: ['./checklist-detail.page.scss'],
 })
-export class VehiculoDetailPage implements OnInit {
+export class ChecklistDetailPage implements OnInit {
 
-  idVeh;
-  vehData;
+  idCheck;
+  checkData;
   param : any;
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {}
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.param = this.activatedRoute.snapshot.params;
     if (Object.keys(this.param).length) {
-			this.listarVeh(this.param.idVeh);
+			this.listarCheck(this.param.idCheck);
 		}
   }
 
-  listarVeh(idVeh) {
+  listarCheck(idCheck) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json;profile=urn:org.apache.isis/v1',
         'Authorization': 'Basic c3ZlbjpwYXNz',
       })
     }
-    const URL = 'http://localhost:8080/restful/objects/dominio.Vehiculo/' + idVeh;
+    const URL = 'http://localhost:8080/restful/objects/dominio.Checklist/' + idCheck;
     this.http.get(URL, httpOptions)
       .subscribe((resultados) => {
-        this.vehData = resultados;
+        this.checkData = resultados;
       });
   }
-
 
 }
