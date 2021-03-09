@@ -35,13 +35,13 @@ export class ListarVehiculoPage implements OnInit {
 
   }
 
-  goDetVeh() { 
-    this.router.navigate(['/vehiculo'])
+  goDetVeh(id_veh) { 
+    this.router.navigate(['/vehiculo', { idVeh: id_veh }])
   }
 
 
 filterItemsOfType(){
- return this.resultadosV.filter(resultado => resultado.titulo != null);
+ return this.resultadosV  .filter(resultado => resultado.titulo != null);
 }
 
 

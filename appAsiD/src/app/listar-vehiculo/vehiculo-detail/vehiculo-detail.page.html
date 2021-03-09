@@ -1,9 +1,74 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>vehiculo-detail</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listar-vehiculo"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detalle de Vehiculo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-label *ngIf="vehData != null">
+    
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center"><strong>{{vehData.$$title}}</strong></ion-card-title>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-icon name="car" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Marca:</strong> 
+        {{vehData.marca}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="car" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Modelo: </strong>
+        {{vehData.modelo}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Año: </strong>
+        {{vehData.anyo}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="car" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Kilometraje: </strong>
+        {{vehData.kilometraje}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Vencimiento VTV: </strong>
+        {{vehData.vencimientoVtv}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon  name="calendar" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Vencimiento Poliza: </strong>
+        {{vehData.vencimientoPoliza}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon  name="locate" slot="start"></ion-icon>
+      <ion-label>
+        <strong>Estado: </strong>
+        {{vehData.estado | uppercase }}</ion-label>
+    </ion-item>
+
+
+  </ion-card> 
+
+  </ion-label>
 
 </ion-content>
