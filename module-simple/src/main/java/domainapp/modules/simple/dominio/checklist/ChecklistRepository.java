@@ -7,6 +7,7 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.value.Blob;
+import org.joda.time.LocalDate;
 
 
 import java.util.List;
@@ -41,6 +42,8 @@ public class ChecklistRepository {
 
             final Vehiculo vehiculo,
             final String identificacion,
+            final String destino,
+            final LocalDate fechaSalida,
             final EstadoChecklist documentacion,
             final EstadoChecklist tablero,
             final EstadoChecklist laterales,
@@ -50,7 +53,8 @@ public class ChecklistRepository {
             final Blob fotos
 
     ) {
-        final Checklist checklist = new Checklist(vehiculo, identificacion, documentacion, tablero,
+        final Checklist checklist = new Checklist(vehiculo, identificacion, destino, fechaSalida,
+                documentacion, tablero,
                 laterales, seccionTrasera, frente, comentarios, fotos);
         repositoryService.persist(checklist);
         return checklist;

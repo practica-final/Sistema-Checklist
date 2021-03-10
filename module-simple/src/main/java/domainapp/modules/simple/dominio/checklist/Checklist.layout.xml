@@ -21,6 +21,8 @@
                                 <cpt:action id="Inhabilitar"/>
                                 <cpt:action id="Borrar"/>
                                 <cpt:property id="vehiculo"/>
+                                <cpt:property id="destino"/>
+                                <cpt:property id="fechaSalida"/>
                                 <cpt:property id="documentacion"/>
                                 <cpt:property id="tablero"/>
                                 <cpt:property id="laterales"/>

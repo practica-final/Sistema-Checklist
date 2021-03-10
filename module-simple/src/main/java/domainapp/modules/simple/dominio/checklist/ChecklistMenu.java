@@ -8,6 +8,7 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
 import org.apache.isis.applib.value.Blob;
 import org.datanucleus.query.typesafe.TypesafeQuery;
+import org.joda.time.LocalDate;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +39,14 @@ public class ChecklistMenu {
             final String identificacion,
 
             @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Destino")
+            final String destino,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Fecha de Salida")
+            final LocalDate fechaSalida,
+
+            @Parameter(maxLength = 40)
             @ParameterLayout(named = "Documentacion")
             final EstadoChecklist documentacion,
 
@@ -65,7 +74,7 @@ public class ChecklistMenu {
             @ParameterLayout(named = "Fotos")
             final Blob fotos)
     {
-        return checklistRepository.create(vehiculo, identificacion, documentacion, tablero, laterales, seccionTrasera, frente, comentarios, fotos);
+        return checklistRepository.create(vehiculo, identificacion, destino, fechaSalida, documentacion, tablero, laterales, seccionTrasera, frente, comentarios, fotos);
     }
 
     public List<Vehiculo> choices0Create() {return vehiculoRepository.Listar();}

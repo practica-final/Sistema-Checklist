@@ -10,9 +10,11 @@ import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.title.TitleService;
 import org.apache.isis.applib.value.Blob;
+import org.joda.time.LocalDate;
 
 
 import javax.jdo.annotations.*;
+
 
 @Getter
 @Setter
@@ -58,6 +60,16 @@ public class Checklist {
     @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
     @lombok.NonNull
     @Property()
+    private String destino;
+
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    @lombok.NonNull
+    @Property()
+    private LocalDate fechaSalida;
+
+    @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
+    @lombok.NonNull
+    @Property()
     private EstadoChecklist documentacion;
 
     @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
@@ -99,6 +111,8 @@ public class Checklist {
     public String title(){ return vehiculo.getDominio() + " " + vehiculo.getMarca(); }
 
     public String ReporteIdentificacion(){ return this.identificacion; }
+    public String ReporteDestino(){ return this.destino; }
+    public LocalDate ReporteFechaSalida(){ return this.fechaSalida; }
     public String ReporteDocumentacion(){ return this.documentacion.toString(); }
     public String ReporteTablero(){ return this.tablero.toString(); }
     public String ReporteLaterales(){ return this.laterales.toString(); }
@@ -113,6 +127,10 @@ public class Checklist {
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Identificacion")
             final String identificacion,
+
+            @Parameter(maxLength = 40)
+            @ParameterLayout(named = "Destino")
+            final String destino,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Documentacion")
@@ -143,6 +161,7 @@ public class Checklist {
             final Blob fotos){
 
         this.identificacion = identificacion;
+        this.destino = destino;
         this.documentacion = documentacion;
         this.tablero = tablero;
         this.laterales = laterales;
@@ -159,25 +178,26 @@ public class Checklist {
     public String default0Update() {
         return getIdentificacion();
     }
-    public EstadoChecklist default1Update() {
+    public String default1Update() { return getDestino(); }
+    public EstadoChecklist default2Update() {
         return getDocumentacion();
     }
-    public EstadoChecklist default2Update() {
+    public EstadoChecklist default3Update() {
         return getTablero();
     }
-    public EstadoChecklist default3Update() {
+    public EstadoChecklist default4Update() {
         return getLaterales();
     }
-    public EstadoChecklist default4Update() {
+    public EstadoChecklist default5Update() {
         return getSeccionTrasera();
     }
-    public EstadoChecklist default5Update() {
+    public EstadoChecklist default6Update() {
         return getFrente();
     }
-    public String default6Update() {
+    public String default7Update() {
         return getComentarios();
     }
-    public Blob default7Update() {
+    public Blob default8Update() {
         return getFotos();
     }
 

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.apache.isis.applib.value.Blob;
+import org.joda.time.LocalDate;
 
 
 public class ChecklistCreate extends FixtureScript {
@@ -17,6 +18,12 @@ public class ChecklistCreate extends FixtureScript {
 
     @Getter @Setter
     private String identificacion;
+
+    @Getter @Setter
+    private String destino;
+
+    @Getter @Setter
+    private LocalDate fechaSalida;
 
     @Getter @Setter
     private EstadoChecklist documentacion;
@@ -47,6 +54,8 @@ public class ChecklistCreate extends FixtureScript {
 
         Vehiculo vehiculo = checkParam("vehiculo", ec, Vehiculo.class);
         String identificacion = checkParam("identificacion", ec, String.class);
+        String destino = checkParam("destino", ec, String.class);
+        LocalDate fechaSalida = checkParam("fechaSalida", ec, LocalDate.class);
         EstadoChecklist documentacion = checkParam("documentacion", ec, EstadoChecklist.class);
         EstadoChecklist tablero = checkParam("tablero", ec, EstadoChecklist.class);
         EstadoChecklist laterales = checkParam("laterales", ec, EstadoChecklist.class);
@@ -55,7 +64,8 @@ public class ChecklistCreate extends FixtureScript {
         String comentarios = checkParam("comentarios", ec, String.class);
         Blob fotos = checkParam("fotos", ec, Blob.class);
 
-        this.checklistObject = wrap(menu).create(vehiculo, identificacion, documentacion, tablero, laterales,
+        this.checklistObject = wrap(menu).create(vehiculo, identificacion, destino, fechaSalida,
+                documentacion, tablero, laterales,
                 seccionTrasera, frente, comentarios, fotos);
 
         // also make available to UI

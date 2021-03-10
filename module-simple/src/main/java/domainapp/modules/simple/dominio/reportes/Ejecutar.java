@@ -87,7 +87,9 @@ public class Ejecutar {
         reporteChecklists.add(new ReporteChecklist());
 
         for (Checklist checklist : checklists) {
-            ReporteChecklist reporteChecklist = new ReporteChecklist(checklist.ReporteIdentificacion(), checklist.ReporteDocumentacion(),
+            ReporteChecklist reporteChecklist = new ReporteChecklist(checklist.ReporteIdentificacion(),
+                    checklist.ReporteDestino(), checklist.ReporteFechaSalida().toString("dd-MM-yyyy"),
+                    checklist.ReporteDocumentacion(),
                     checklist.ReporteTablero(), checklist.ReporteLaterales(), checklist.ReporteSeccionTrasera(),
                     checklist.ReporteFrente(), checklist.ReporteComentarios());
             reporteChecklists.add(reporteChecklist);
