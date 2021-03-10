@@ -6,11 +6,8 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  
+  
   {
     path: 'listar-vehiculo',
     loadChildren: () => import('./listar-vehiculo/listar-vehiculo.module').then( m => m.ListarVehiculoPageModule)
@@ -27,6 +24,17 @@ const routes: Routes = [
     path: 'checklist',
     loadChildren: () => import('./listar-checklist/checklist-detail/checklist-detail.module').then( m => m.ChecklistDetailPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
 
 ];
 
