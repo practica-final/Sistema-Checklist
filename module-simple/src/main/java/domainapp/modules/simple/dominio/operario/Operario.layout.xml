@@ -25,9 +25,12 @@
     </bs3:row>
 
     <bs3:row>
+
         <bs3:col span="12">
-            <bs3:row>
-                <bs3:col span="8">
+
+
+           <bs3:row>
+               <bs3:col span="8">
                     <cpt:fieldSet name="Operario">
                         <cpt:action id="update"/>
                         <cpt:action id="Activado"/>
@@ -42,20 +45,34 @@
                         <cpt:property id="llaveRSV"/>
                         <cpt:property id="estado"/>
                     </cpt:fieldSet>
-                </bs3:col>
-                <bs3:col span="4">
+               </bs3:col>
+
+               <bs3:col span="4">
                     <cpt:fieldSet name="Asignar Empresa">
                         <cpt:property id="asigEmpresa" hidden="ALL_TABLES">
                             <cpt:action id="AgregarEmpresa" promptStyle="INLINE"/>
                         </cpt:property>
                     </cpt:fieldSet>
-                </bs3:col>
-            </bs3:row>
+               </bs3:col>
+
+           </bs3:row>
+
+
+                <bs3:tab name="Vehiculos">
+                    <bs3:row>
+                        <bs3:col span="12" size="MD">
+                            <cpt:collection defaultView="table" id="vehiculo"/>
+                        </bs3:col>
+                    </bs3:row>
+                </bs3:tab>
+
         </bs3:col>
     </bs3:row>
 
+
+
     <bs3:row>
-        <bs3:col span="12">
+       <bs3:col span="12">
             <bs3:tabGroup>
                 <bs3:tab name="Other">
                     <bs3:row>
@@ -76,5 +93,8 @@
         <bs3:col span="12">
             <bs3:tabGroup unreferencedCollections="true"/>
         </bs3:col>
+
+
     </bs3:row>
+
 </bs3:grid>

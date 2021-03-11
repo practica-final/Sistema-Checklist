@@ -100,10 +100,10 @@ public class Operario implements Comparable<Operario>
         @PropertyLayout(named = "Empresa")
         private Empresa asigEmpresa;
 
-        /*@Persistent(mappedBy = "asignarOperario", defaultFetchGroup = "true")*/
+        @Persistent(mappedBy = "asignarOperario", defaultFetchGroup = "true")
         @Column(allowsNull = "true")
         @Property()
-        private Vehiculo vehiculo;
+        private List<Vehiculo> vehiculo;
 
         public String title(){
             return getLegajoSAP() + " " + getNombreyApellido();

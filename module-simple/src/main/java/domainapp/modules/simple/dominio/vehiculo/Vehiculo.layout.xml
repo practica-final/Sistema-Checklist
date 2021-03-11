@@ -25,8 +25,10 @@
     </bs3:row>
 
     <bs3:row>
+
         <bs3:col span="12">
             <bs3:row>
+
                 <bs3:col span="8">
                     <cpt:fieldSet name="Vehículos">
                         <cpt:property id="dominio"/>
@@ -43,6 +45,7 @@
                         <cpt:action id="Baja"/>
                     </cpt:fieldSet>
                 </bs3:col>
+
                 <bs3:col span="4">
                     <cpt:fieldSet name="Asignar Operario">
                         <cpt:property id="asignarOperario" hidden="ALL_TABLES">
@@ -50,6 +53,7 @@
                         </cpt:property>
                     </cpt:fieldSet>
                 </bs3:col>
+
             </bs3:row>
         </bs3:col>
     </bs3:row>
