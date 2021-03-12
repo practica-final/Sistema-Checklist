@@ -110,8 +110,24 @@ public class EmpresaMenu {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de empresas")
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Empresa")
     @MemberOrder(sequence = "3")
+    public Empresa findByRazonSocial(
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Por Razon Social: ")
+            final String razonSocial) {
+        TypesafeQuery<Empresa> q = isisJdoSupport.newTypesafeQuery(Empresa.class);
+        final QEmpresa cand = QEmpresa.candidate();
+        q = q.filter(
+                cand.razonSocial.eq(q.stringParameter("razonSocial"))
+        );
+        return q.setParameter("razonSocial", razonSocial)
+                .executeUnique();
+    }
+
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de empresas")
+    @MemberOrder(sequence = "4")
     public List<Empresa> listAll(){
         return repositoryService.allInstances(Empresa.class);
     }

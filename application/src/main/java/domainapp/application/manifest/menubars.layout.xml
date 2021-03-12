@@ -51,7 +51,10 @@
                     <cpt:named>Crear Empresas</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Empresa" id="findByCuit">
-                    <cpt:named>Buscar por CUIT de empresa</cpt:named>
+                    <cpt:named>Buscar por CUIT</cpt:named>
+                </mb3:serviceAction>
+                <mb3:serviceAction objectType="Empresa" id="findByRazonSocial">
+                    <cpt:named>Buscar por Razon Social</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Empresa" id="listAll">
                     <cpt:named>Listar Empresas</cpt:named>

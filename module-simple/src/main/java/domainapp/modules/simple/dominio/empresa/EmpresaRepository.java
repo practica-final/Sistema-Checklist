@@ -39,6 +39,16 @@ public class EmpresaRepository {
     }
 
     @Programmatic
+    public Empresa findByRazonSocial(final String razonSocial){
+
+        return repositoryService.uniqueMatch(
+                new QueryDefault<>(
+                        Empresa.class,
+                        "findByRazonSocial",
+                        "razonSocial", razonSocial ));
+    }
+
+    @Programmatic
     public Empresa create(
             final String razonSocial, final String direccion,
             final String cuit, final String telefono, final EstadoGeneral estado/*,
