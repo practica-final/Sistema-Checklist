@@ -113,7 +113,7 @@ public class Vehiculo implements Comparable<Vehiculo> {
     }
 
     @Action()
-    @ActionLayout(named = "Editar")
+    @ActionLayout(named = "Editar Vehiculo")
     public Vehiculo update(
             @Parameter(maxLength = 13)
             @ParameterLayout(named = "Dominio: ") final String dominio,
@@ -129,11 +129,11 @@ public class Vehiculo implements Comparable<Vehiculo> {
 
             @Parameter(maxLength = 80)
             @ParameterLayout(named = "Kilometraje: ") final String kilometraje,
-            @ParameterLayout(named = "Vencimiento de la VTV: ") final LocalDate vencimientoVtv,
-            @ParameterLayout(named = "Vencimiento del seguro: ") final LocalDate vencimientoPoliza,
+            @ParameterLayout(named = "Vencimiento VTV: ") final LocalDate vencimientoVtv,
+            @ParameterLayout(named = "Vencimiento Poliza: ") final LocalDate vencimientoPoliza,
 
             @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Estado del vehículo: ") final EstadoVehiculo estado)
+            @ParameterLayout(named = "Estado: ") final EstadoVehiculo estado)
 
     {
         setDominio(dominio);

@@ -128,6 +128,7 @@ public class Checklist {
     public String ReporteComentarios(){ return this.comentarios; }
 
 
+    /*
     @Action()
     @ActionLayout(named = "Editar")
     public Checklist update(
@@ -207,6 +208,8 @@ public class Checklist {
     public Blob default8Update() {
         return getFotos();
     }
+
+*/
 
 
     @Override

@@ -118,9 +118,9 @@ public class Empresa implements Comparable<Empresa> {
         return this;
     }
 
-    public String default0Update() {return getCuit();}
-    public String default1Update() {return getRazonSocial();}
-    public String default2Update() {return getDireccion();}
+    public String default0Update() {return getRazonSocial();}
+    public String default1Update() {return getDireccion();}
+    public String default2Update() {return getCuit();}
     public String default3Update() {return getTelefono();}
     public EstadoGeneral default4Update(){return getEstado();}
 
