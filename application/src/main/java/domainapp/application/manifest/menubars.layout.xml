@@ -33,7 +33,7 @@
                     <cpt:named>Crear Operario</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Operario" id="findByLegajoSAP">
-                    <cpt:named>Buscar por Legajo Operario</cpt:named>
+                    <cpt:named>Buscar por Legajo</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Operario" id="listAll">
                     <cpt:named>Listar Operarios</cpt:named>
@@ -48,7 +48,7 @@
             <mb3:named>Empresas</mb3:named>
             <mb3:section>
                 <mb3:serviceAction objectType="Empresa" id="create">
-                    <cpt:named>Crear Empresas</cpt:named>
+                    <cpt:named>Crear Empresa</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Empresa" id="findByCuit">
                     <cpt:named>Buscar por CUIT</cpt:named>
@@ -69,7 +69,7 @@
             <mb3:named>Vehiculos</mb3:named>
             <mb3:section>
                 <mb3:serviceAction objectType="Vehiculo" id="create">
-                    <cpt:named>Crear Vehiculos</cpt:named>
+                    <cpt:named>Crear Vehiculo</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Vehiculo" id="findByDominio">
                     <cpt:named>Buscar por Dominio</cpt:named>
@@ -87,7 +87,7 @@
             <mb3:named>Checklist</mb3:named>
             <mb3:section>
                 <mb3:serviceAction objectType="Checklist" id="create">
-                    <cpt:named>Cargar Checklist</cpt:named>
+                    <cpt:named>Crear Checklist</cpt:named>
                 </mb3:serviceAction>
                 <mb3:serviceAction objectType="Checklist" id="findByVehiculo">
                     <cpt:named>Buscar por vehiculo</cpt:named>

@@ -43,8 +43,8 @@ public class OperarioMenu {
             final String nombreyApellido,
 
             @Parameter(maxLength = 40,
-                    regexPattern = "^[0-9]{9}$",
-                    regexPatternReplacement = "Unicamente carga de números (9 como maximo)")
+                    regexPattern = "^[0-6]{6}$",
+                    regexPatternReplacement = "Unicamente carga de números (6 como maximo)")
             @ParameterLayout(named = "Legajo SAP: ")
             final String legajoSAP,
 
@@ -86,7 +86,7 @@ public class OperarioMenu {
 
         public Operario findByLegajoSAP(
                 @Parameter(optionality = Optionality.MANDATORY)
-                @ParameterLayout(named = "Buscar por legajoSAP: ")
+                @ParameterLayout(named = "Legajo SAP: ")
                 final String legajoSAP){
             TypesafeQuery<Operario> q = isisJdoSupport.newTypesafeQuery(Operario.class);
             final QOperario cand = QOperario.candidate();
