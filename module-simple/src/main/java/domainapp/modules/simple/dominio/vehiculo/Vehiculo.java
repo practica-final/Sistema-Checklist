@@ -76,9 +76,10 @@ public class Vehiculo implements Comparable<Vehiculo> {
     @Property()
     private Operario asignarOperario;
 
+    @Persistent(mappedBy = "vehiculo", defaultFetchGroup = "true")
     @Column(allowsNull = "true")
     @Property()
-    private Checklist checklist;
+    private List<Checklist> checklist;
 
     public String title(){
         return getDominio();
