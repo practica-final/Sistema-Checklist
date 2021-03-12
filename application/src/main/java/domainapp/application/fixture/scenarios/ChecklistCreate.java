@@ -3,6 +3,7 @@ package domainapp.application.fixture.scenarios;
 import domainapp.modules.simple.dominio.checklist.Checklist;
 import domainapp.modules.simple.dominio.checklist.ChecklistMenu;
 import domainapp.modules.simple.dominio.checklist.EstadoChecklist;
+import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,9 @@ public class ChecklistCreate extends FixtureScript {
 
     @Getter @Setter
     private Vehiculo vehiculo;
+
+    @Getter @Setter
+    private Operario operario;
 
     @Getter @Setter
     private String identificacion;
@@ -53,6 +57,7 @@ public class ChecklistCreate extends FixtureScript {
     protected void execute(final ExecutionContext ec) {
 
         Vehiculo vehiculo = checkParam("vehiculo", ec, Vehiculo.class);
+        Operario operario = checkParam("operario", ec, Operario.class);
         String identificacion = checkParam("identificacion", ec, String.class);
         String destino = checkParam("destino", ec, String.class);
         LocalDate fechaSalida = checkParam("fechaSalida", ec, LocalDate.class);
@@ -64,7 +69,7 @@ public class ChecklistCreate extends FixtureScript {
         String comentarios = checkParam("comentarios", ec, String.class);
         Blob fotos = checkParam("fotos", ec, Blob.class);
 
-        this.checklistObject = wrap(menu).create(vehiculo, identificacion, destino, fechaSalida,
+        this.checklistObject = wrap(menu).create(vehiculo, operario, identificacion, destino, fechaSalida,
                 documentacion, tablero, laterales,
                 seccionTrasera, frente, comentarios, fotos);
 

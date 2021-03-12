@@ -1,5 +1,7 @@
 package domainapp.modules.simple.dominio.checklist;
 
+import domainapp.modules.simple.dominio.operario.Operario;
+import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import domainapp.modules.simple.dominio.reportes.Ejecutar;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
@@ -33,6 +35,10 @@ public class ChecklistMenu {
             @Parameter(optionality = Optionality.MANDATORY)
             @ParameterLayout(named = "Dominio: ")
             final Vehiculo vehiculo,
+
+            @Parameter(optionality = Optionality.MANDATORY)
+            @ParameterLayout(named = "Usuario: ")
+            final Operario operario,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Identificacion")
@@ -74,10 +80,11 @@ public class ChecklistMenu {
             @ParameterLayout(named = "Fotos")
             final Blob fotos)
     {
-        return checklistRepository.create(vehiculo, identificacion, destino, fechaSalida, documentacion, tablero, laterales, seccionTrasera, frente, comentarios, fotos);
+        return checklistRepository.create(vehiculo, operario, identificacion, destino, fechaSalida, documentacion, tablero, laterales, seccionTrasera, frente, comentarios, fotos);
     }
 
     public List<Vehiculo> choices0Create() {return vehiculoRepository.Listar();}
+    public List<Operario> choices1Create() {return operarioRepository.Listar();}
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Buscar Checklist")
@@ -120,4 +127,7 @@ public class ChecklistMenu {
 
     @javax.inject.Inject
     VehiculoRepository vehiculoRepository;
+
+    @javax.inject.Inject
+    OperarioRepository operarioRepository;
 }

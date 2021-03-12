@@ -1,6 +1,8 @@
 package domainapp.modules.simple.dominio.checklist;
 
 import com.google.common.collect.ComparisonChain;
+import domainapp.modules.simple.dominio.operario.Operario;
+import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import domainapp.modules.simple.dominio.vehiculo.VehiculoRepository;
 import lombok.AccessLevel;
@@ -51,6 +53,11 @@ public class Checklist {
     @Property()
     @Column(allowsNull = "false")
     private Vehiculo vehiculo;
+
+    @lombok.NonNull
+    @Property()
+    @Column(allowsNull = "false")
+    private Operario operario;
 
     @javax.jdo.annotations.Column(allowsNull = "false", length = 40)
     @lombok.NonNull
@@ -108,7 +115,7 @@ public class Checklist {
     private Blob fotos;
 
 
-    public String title(){ return vehiculo.getDominio() + " " + vehiculo.getMarca(); }
+    public String title(){ return vehiculo.getDominio() + " " + getFechaSalida(); }
 
     public String ReporteIdentificacion(){ return this.identificacion; }
     public String ReporteDestino(){ return this.destino; }
@@ -222,6 +229,11 @@ public class Checklist {
     @javax.jdo.annotations.NotPersistent
     @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
     VehiculoRepository vehiculoRepository;
+
+    @javax.inject.Inject
+    @javax.jdo.annotations.NotPersistent
+    @lombok.Getter(AccessLevel.NONE) @lombok.Setter(AccessLevel.NONE)
+    OperarioRepository operarioRepository;
 
     @javax.inject.Inject
     @javax.jdo.annotations.NotPersistent

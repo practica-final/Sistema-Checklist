@@ -1,5 +1,6 @@
 package domainapp.modules.simple.dominio.checklist;
 
+import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
@@ -41,6 +42,7 @@ public class ChecklistRepository {
     public Checklist create(
 
             final Vehiculo vehiculo,
+            final Operario operario,
             final String identificacion,
             final String destino,
             final LocalDate fechaSalida,
@@ -53,7 +55,7 @@ public class ChecklistRepository {
             final Blob fotos
 
     ) {
-        final Checklist checklist = new Checklist(vehiculo, identificacion, destino, fechaSalida,
+        final Checklist checklist = new Checklist(vehiculo, operario, identificacion, destino, fechaSalida,
                 documentacion, tablero,
                 laterales, seccionTrasera, frente, comentarios, fotos);
         repositoryService.persist(checklist);
