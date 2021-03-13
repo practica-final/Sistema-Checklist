@@ -171,7 +171,7 @@
     </mb3:secondary>
 
 
-<!--    <mb3:tertiary>
+    <mb3:tertiary>
         <mb3:menu>
             <mb3:named>Configuration Service Menu</mb3:named>
             <mb3:section>
@@ -180,5 +180,5 @@
                 </mb3:serviceAction>
             </mb3:section>
         </mb3:menu>
-    </mb3:tertiary>-->
+    </mb3:tertiary>
 </mb3:menuBars>

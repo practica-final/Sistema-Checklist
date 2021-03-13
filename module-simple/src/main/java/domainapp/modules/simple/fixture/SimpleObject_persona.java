@@ -19,45 +19,45 @@
 
 package domainapp.modules.simple.fixture;
 
+import domainapp.modules.simple.dominio.operario.Operario;
+import domainapp.modules.simple.dominio.operario.OperarioMenu;
 import org.apache.isis.applib.fixturescripts.PersonaWithBuilderScript;
 import org.apache.isis.applib.fixturescripts.PersonaWithFinder;
 import org.apache.isis.applib.fixturescripts.setup.PersonaEnumPersistAll;
 import org.apache.isis.applib.services.registry.ServiceRegistry2;
 
-import domainapp.modules.simple.dom.impl.SimpleObject;
-import domainapp.modules.simple.dom.impl.SimpleObjects;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum SimpleObject_persona implements PersonaWithBuilderScript<SimpleObject, SimpleObjectBuilder>,
-        PersonaWithFinder<SimpleObject> {
+public enum SimpleObject_persona implements PersonaWithBuilderScript<Operario, SimpleObjectBuilder>,
+        PersonaWithFinder<Operario> {
 
-    FOO("Foo"),
-    BAR("Bar"),
-    BAZ("Baz"),
-    FRODO("Frodo"),
-    FROYO("Froyo"),
-    FIZZ("Fizz"),
-    BIP("Bip"),
-    BOP("Bop"),
-    BANG("Bang"),
-    BOO("Boo");
+    FOO("123456"),
+    BAR("654321"),
+    BAZ("246802"),
+    FRODO("098765"),
+    FROYO("567890"),
+    FIZZ("357913"),
+    BIP("123786"),
+    BOP("987342"),
+    BANG("876902"),
+    BOO("412417");
 
-    private final String name;
+    private final String legajoSAP;
 
 //    @Override
     public SimpleObjectBuilder builder() {
-        return new SimpleObjectBuilder().setName(name);
+        return new SimpleObjectBuilder().setLegajoSAP(legajoSAP);
     }
 
     //@Override
-    public SimpleObject findUsing(final ServiceRegistry2 serviceRegistry) {
-        SimpleObjects simpleObjects = serviceRegistry.lookupService(SimpleObjects.class);
-        return simpleObjects.findByNameExact(name);
+    public Operario findUsing(final ServiceRegistry2 serviceRegistry) {
+        OperarioMenu simpleObjects = serviceRegistry.lookupService(OperarioMenu.class);
+        return simpleObjects.findByLegajoSAP(legajoSAP);
     }
 
     public static class PersistAll
-            extends PersonaEnumPersistAll<SimpleObject_persona, SimpleObject, SimpleObjectBuilder> {
+            extends PersonaEnumPersistAll<SimpleObject_persona, Operario, SimpleObjectBuilder> {
         public PersistAll() {
             super(SimpleObject_persona.class);
         }

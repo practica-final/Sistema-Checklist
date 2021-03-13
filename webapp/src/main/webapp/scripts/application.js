@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     	}else{
         $('body').css('background-color', 'white');
-        $('body').css('background-image', 'url("/images/backgroud.jpg")');
+        $('body').css('background-image', 'url("/images/background.jpg")');
         $('body').css('background-repeat', 'repeat-y');
         $('body').css('color', 'black');
         $('body').css('position', 'relative');

@@ -19,32 +19,56 @@
 
 package domainapp.modules.simple.fixture;
 
+import domainapp.modules.simple.dominio.operario.Operario;
+import domainapp.modules.simple.dominio.operario.OperarioEstado;
+import domainapp.modules.simple.dominio.operario.OperarioMenu;
 import org.apache.isis.applib.fixturescripts.BuilderScriptAbstract;
 
-import domainapp.modules.simple.dom.impl.SimpleObject;
-import domainapp.modules.simple.dom.impl.SimpleObjects;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.joda.time.LocalDate;
 
 @Accessors(chain = true)
-public class SimpleObjectBuilder extends BuilderScriptAbstract<SimpleObject, SimpleObjectBuilder> {
+public class SimpleObjectBuilder extends BuilderScriptAbstract<Operario, SimpleObjectBuilder> {
 
     @Getter @Setter
-    private String name;
+    private String nombreyApellido;
 
-    @Getter
-    private SimpleObject object;
+    @Getter @Setter
+    private String legajoSAP;
+
+    @Getter @Setter
+    private String email;
+
+    @Getter @Setter
+    private String telefono;
+
+    @Getter @Setter
+    private String numeroLicencia;
+
+    @Getter @Setter
+    private LocalDate vencimientoLicencia;
+
+    @Getter @Setter
+    private OperarioEstado llaveRSV;
+
+    @Getter @Setter
+    private OperarioEstado estado;
+
+    @Getter @Setter
+    private Operario object;
 
     @Override
     protected void execute(final ExecutionContext ec) {
 
-        checkParam("name", ec, String.class);
+        checkParam("legajoSAP", ec, String.class);
 
-        object = wrap(simpleObjects).create(name);
+        object = wrap(operarioMenu).create(nombreyApellido, legajoSAP, email,
+                telefono, numeroLicencia, vencimientoLicencia, llaveRSV, estado);
     }
 
     @javax.inject.Inject
-    SimpleObjects simpleObjects;
+    OperarioMenu operarioMenu;
 
 }
