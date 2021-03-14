@@ -115,6 +115,8 @@ public class Operario implements Comparable<Operario>
         public String ReporteEmail() {return this.email; }
         public String ReporteNumeroLicencia() {return this.numeroLicencia; }
         public LocalDate ReporteVencimientoLicencia() {return this.vencimientoLicencia; }
+        public String ReporteLlaveRSV(){ return this.llaveRSV.toString(); }
+        public String ReporteEstado(){ return this.estado.toString(); }
 
 
         public Operario(){}

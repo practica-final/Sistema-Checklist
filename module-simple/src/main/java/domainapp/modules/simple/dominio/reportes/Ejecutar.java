@@ -71,7 +71,8 @@ public class Ejecutar {
 
         for (Operario operario : operarios) {
             ReporteOperario reporteOperario = new ReporteOperario(operario.ReporteLegajoSAP(), operario.ReporteNombreyApellido(), operario.ReporteEmail(),
-                    operario.ReporteNumeroLicencia(), operario.ReporteVencimientoLicencia().toString("dd-MM-yyyy"));
+                    operario.ReporteNumeroLicencia(), operario.ReporteVencimientoLicencia().toString("dd-MM-yyyy"),
+                    operario.ReporteLlaveRSV(), operario.ReporteEstado());
             reporteOperarios.add(reporteOperario);
         }
 

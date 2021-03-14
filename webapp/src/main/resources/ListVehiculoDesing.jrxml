@@ -69,7 +69,7 @@
 			<staticText>
 				<reportElement x="0" y="0" width="553" height="56" forecolor="#E7D6FF" uuid="cfd18195-1bb2-4bef-a1d4-a1912e0d93ba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" size="29" isBold="true"/>
+					<font fontName="SansSerif" size="29" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE VEHICULOS]]></text>
 			</staticText>
@@ -86,7 +86,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Arial" size="11" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -127,7 +127,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[DOMINIO]]></text>
 							</staticText>
@@ -149,7 +149,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{dominio}]]></textFieldExpression>
 							</textField>
@@ -162,7 +162,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="79" height="30" uuid="0ffa5562-c38b-4073-977d-28fb1950a431"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[MARCA]]></text>
 							</staticText>
@@ -171,29 +171,29 @@
 							<textField>
 								<reportElement x="0" y="0" width="79" height="30" uuid="aabc2fdb-d793-4466-b00b-bd820dbffc88"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="81" uuid="098d6cd6-a359-40cc-9ad5-9117a3fc52bf">
+					<jr:column width="71" uuid="098d6cd6-a359-40cc-9ad5-9117a3fc52bf">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="81" height="30" uuid="8a5262fe-1e43-4866-88a2-569e75cc0b4d"/>
+								<reportElement x="0" y="0" width="71" height="30" uuid="8a5262fe-1e43-4866-88a2-569e75cc0b4d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[MODELO]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="81" height="30" uuid="40c12f3b-70fd-46dd-8efa-a96567698c08"/>
+								<reportElement x="0" y="0" width="71" height="30" uuid="40c12f3b-70fd-46dd-8efa-a96567698c08"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
 							</textField>
@@ -206,7 +206,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="50" height="30" uuid="1e1cb1e9-8ac4-4adc-864e-1db3f49cbeb6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[AÑO]]></text>
 							</staticText>
@@ -215,29 +215,29 @@
 							<textField>
 								<reportElement x="0" y="0" width="50" height="30" uuid="82fcb25c-aced-4222-8b1e-b320469a6250"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{anyo}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="2b6e37d7-8333-48b7-a125-be8f7403a046">
+					<jr:column width="90" uuid="2b6e37d7-8333-48b7-a125-be8f7403a046">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="80" height="30" uuid="0c30fcc6-db91-4231-90bf-883ac4f420c8"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0c30fcc6-db91-4231-90bf-883ac4f420c8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[KILOMETRAJE]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="393663b9-2586-4134-b2ee-6ee00610c107"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="393663b9-2586-4134-b2ee-6ee00610c107"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{kilometraje}]]></textFieldExpression>
 							</textField>
@@ -250,7 +250,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="1ed9aaef-c74a-410b-8e1c-0256568fb426"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[VTO VTV]]></text>
 							</staticText>
@@ -259,49 +259,49 @@
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="9e814732-0081-44d3-8557-78f8741c933b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{vencimientoVtv}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="a206420d-ce7e-4478-937c-f0863647df72">
+					<jr:column width="80" uuid="a206420d-ce7e-4478-937c-f0863647df72">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="ffe4d67e-4668-49a3-9e35-a961c5ba8c77"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="ffe4d67e-4668-49a3-9e35-a961c5ba8c77"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[VTO POLIZA]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="f4a3a82d-bb6f-444d-ac1e-496a20bd17c5"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="f4a3a82d-bb6f-444d-ac1e-496a20bd17c5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{vencimientoPoliza}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="65" uuid="84af1f78-588b-4244-b493-53fec291b11f">
+					<jr:column width="55" uuid="84af1f78-588b-4244-b493-53fec291b11f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="65" height="30" uuid="ff0ac301-e2c3-4e51-ac55-6d7d5387ef5f"/>
+								<reportElement x="0" y="0" width="55" height="30" uuid="ff0ac301-e2c3-4e51-ac55-6d7d5387ef5f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[ESTADO]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="65" height="30" uuid="a8892268-fae4-46e8-aead-ddaf582aa766"/>
+								<reportElement x="0" y="0" width="55" height="30" uuid="a8892268-fae4-46e8-aead-ddaf582aa766"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 							</textField>

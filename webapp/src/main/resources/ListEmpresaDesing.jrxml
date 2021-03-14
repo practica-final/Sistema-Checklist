@@ -63,7 +63,7 @@
 			<staticText>
 				<reportElement x="0" y="0" width="553" height="56" forecolor="#E7D6FF" uuid="cfd18195-1bb2-4bef-a1d4-a1912e0d93ba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Black" size="29" isBold="true"/>
+					<font fontName="SansSerif" size="29" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
 			</staticText>
@@ -80,7 +80,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font fontName="Arial" size="11" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -121,7 +121,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[CUIT]]></text>
 							</staticText>
@@ -143,7 +143,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{cuit}]]></textFieldExpression>
 							</textField>
@@ -156,7 +156,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="120" height="30" uuid="0ffa5562-c38b-4073-977d-28fb1950a431"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[RAZÓN SOCIAL]]></text>
 							</staticText>
@@ -165,7 +165,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="120" height="30" uuid="aabc2fdb-d793-4466-b00b-bd820dbffc88"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
 							</textField>
@@ -178,7 +178,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="140" height="30" uuid="8a5262fe-1e43-4866-88a2-569e75cc0b4d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[DIRECCION]]></text>
 							</staticText>
@@ -187,7 +187,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="140" height="30" uuid="40c12f3b-70fd-46dd-8efa-a96567698c08"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 							</textField>
@@ -200,7 +200,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="30" uuid="1e1cb1e9-8ac4-4adc-864e-1db3f49cbeb6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[TELEFONO]]></text>
 							</staticText>
@@ -209,7 +209,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="82fcb25c-aced-4222-8b1e-b320469a6250"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 							</textField>
@@ -222,7 +222,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="30" uuid="0c30fcc6-db91-4231-90bf-883ac4f420c8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="11" isBold="true"/>
 								</textElement>
 								<text><![CDATA[ESTADO]]></text>
 							</staticText>
@@ -231,7 +231,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="393663b9-2586-4134-b2ee-6ee00610c107"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Arial"/>
+									<font fontName="SansSerif"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 							</textField>
