@@ -8,7 +8,7 @@ $(document).ready(function() {
         //Esto cambia el titulo de la pagina
 
         $('body').css('background-color', '#426ab2');
-        $('body').css('background-image', 'url("/images/background.jpg")');
+        $('body').css('background-image', 'url("/images/camio.jpg")');
         $('body').css('color', '#ffffff');
         $('body').css('position', 'relative');
         $('body').css('height', 'calc(100vh)');
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     	}else{
         $('body').css('background-color', 'white');
-        $('body').css('background-image', 'url("/images/background.jpg")');
+        $('body').css('background-image', 'url("/images/oil.jpg")');
         $('body').css('background-repeat', 'repeat-y');
         $('body').css('color', 'black');
         $('body').css('position', 'relative');

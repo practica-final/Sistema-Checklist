@@ -61,8 +61,8 @@ public class Operario implements Comparable<Operario>
 
         @Column(allowsNull = "false", length = 40)
         @Property(maxLength = 40,
-                regexPattern = "^[0-6]{6}$",
-                regexPatternReplacement = "Unicamente carga de números (6 como maximo)")
+                regexPattern = "^[0-9]{9}$",
+                regexPatternReplacement = "Unicamente carga de números (9 como maximo)")
         private String legajoSAP;
 
         @Column(allowsNull = "false", length = 40)
