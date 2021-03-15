@@ -11,15 +11,30 @@ export class ListarChecklistPage implements OnInit {
 
   public resultadosC : any = null;
   private autenticacion = '';
+  public URLservidor: String;
+  //Si no encuentra URL en la cookie usara la siguiente URL
+  public URLSecundaria: String =  'https://asid-sistema-checklist.herokuapp.com';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    // if(window.localStorage.autenticacion){
+    //   this.autenticacion = window.localStorage.autenticacion;
+    // }
+    // this.listarChecklist();
+  }
+
+  ionViewWillEnter(){
     if(window.localStorage.autenticacion){
       this.autenticacion = window.localStorage.autenticacion;
     }
+    if(window.localStorage.URLservidor){
+      this.URLservidor = window.localStorage.URLservidor;
+    }else{ 
+      this.URLservidor = this.URLSecundaria;
+    }
     this.listarChecklist();
-  }
+ }
 
   listarChecklist(){
     const httpOptions = {
@@ -29,7 +44,7 @@ export class ListarChecklistPage implements OnInit {
         'Authorization': 'Basic ' + this.autenticacion,
       })
     }
-    const URL = 'http://localhost:8080/restful/services/Checklist/actions/listAll/invoke';
+    const URL = this.URLservidor+'/restful/services/Checklist/actions/listAll/invoke';
     this.http.get(URL, httpOptions)
     .subscribe((resultados : Array<any>) => {
       var array = resultados;
