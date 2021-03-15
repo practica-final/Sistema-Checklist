@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     	}else{
         $('body').css('background-color', 'white');
-        $('body').css('background-image', 'url("/images/oil.jpg")');
+        $('body').css('background-image', 'url("/images/oilgas.jpg")');
         $('body').css('background-repeat', 'repeat-y');
         $('body').css('color', 'black');
         $('body').css('position', 'relative');
