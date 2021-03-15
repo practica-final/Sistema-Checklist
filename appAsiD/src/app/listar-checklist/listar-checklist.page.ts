@@ -10,10 +10,14 @@ import { Router } from '@angular/router';
 export class ListarChecklistPage implements OnInit {
 
   public resultadosC : any = null;
+  private autenticacion = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    if(window.localStorage.autenticacion){
+      this.autenticacion = window.localStorage.autenticacion;
+    }
     this.listarChecklist();
   }
 
@@ -21,7 +25,8 @@ export class ListarChecklistPage implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept':  'application/json;profile=urn:org.apache.isis/v1',
-        'Authorization': 'Basic c3ZlbjpwYXNz',
+        // 'Authorization': 'Basic c3ZlbjpwYXNz',
+        'Authorization': 'Basic ' + this.autenticacion,
       })
     }
     const URL = 'http://localhost:8080/restful/services/Checklist/actions/listAll/invoke';
@@ -40,7 +45,7 @@ export class ListarChecklistPage implements OnInit {
 
 
 filterItemsOfType(){
- return this.resultadosC  .filter(resultado => resultado.titulo != null);
+ return this.resultadosC.filter(resultado => resultado.titulo != null);
 
   }
 

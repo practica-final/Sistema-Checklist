@@ -15,6 +15,7 @@
                 <ion-img src="/assets/Logo-login.png" class="ion-align-self-end"></ion-img>
               </div>   
             </div>
+            
 
           <form [formGroup]='loginForm' (ngSubmit)=submit()>
 
@@ -39,14 +40,14 @@
                   </ion-label>                  
                   
                   <ion-icon slot="end" id="eye" [name]="hide ? 'eye' : 'eye-off'" (click)="hide = !hide"></ion-icon>
-                  <ion-input type="password" [type]="hide ? 'password' : 'text'" required formControlName="password"></ion-input>
+                  <ion-input type="password" [type]="hide ? 'text' : 'password'" required formControlName="password"></ion-input>
                     
 
                   </ion-item>
 
               </div>
               <div id="button">
-                <ion-button color="asid" size="medium" class="buttonform" [routerLink]="'/home'">Ingresar
+                <ion-button type="submit" color="asid" size="medium" class="buttonform" [disabled]="!loginForm.valid">Ingresar
                   <ion-icon slot="start" name="log-in"></ion-icon>
                 </ion-button>
               </div>

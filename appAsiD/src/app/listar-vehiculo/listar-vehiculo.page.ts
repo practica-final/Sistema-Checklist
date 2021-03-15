@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 export class ListarVehiculoPage implements OnInit {
 
   public resultadosV : any = null;
+  private autenticacion = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-
+    if(window.localStorage.autenticacion){
+      this.autenticacion = window.localStorage.autenticacion;
+    }
     this.listarVehiculos();
   }
 
@@ -22,7 +25,8 @@ export class ListarVehiculoPage implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept':  'application/json;profile=urn:org.apache.isis/v1',
-        'Authorization': 'Basic c3ZlbjpwYXNz',
+        //'Authorization': 'Basic c3ZlbjpwYXNz',
+        'Authorization': 'Basic ' + this.autenticacion,
       })
     }
     const URL = 'http://localhost:8080/restful/services/Vehiculo/actions/listAll/invoke';
@@ -41,7 +45,7 @@ export class ListarVehiculoPage implements OnInit {
 
 
 filterItemsOfType(){
- return this.resultadosV  .filter(resultado => resultado.titulo != null);
+ return this.resultadosV.filter(resultado => resultado.titulo != null);
 }
 
 

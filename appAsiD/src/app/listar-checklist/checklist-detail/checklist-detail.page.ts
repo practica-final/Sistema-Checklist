@@ -12,6 +12,7 @@ export class ChecklistDetailPage implements OnInit {
   idCheck;
   checkData;
   param : any;
+  private autenticacion = '';
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
 
@@ -26,7 +27,8 @@ export class ChecklistDetailPage implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json;profile=urn:org.apache.isis/v1',
-        'Authorization': 'Basic c3ZlbjpwYXNz',
+        // 'Authorization': 'Basic c3ZlbjpwYXNz',
+        'Authorization': 'Basic ' + this.autenticacion,
       })
     }
     const URL = 'http://localhost:8080/restful/objects/dominio.Checklist/' + idCheck;
