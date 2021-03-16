@@ -23,14 +23,14 @@
                                 <cpt:property id="vehiculo"/>
                                 <cpt:property id="operario"/>
                                 <cpt:property id="destino"/>
-                                <cpt:property id="fechaSalida"/>
+                                <cpt:property id="fechaSalida" hidden="STANDALONE_TABLES"/>
                                 <cpt:property id="documentacion"/>
                                 <cpt:property id="tablero"/>
                                 <cpt:property id="laterales"/>
                                 <cpt:property id="seccionTrasera"/>
                                 <cpt:property id="frente"/>
-                                <cpt:property id="comentarios"/>
-                                <cpt:property id="fotos"/>
+                                <cpt:property id="comentarios" hidden="STANDALONE_TABLES"/>
+                                <cpt:property id="fotos" hidden="STANDALONE_TABLES"/>
                             </cpt:fieldSet>
                         </bs3:col>
                     </bs3:row>

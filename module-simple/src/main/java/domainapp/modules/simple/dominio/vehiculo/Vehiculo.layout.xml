@@ -34,7 +34,7 @@
                         <cpt:property id="dominio"/>
                         <cpt:property id="marca"/>
                         <cpt:property id="modelo"/>
-                        <cpt:property id="anyo"/>
+                        <cpt:property id="anyo" hidden="STANDALONE_TABLES"/>
                         <cpt:property id="kilometraje"/>
                         <cpt:property id="vencimientoVtv"/>
                         <cpt:property id="vencimientoPoliza"/>
