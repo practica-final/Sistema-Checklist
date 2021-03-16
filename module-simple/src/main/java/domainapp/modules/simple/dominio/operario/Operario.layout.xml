@@ -39,10 +39,10 @@
                         <cpt:property id="nombreyApellido"/>
                         <cpt:property id="legajoSAP"/>
                         <cpt:property id="email"/>
-                        <cpt:property id="telefono"/>
-                        <cpt:property id="numeroLicencia"/>
-                        <cpt:property id="vencimientoLicencia"/>
-                        <cpt:property id="llaveRSV"/>
+                        <cpt:property id="telefono" hidden="STANDALONE_TABLES"/>
+                        <cpt:property id="numeroLicencia" hidden="STANDALONE_TABLES"/>
+                        <cpt:property id="vencimientoLicencia" hidden="STANDALONE_TABLES"/>
+                        <cpt:property id="llaveRSV" hidden="STANDALONE_TABLES"/>
                         <cpt:property id="estado"/>
                     </cpt:fieldSet>
                </bs3:col>

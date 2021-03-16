@@ -35,9 +35,9 @@
                         <cpt:property id="marca"/>
                         <cpt:property id="modelo"/>
                         <cpt:property id="anyo" hidden="STANDALONE_TABLES"/>
-                        <cpt:property id="kilometraje"/>
-                        <cpt:property id="vencimientoVtv"/>
-                        <cpt:property id="vencimientoPoliza"/>
+                        <cpt:property id="kilometraje" hidden="STANDALONE_TABLES"/>
+                        <cpt:property id="vencimientoVtv" hidden="STANDALONE_TABLES"/>
+                        <cpt:property id="vencimientoPoliza" hidden="STANDALONE_TABLES"/>
                         <cpt:property id="estado"/>
                         <cpt:action id="update"/>
                         <cpt:action id="Activo"/>
