@@ -16,7 +16,7 @@ export class NewCheckPage implements OnInit {
   checkForm: FormGroup;
   private autenticacion = '';
 
-  public URLservidor: 'https://asid-sistema-checklist.herokuapp.com';
+  public URLservidor = 'https://asid-sistema-checklist.herokuapp.com';
   public operarioArray: any = null;
   public vehiculoArray: any = null;
 
@@ -86,7 +86,7 @@ export class NewCheckPage implements OnInit {
         var array = resultados;
         array.pop();
         this.operarioArray = array;
-        console.log(this.operarioArray);
+        console.log('array operarios? ',this.operarioArray);
       });
     }
 
@@ -127,7 +127,7 @@ export class NewCheckPage implements OnInit {
           console.log(checklist);
         });
       // this.router.navigate(['/listar-checklist', { idCheck: this.idCheck }]);
-      this.router.navigate(['/listar-checklist']);
+      // this.router.navigate(['/listar-checklist']);
     }
 
   

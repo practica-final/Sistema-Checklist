@@ -29,15 +29,16 @@ export class ChecklistService {
   crearChecklist(id, checklist) {
     const httpOptions = {
       headers: new HttpHeaders({
-        Accept: 'application/json;profile=urn:org.apache.isis/v1',
-        Authorization: 'Basic dXNlcjE6YWJjMTIz=',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json;profile=urn:org.apache.isis/v1',
+        'Authorization': 'Basic c3ZlbjpwYXNz=',
+        // 'Authorization': 'Basic dXNlcjE6YWJjMTIz=',
         // 'Authorization': 'Basic ' + this.autenticacion,
       }),
     }
     const crearChecklistUrl =
       this.urlServidor + '/restful/services/Checklist/';
 
-      debugger;
       console.log(checklist);
     let datos = {
       'dominio:': {
