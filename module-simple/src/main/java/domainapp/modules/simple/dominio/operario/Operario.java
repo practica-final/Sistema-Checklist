@@ -106,7 +106,7 @@ public class Operario implements Comparable<Operario>
         private List<Vehiculo> vehiculo;
 
         public String title(){
-            return getLegajoSAP() + " " + getNombreyApellido();
+            return getNombreyApellido();
         }
 
 

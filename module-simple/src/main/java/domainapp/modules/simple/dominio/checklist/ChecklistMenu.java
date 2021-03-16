@@ -105,7 +105,7 @@ public class ChecklistMenu {
     public List<Vehiculo> choices0FindByVehiculo() {return vehiculoRepository.Listar();}
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, named = "Listado de Checklist")
     @MemberOrder(sequence = "4")
     public List<Checklist> listAll() {
         List <Checklist> checklists =  checklistRepository.Listar();

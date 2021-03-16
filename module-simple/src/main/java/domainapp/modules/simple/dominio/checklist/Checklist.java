@@ -128,37 +128,9 @@ public class Checklist {
     public String ReporteComentarios(){ return this.comentarios; }
 
 
-    /*
     @Action()
     @ActionLayout(named = "Editar")
     public Checklist update(
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Identificacion")
-            final String identificacion,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Destino")
-            final String destino,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Documentacion")
-            final EstadoChecklist documentacion,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Tablero")
-            final EstadoChecklist tablero,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Laterales")
-            final EstadoChecklist laterales,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Seccion Trasera")
-            final EstadoChecklist seccionTrasera,
-
-            @Parameter(maxLength = 40)
-            @ParameterLayout(named = "Frente")
-            final EstadoChecklist frente,
 
             @Parameter(maxLength = 40)
             @ParameterLayout(named = "Comentarios")
@@ -168,13 +140,6 @@ public class Checklist {
             @ParameterLayout(named = "Fotos")
             final Blob fotos){
 
-        this.identificacion = identificacion;
-        this.destino = destino;
-        this.documentacion = documentacion;
-        this.tablero = tablero;
-        this.laterales = laterales;
-        this.seccionTrasera = seccionTrasera;
-        this.frente = frente;
         this.comentarios = comentarios;
         this.fotos = fotos;
 
@@ -184,32 +149,11 @@ public class Checklist {
     }
 
     public String default0Update() {
-        return getIdentificacion();
-    }
-    public String default1Update() { return getDestino(); }
-    public EstadoChecklist default2Update() {
-        return getDocumentacion();
-    }
-    public EstadoChecklist default3Update() {
-        return getTablero();
-    }
-    public EstadoChecklist default4Update() {
-        return getLaterales();
-    }
-    public EstadoChecklist default5Update() {
-        return getSeccionTrasera();
-    }
-    public EstadoChecklist default6Update() {
-        return getFrente();
-    }
-    public String default7Update() {
         return getComentarios();
     }
-    public Blob default8Update() {
+    public Blob default1Update() {
         return getFotos();
     }
-
-*/
 
 
     @Override
