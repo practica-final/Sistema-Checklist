@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'checklist-detail',
     loadChildren: () => import('./checklist-detail/checklist-detail.module').then( m => m.ChecklistDetailPageModule)
+  },  {
+    path: 'new-check',
+    loadChildren: () => import('./new-check/new-check.module').then( m => m.NewCheckPageModule)
   }
+
 ];
 
 @NgModule({

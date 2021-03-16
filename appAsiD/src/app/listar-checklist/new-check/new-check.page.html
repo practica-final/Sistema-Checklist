@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end">Nueva Planilla</ion-title>
+    <ion-buttons slot="start">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <form [formGroup]="checkForm" (ngSubmit)="submit()">
+      <ion-card style="background-color: rgb(170, 196, 245)">
+        <ion-card-header style="text-align: center">
+          <ion-card-title
+            style="
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                sans-serif;
+            "
+          >
+            TITULO DE LOS DATOS DEL CHECK
+          </ion-card-title>
+        </ion-card-header>
+      </ion-card>
+
+
+      <ion-card style="background-color: rgb(170, 196, 245)">
+        <ion-card-header style="text-align: center">
+          <!-- <ion-card-title
+            style="
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                sans-serif;"> -->
+
+
+            <!--SELECCION DE OPERARIO-->
+
+            <ion-select placeholder="Seleccione Operario" #C (ionChange)="onSelectOperario($event.detail.value)">
+              <ion-select-option
+                *ngFor="let usuario of operarioArray"
+                [value]="usuario">
+                {{usuario.$$title}}
+              </ion-select-option>
+            </ion-select>
+
+            <!--SELECCION DE vehiculo-->
+
+            <ion-select placeholder="Seleccione Vehiculo" #C (ionChange)="onSelectVehiculo($event.detail.value)">
+              <ion-select-option
+                *ngFor="let dominio of vehiculoArray"
+                [value]="dominio">
+                {{dominio.$$title}}
+              </ion-select-option>
+            </ion-select>
+
+
+          <!-- </ion-card-title> -->
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          Identificacion: &nbsp;
+          <ion-input type="text" formControlName="identificacion"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          Destino: &nbsp;
+          <ion-input type="text" formControlName="destino"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Fecha de Salida</ion-label>
+          <ion-datetime
+            value="03-06-2021"
+            formControlName="fechaDeSalida"
+            displayFormat="DD/MM/YYYY"
+            pikerFormat="YYYY MM DD"
+            placeholder="Seleccione Fecha"
+            cancelText="Cancelar"
+            doneText="OK"
+          ></ion-datetime>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Documentacion</ion-label>
+          <ion-select interface="popover" formControlName="documentacion">
+            <ion-select-option>Habilitado</ion-select-option>
+            <ion-select-option>NoHabilitado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Tablero</ion-label>
+          <ion-select interface="popover" formControlName="tablero">
+            <ion-select-option>Habilitado</ion-select-option>
+            <ion-select-option>NoHabilitado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Laterales</ion-label>
+          <ion-select interface="popover" formControlName="laterales">
+            <ion-select-option>Habilitado</ion-select-option>
+            <ion-select-option>NoHabilitado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Seccion Trasera</ion-label>
+          <ion-select interface="popover" formControlName="seccionTrasera">
+            <ion-select-option>Habilitado</ion-select-option>
+            <ion-select-option>NoHabilitado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          <ion-label>Frente</ion-label>
+          <ion-select interface="popover" formControlName="frente">
+            <ion-select-option>Habilitado</ion-select-option>
+            <ion-select-option>NoHabilitado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          Comentarios: &nbsp;
+          <ion-input type="text" formControlName="comentarios"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          Fotos: &nbsp;
+          <ion-input type="text" formControlName="fotos"></ion-input>
+        </ion-item>
+
+      </ion-card>
+
+      <ion-button
+        type="submit"
+        style="background-color: rgb(170, 196, 245)"
+      >
+        Guardar
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

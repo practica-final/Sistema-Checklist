@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: () => import('./listar-checklist/checklist-detail/checklist-detail.module').then( m => m.ChecklistDetailPageModule)
   },
   {
+    path: 'new-check',
+    loadChildren: () => import('./listar-checklist/new-check/new-check.module').then( m => m.NewCheckPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
