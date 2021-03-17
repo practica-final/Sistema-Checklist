@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChecklistService } from '../../services/checklist.service';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-new-check',
@@ -25,7 +26,9 @@ export class NewCheckPage implements OnInit {
     private fb: FormBuilder,
     private paramRoute: ActivatedRoute,
     private router: Router,
-    private checklistService: ChecklistService) { 
+    private checklistService: ChecklistService,
+    public alertController: AlertController, 
+    public navCtrl: NavController, public toastController: ToastController) { 
 
       this.checkForm = this.fb.group({
         dominio: [''],
@@ -128,6 +131,31 @@ export class NewCheckPage implements OnInit {
         });
       // this.router.navigate(['/listar-checklist', { idCheck: this.idCheck }]);
       // this.router.navigate(['/listar-checklist']);
+    }
+
+    async alertaLogOut() {
+      const alert = await this.alertController.create({
+        header: 'Cerrar Sesión',
+        message: '¿Esta seguro que desea cerrar sesión?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Apreto boton cancelar');
+            }
+          }, {
+            text: 'Si, salir',
+            handler: () => {
+              console.log('Apreto boton Salir');
+              this.navCtrl.navigateRoot('/login');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
     }
 
   

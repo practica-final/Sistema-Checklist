@@ -1,18 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="asid">
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
     <ion-title>
-      Listado de Vehiculos
+      Vehiculos
     </ion-title>
-
+    <ion-buttons slot="end"><ion-button (click)="alertaLogOut()"><ion-icon name="log-out-outline"></ion-icon></ion-button></ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-  <ion-content>
+<ion-content>
+
+  <ion-card>
+
     <ion-item *ngFor="let resultado of resultadosV" (click)="goDetVeh(resultado.$$instanceId)">
       
       <ion-avatar slot="start">
@@ -20,15 +21,12 @@
       </ion-avatar>
   
       <ion-label>
-        <h1>{{resultado.$$title}}</h1>
-        <p> Solicitado por <strong>operador</strong></p>
-
+        <h1>{{resultado.$$title | uppercase}}</h1>
+        <p> {{resultado.estado | uppercase}}</p>
       </ion-label>
   
     </ion-item>
 
-    <!-- EL CONTENIDO DENTRO DE AQUÍ SIRVE PARA TRAER LOS DATOS ALMACENADOS DE LOS VEHICULOS-->
-  
-    <!-- <pre>Contenido obtenido: {{ resultadosV | json }}</pre> -->
+  </ion-card>
 
 </ion-content>

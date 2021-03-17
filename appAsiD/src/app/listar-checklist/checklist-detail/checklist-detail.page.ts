@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-checklist-detail',
@@ -18,7 +18,8 @@ export class ChecklistDetailPage implements OnInit {
   //Si no encuentra URL en la cookie usara la siguiente URL
   public URLSecundaria: String =  'https://asid-sistema-checklist.herokuapp.com';
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, public toastController: ToastController) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, public toastController: ToastController,
+    public alertController: AlertController, public navCtrl: NavController) { }
 
   ngOnInit() {
     if(window.localStorage.autenticacion){
@@ -49,5 +50,31 @@ export class ChecklistDetailPage implements OnInit {
         this.checkData = resultados;
       });
   }
+
+  async alertaLogOut() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar Sesión',
+      message: '¿Esta seguro que desea cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Apreto boton cancelar');
+          }
+        }, {
+          text: 'Si, salir',
+          handler: () => {
+            console.log('Apreto boton Salir');
+            this.navCtrl.navigateRoot('/login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
 
 }

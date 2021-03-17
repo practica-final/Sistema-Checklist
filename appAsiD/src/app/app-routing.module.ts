@@ -9,7 +9,7 @@ const routes: Routes = [
   
   
   {
-    path: 'listar-vehiculo',
+    path: 'vehiculos',
     loadChildren: () => import('./listar-vehiculo/listar-vehiculo.module').then( m => m.ListarVehiculoPageModule)
   },
   {
@@ -17,11 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./listar-vehiculo/vehiculo-detail/vehiculo-detail.module').then( m => m.VehiculoDetailPageModule)
   },
   {
-    path: 'listar-checklist',
+    path: 'checklist',
     loadChildren: () => import('./listar-checklist/listar-checklist.module').then( m => m.ListarChecklistPageModule)
   },
   {
-    path: 'checklist',
+    path: 'ver-check',
     loadChildren: () => import('./listar-checklist/checklist-detail/checklist-detail.module').then( m => m.ChecklistDetailPageModule)
   },
   {

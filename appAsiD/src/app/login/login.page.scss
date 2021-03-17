@@ -1,13 +1,12 @@
 ion-title{
     text-align: left;
-    color: #9c8dc4ee;
+    color: #0f0625ee;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
-    text-shadow: 30px;
 }
 
 ion-content{
-    --background: #999999 url("/assets/Background.jpg") no-repeat center center / cover;
+    --background: #999999 url("/assets/camio.jpg") no-repeat center center / cover;
 }
 
 
@@ -16,8 +15,7 @@ ion-content{
     align-items: center;
     justify-content: center;
     height: 40%;
-    margin-bottom: 30px;
-    margin-top: 10px;
+    margin-top: 20%;
   }
 
 #rounded {
@@ -28,17 +26,23 @@ ion-content{
     margin-bottom: 15px;  
     color: #e4c2c2d8;
     font-weight: bold;
+    box-shadow: 10px 5px 5px black;
 }
 
+#margenesForm{
+    margin-top: 20%;
+}
 
 .buttonform{
     border-radius:3px;
     size: 30px;
     border:rgba(0,0,0,.3) 0px solid;
     box-sizing:border-box;
+    box-shadow: 10px 5px 5px black;
   }
 
   #button{
       text-align: right;
+    //   box-shadow: 10px 5px 5px black;
   }
   

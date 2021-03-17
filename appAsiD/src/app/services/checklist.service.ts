@@ -53,7 +53,7 @@ export class ChecklistService {
       destino: {
         value: checklist.destino,
       },
-      'fechaDeSalida:': {
+      fechaDeSalida: {
         value: checklist.fechaDeSalida.substr(0, 10),
       },
       documentacion: {

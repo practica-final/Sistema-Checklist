@@ -25,3 +25,11 @@
 #container a {
   text-decoration: none;
 }
+
+ion-content{
+  --background: #999999 url("/assets/oilgas.jpg") no-repeat center center / cover;
+}
+
+p{
+  font-weight: bold;
+}

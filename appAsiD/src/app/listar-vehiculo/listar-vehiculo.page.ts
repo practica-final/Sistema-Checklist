@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-listar-vehiculo',
@@ -15,7 +16,8 @@ export class ListarVehiculoPage implements OnInit {
   //Si no encuentra URL en la cookie usara la siguiente URL
   public URLSecundaria: String =  'https://asid-sistema-checklist.herokuapp.com';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+    public alertController: AlertController, public navCtrl: NavController, public toastController: ToastController) { }
 
   ngOnInit() {
     // if(window.localStorage.autenticacion){
@@ -61,6 +63,31 @@ export class ListarVehiculoPage implements OnInit {
 
 filterItemsOfType(){
  return this.resultadosV.filter(resultado => resultado.titulo != null);
+}
+
+async alertaLogOut() {
+  const alert = await this.alertController.create({
+    header: 'Cerrar Sesión',
+    message: '¿Esta seguro que desea cerrar sesión?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Apreto boton cancelar');
+        }
+      }, {
+        text: 'Si, salir',
+        handler: () => {
+          console.log('Apreto boton Salir');
+          this.navCtrl.navigateRoot('/login');
+        }
+      }
+    ]
+  });
+
+  await alert.present();
 }
 
 

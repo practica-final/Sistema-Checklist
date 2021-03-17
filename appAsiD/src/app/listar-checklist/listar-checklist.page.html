@@ -4,25 +4,31 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Listado de Checklist
+      Checklist
     </ion-title>
+    <ion-buttons slot="end"><ion-button (click)="alertaLogOut()"><ion-icon name="log-out-outline"></ion-icon></ion-button></ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-item *ngFor="let resultado of resultadosC" (click)="goDetCheck(resultado.$$instanceId)">
-      
-    <ion-avatar slot="start">
-      <ion-img src="https://image.flaticon.com/icons/png/512/16/16424.png"></ion-img>
-    </ion-avatar>
+  <ion-card>
 
-    <ion-label>
-      <h1>{{resultado.$$title}}</h1>
-      <p> Solicitado por <strong>operador</strong></p>
+    <ion-item *ngFor="let resultado of resultadosC" (click)="goDetCheck(resultado.$$instanceId)">
+        
+      <ion-avatar slot="start">
+        <ion-img src="https://w7.pngwing.com/pngs/369/468/png-transparent-computer-icons-flat-design-checklist-sequence-of-numbers-web-design-logo-apartment.png"></ion-img>
+      </ion-avatar>
 
-    </ion-label>
+      <ion-label>
+        <!-- <h1>{{resultado.$$title}}</h1> -->
+        <h1>{{resultado.operario.title}} </h1>
+        <h2>{{resultado.$$title}}</h2>
 
-  </ion-item>
+      </ion-label>
+
+    </ion-item>
+
+  </ion-card>
 
 </ion-content>
