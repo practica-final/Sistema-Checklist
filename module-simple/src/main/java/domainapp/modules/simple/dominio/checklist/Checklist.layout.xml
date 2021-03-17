@@ -17,9 +17,6 @@
                         <bs3:col span="12">
                             <cpt:fieldSet name="Datos del Checklist">
                                 <cpt:action id="update"/>
-                                <!--<cpt:action id="Habilitar"/>
-                                <cpt:action id="Inhabilitar"/>
-                                <cpt:action id="Borrar"/>-->
                                 <cpt:property id="vehiculo"/>
                                 <cpt:property id="operario"/>
                                 <cpt:property id="destino"/>
@@ -31,6 +28,9 @@
                                 <cpt:property id="frente"/>
                                 <cpt:property id="comentarios" hidden="STANDALONE_TABLES"/>
                                 <cpt:property id="fotos" hidden="STANDALONE_TABLES"/>
+                                <cpt:property id="estado"/>
+                                <cpt:action id="Habilitado"/>
+                                <cpt:action id="Inhabilitado"/>
                             </cpt:fieldSet>
                         </bs3:col>
                     </bs3:row>

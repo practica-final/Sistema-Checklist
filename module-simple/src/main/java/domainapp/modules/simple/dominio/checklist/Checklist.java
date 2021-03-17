@@ -1,6 +1,7 @@
 package domainapp.modules.simple.dominio.checklist;
 
 import com.google.common.collect.ComparisonChain;
+import domainapp.modules.simple.dominio.EstadoGeneral;
 import domainapp.modules.simple.dominio.operario.Operario;
 import domainapp.modules.simple.dominio.operario.OperarioRepository;
 import domainapp.modules.simple.dominio.vehiculo.Vehiculo;
@@ -114,8 +115,20 @@ public class Checklist {
     @Getter @Setter
     private Blob fotos;
 
+    @javax.jdo.annotations.Column(allowsNull = "true", name = "estado")
+    @Property()
+    private EstadoGeneral estado;
+
 
     public String title(){ return vehiculo.getDominio() + " " + getFechaSalida(); }
+
+    public String iconName(){
+        if (this.estado == EstadoGeneral.Habilitado){
+            return "Habilitado";
+        }else{
+            return "Inhabilitado";
+        }
+    }
 
     public String ReporteIdentificacion(){ return this.identificacion; }
     public String ReporteDestino(){ return this.destino; }
@@ -155,6 +168,27 @@ public class Checklist {
         return getFotos();
     }
 
+
+    @Programmatic
+    public void CambiarEstado(EstadoGeneral estado){
+        this.estado = estado;
+    }
+
+    @Action()
+    @ActionLayout(named = "Habilitar")
+    public Checklist Habilitado(){
+        CambiarEstado(EstadoGeneral.Habilitado);
+        return this;
+    }
+
+    @Action(semantics = SemanticsOf.IDEMPOTENT_ARE_YOU_SURE)
+    @ActionLayout(named = "Inhabilitar")
+    public Checklist Inhabilitado(){
+        CambiarEstado(EstadoGeneral.Inhabilitado);
+        return this;
+    }
+    public boolean hideHabilitado(){return  this.estado == EstadoGeneral.Habilitado;}
+    public boolean hideInhabilitado(){return  this.estado == EstadoGeneral.Inhabilitado;}
 
     @Override
     public String toString() {
