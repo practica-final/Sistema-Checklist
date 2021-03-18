@@ -36,7 +36,7 @@
                     </bs3:row>
                 </bs3:tab>
             </bs3:tabGroup>
-            <!--<bs3:tabGroup>
+            <bs3:tabGroup>
                 <bs3:tab name="Checklist">
                     <bs3:row>
                         <bs3:col span="12" size="MD">
@@ -44,14 +44,14 @@
                         </bs3:col>
                     </bs3:row>
                 </bs3:tab>
-                <bs3:tab name="Vehiculos">
+                <!--<bs3:tab name="Vehiculos">
                     <bs3:row>
                         <bs3:col span="12" size="MD">
                             <cpt:collection defaultView="table" id="vehiculos"/>
                         </bs3:col>
                     </bs3:row>
-                </bs3:tab>
-            </bs3:tabGroup>-->
+                </bs3:tab>-->
+            </bs3:tabGroup>
         </bs3:col>
         <bs3:col span="6">
             <bs3:tabGroup>
