@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./operarios/ver-ope/ver-ope.module').then( m => m.VerOpePageModule)
   },
   {
+    path: 'new-op',
+    loadChildren: () => import('./operarios/new-ope/new-ope.module').then( m => m.NewOpePageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

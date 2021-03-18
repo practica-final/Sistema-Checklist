@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'ver-ope',
     loadChildren: () => import('./ver-ope/ver-ope.module').then( m => m.VerOpePageModule)
+  },
+  {
+    path: 'new-ope',
+    loadChildren: () => import('./new-ope/new-ope.module').then( m => m.NewOpePageModule)
   }
 ];
 

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="asid">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nuevo Operario</ion-title>
+    <ion-buttons slot="end"><ion-button (click)="alertaLogOut()"><ion-icon name="log-out-outline"></ion-icon></ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="container">
+
+    <form [formGroup]="opForm" (ngSubmit)="submit()">
+
+      <ion-card>
+
+        <ion-item>
+          <ion-icon name="medkit" slot="start"></ion-icon>
+          Nombre y Apellido &nbsp;
+          <ion-input type="text" formControlName="nombreYApellido"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="navigate" slot="start"></ion-icon>
+          SAP &nbsp;
+          <ion-input type="text" formControlName="legajoSap"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="navigate" slot="start"></ion-icon>
+          Correo &nbsp;
+          <ion-input type="text" formControlName="correo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="navigate" slot="start"></ion-icon>
+          Telefono &nbsp;
+          <ion-input type="text" formControlName="telefono"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="navigate" slot="start"></ion-icon>
+          N° Licencia &nbsp;
+          <ion-input type="text" formControlName="númeroDeLicencia"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>Vto Licencia</ion-label>
+          <ion-datetime
+            formControlName="vencimientoDeLicencia"
+            displayFormat="DD/MM/YYYY"
+            pikerFormat="YYYY MM DD"
+            placeholder="Seleccione Fecha"
+            cancelText="Cancelar"
+            doneText="OK"
+          > 
+          
+        </ion-datetime>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          <ion-label>Llave RSV</ion-label>
+          <ion-select interface="popover" formControlName="llaveRsv">
+            <ion-select-option>Activo</ion-select-option>
+            <ion-select-option>Inactivo</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          <ion-label>Estado</ion-label>
+          <ion-select interface="popover" formControlName="estado">
+            <ion-select-option>Activo</ion-select-option>
+            <ion-select-option>Inactivo</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-card>
+
+      <ion-button id="submit" expand="block" type="submit" color="asid">
+        Guardar
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
