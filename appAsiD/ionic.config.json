@@ -1,5 +1,7 @@
 {
   "name": "appAsiD",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

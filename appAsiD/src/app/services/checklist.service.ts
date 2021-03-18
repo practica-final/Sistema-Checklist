@@ -30,7 +30,7 @@ export class ChecklistService {
   
   crearChecklist(id, checklist, file) {
     //let image = new Blob([file.stream()], file.type).then(resp => resp)
-    let fotos : any = `${file.name}:${file.type}:${file.bytes}`;  
+    let fotos : any = `${file.name}:${file.type}:${file}`;  
     //this.temp = new Blob([file]);
     this.temp.readAsText(file);
     this.temp.onloadend = () => {console.log(this.temp.result);
