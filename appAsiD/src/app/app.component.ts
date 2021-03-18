@@ -16,18 +16,18 @@ export class AppComponent {
     },
     {
       title: 'Operario',
-      children:[
-        {
-          title: 'Ver Operario',
+      // children:[
+      //   {
+          // title: 'Ver Operario',
           url: '/operarios',
           icon: 'person-circle'
-        },
-        {
-          title: 'Crear Operario',
-          url: '/new-op',
-          icon: 'add-circle'
-        }
-      ]      
+        // },
+        // {
+        //   title: 'Crear Operario',
+        //   url: '/new-op',
+        //   icon: 'add-circle'
+        // }
+      // ]      
     },
     {
       title: 'Vehiculo',
