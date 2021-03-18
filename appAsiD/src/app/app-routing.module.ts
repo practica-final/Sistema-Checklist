@@ -29,6 +29,14 @@ const routes: Routes = [
     loadChildren: () => import('./listar-checklist/new-check/new-check.module').then( m => m.NewCheckPageModule)
   },
   {
+    path: 'operarios',
+    loadChildren: () => import('./operarios/operarios.module').then( m => m.OperariosPageModule)
+  },
+  {
+    path: 'ver-op',
+    loadChildren: () => import('./operarios/ver-ope/ver-ope.module').then( m => m.VerOpePageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },

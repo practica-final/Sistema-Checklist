@@ -15,6 +15,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Operario',
+      url: '/operarios',
+      icon: 'person-circle'
+    },
+    {
       title: 'Vehiculo',
       url: '/vehiculos',
       icon: 'car'

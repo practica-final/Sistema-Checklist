@@ -123,14 +123,12 @@ export class NewCheckPage implements OnInit {
 
   
     submit() {
-      //console.log('aqui es submit id' + this.idCheck);
       this.checklistService
         .crearChecklist(this.idCheck, this.checkForm.value)
         .subscribe((checklist) => {
           console.log(checklist);
         });
-      // this.router.navigate(['/listar-checklist', { idCheck: this.idCheck }]);
-      // this.router.navigate(['/listar-checklist']);
+      this.router.navigate(['/checklist']);
     }
 
     async alertaLogOut() {

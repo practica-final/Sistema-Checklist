@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-listar-vehiculo',
-  templateUrl: './listar-vehiculo.page.html',
-  styleUrls: ['./listar-vehiculo.page.scss'],
+  selector: 'app-operarios',
+  templateUrl: './operarios.page.html',
+  styleUrls: ['./operarios.page.scss'],
 })
-export class ListarVehiculoPage implements OnInit {
+export class OperariosPage implements OnInit {
 
-  public resultadosV : any = null;
+  public resultados : any = null;
   private autenticacion = '';
   public URLservidor: String;
   //Si no encuentra URL en la cookie usara la siguiente URL
   public URLSecundaria: String =  'https://asid-sistema-checklist.herokuapp.com';
 
   constructor(private http: HttpClient, private router: Router,
-    public alertController: AlertController, public navCtrl: NavController, public toastController: ToastController) { }
+    public alertController: AlertController, public navCtrl: NavController, 
+    public toastController: ToastController) { }
 
   ngOnInit() {
-    
   }
 
   ionViewWillEnter(){
@@ -32,34 +32,33 @@ export class ListarVehiculoPage implements OnInit {
     }else{ 
       this.URLservidor = this.URLSecundaria;
     }
-    this.listarVehiculos();
+    this.listarOperarios();
  }
 
-  listarVehiculos(){
+  listarOperarios(){
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept':  'application/json;profile=urn:org.apache.isis/v1',
-        //'Authorization': 'Basic c3ZlbjpwYXNz',
         'Authorization': 'Basic ' + this.autenticacion,
       })
     }
-    const URL = this.URLservidor+'/restful/services/Vehiculo/actions/listAll/invoke';
+    const URL = this.URLservidor+'/restful/services/Operario/actions/listAll/invoke';
     this.http.get(URL, httpOptions)
     .subscribe((resultados : Array<any>) => {
       var array = resultados;
       array.pop();
-      this.resultadosV = array;
+      this.resultados = array;
     });
 
   }
 
-  goDetVeh(id_veh) { 
-    this.router.navigate(['/vehiculo', { idVeh: id_veh }])
+  goDetOp(id_op) { 
+    this.router.navigate(['/ver-op', { idOp: id_op }])
   }
 
 
 filterItemsOfType(){
- return this.resultadosV.filter(resultado => resultado.titulo != null);
+ return this.resultados.filter(resultado => resultado.titulo != null);
 }
 
 async alertaLogOut() {
@@ -86,6 +85,5 @@ async alertaLogOut() {
 
   await alert.present();
 }
-
 
 }
