@@ -16,7 +16,7 @@ export class NewCheckPage implements OnInit {
   datosCheck = '';
   checkForm: FormGroup;
   private autenticacion = '';
-
+  private file : File;
   public URLservidor = 'https://asid-sistema-checklist.herokuapp.com';
   public operarioArray: any = null;
   public vehiculoArray: any = null;
@@ -47,6 +47,8 @@ export class NewCheckPage implements OnInit {
 
     }
 
+    handleFileImput=(event)=>{this.file = event.target.files[0]}
+    
     ngOnInit() {
       this.paramRoute.paramMap.subscribe((param) => {
         this.idCheck = param.get('id');
@@ -124,7 +126,7 @@ export class NewCheckPage implements OnInit {
   
     submit() {
       this.checklistService
-        .crearChecklist(this.idCheck, this.checkForm.value)
+        .crearChecklist(this.idCheck, this.checkForm.value, this.file)
         .subscribe((checklist) => {
           console.log(checklist);
         });

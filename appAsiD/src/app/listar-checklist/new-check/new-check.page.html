@@ -122,7 +122,7 @@
         <ion-item>
           <ion-icon name="image" slot="start"></ion-icon>
           Fotos &nbsp;
-          <ion-input type="file" formControlName="fotos"></ion-input>
+          <ion-input type="file" (change)=handleFileImput($event)></ion-input>
         </ion-item>
 
       </ion-card>
